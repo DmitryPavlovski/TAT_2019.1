@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DevTask1
 {
@@ -16,22 +12,14 @@ namespace DevTask1
         static void Main(string[] args)
         {
             try
-            {
-                if (ChekForEmptiness(args))
-                {
-                    throw new Exception("String too short!");
-                }
+            {                
                 SubStrings line = new SubStrings(args);
-                line.SearchSubstrings();
+                line.DisplayAndSearchAllSubstrings();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
-        }
-        private static bool ChekForEmptiness(string[] str)
-        {
-            return str.Length == 0 || str[0].Length <= 2;
-        }
+        }        
     }
 }
