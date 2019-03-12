@@ -12,8 +12,8 @@ namespace DevTask1
         static void Main(string[] args)
         {
             try
-            {                
-                SubStrings line = new SubStrings(args);
+            {
+                SequenceSubStrings line = new SequenceSubStrings(args);
                 line.DisplayAndSearchAllSubstrings();
             }
             catch (Exception ex)
