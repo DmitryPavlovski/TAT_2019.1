@@ -43,7 +43,7 @@ namespace DevTask1
         {
             if (sequence[indexPreviousElement] == sequence[indexPreviousElement + 1])
             {
-                return null;
+                return "0";
             }
             return sequence.Substring(indexFirstElement, indexPreviousElement - indexFirstElement + 2);           
         }
