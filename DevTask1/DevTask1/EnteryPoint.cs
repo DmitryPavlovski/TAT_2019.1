@@ -4,7 +4,7 @@ namespace DevTask1
 {
     class EnteryPoint
     {
-        /// <summary>
+     /// <summary>
      /// The program accepts the sequence and displays
      /// all subsequences without consecutively repeating symdols
      /// </summary>
@@ -13,13 +13,13 @@ namespace DevTask1
         {
             try
             {
-                SequenceSubStrings line = new SequenceSubStrings(args);
+                SubStringsSequence line = new SubStringsSequence(args);
                 line.DisplayAndSearchAllSubstrings();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
-        }        
+        }
     }
 }

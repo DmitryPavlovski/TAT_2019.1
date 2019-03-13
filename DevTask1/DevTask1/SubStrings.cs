@@ -3,25 +3,25 @@ using System.Text;
 
 namespace DevTask1
 {
-    class SequenceSubStrings
+    class SubStringsSequence
     {
         private StringBuilder subsequence;
         /// <summary>
         /// Constructor forms a string from array of strings and checks on Error
         /// </summary>
         /// <param name="sequence">Array of strings</param>
-        public SequenceSubStrings(string[] sequence)
+        public SubStringsSequence(string[] sequence)
         {           
                 if (ChekForEmptiness(sequence))
                 {
                     throw new Exception("String too short!");
                 }
-                this.subsequence = new StringBuilder();
+                subsequence = new StringBuilder();
                 foreach (string word in sequence)
                 {
-                    this.subsequence.Append(word).Append(" ");
+                    subsequence.Append(word).Append(" ");
                 }
-                this.subsequence.Remove(this.subsequence.Length - 1, 1);            
+                subsequence.Remove(subsequence.Length - 1, 1);            
         }
         /// <summary>
         /// Method checks for minimum array length
@@ -43,7 +43,7 @@ namespace DevTask1
         {
             if (sequence[indexPreviousElement] == sequence[indexPreviousElement + 1])
             {
-                return "0";
+                return null;
             }
             return sequence.Substring(indexFirstElement, indexPreviousElement - indexFirstElement + 2);           
         }
@@ -56,7 +56,7 @@ namespace DevTask1
             {
                 for (int lastElevent = firstElement; lastElevent < subsequence.Length - 1; lastElevent++)
                 {
-                    if(SearchNextSubstring( subsequence.ToString(), firstElement, lastElevent).Length>1)
+                    if(SearchNextSubstring(subsequence.ToString(), firstElement, lastElevent).Length>1)
                     {
                         Console.WriteLine(SearchNextSubstring(subsequence.ToString(),firstElement, lastElevent));
                     }
@@ -67,6 +67,5 @@ namespace DevTask1
                 }
             }
         }
-       
-    }
+     }
 }
