@@ -53,17 +53,24 @@ namespace TaskDEV_2
         /// <param name="word"></param>
         public Phonetics(string word)
         {
-            if(word.Length==0)
+            this.word = word.ToLower();
+            CheckOnException(this.word);
+        }
+        /// <summary>
+        /// Method for check on all Exection
+        /// </summary>
+        /// <param name="word"></param>
+        private void CheckOnException(string word)
+        {
+            if (word.Length == 0)
             {
                 throw new FormatException("Need write word!!!");
             }
-            this.word = word.ToLower();
             if (word.IndexOf('+') != word.LastIndexOf('+'))
             {
                 throw new FormatException("Wrote two stress!!!");
             }
-            int indexFirstVowel = word.Length-1;
-            int indexLastVowel = 0;
+            int indexFirstVowel = word.Length - 1, indexLastVowel = 0;
             if (!word.Contains('+'))
             {
                 for (int i = 0; i < vowels.Length; i++)
@@ -82,12 +89,11 @@ namespace TaskDEV_2
                     this.word = word.Insert(indexFirstVowel + 1, "+");
                 }
                 else if (word.Contains('ё'))
-                     {
-                        this.word = word.Insert(word.IndexOf('ё') + 1, "+");
-                     }
+                {
+                    this.word = word.Insert(word.IndexOf('ё') + 1, "+");
+                }
                 else throw new FormatException("Need right show stress!!!");
             }
-            
         }
 
         public Phonetics()
@@ -105,7 +111,7 @@ namespace TaskDEV_2
                 symbols[i] = new Symbol(word[i]);
                 if (i!=word.Length-1 && word[i + 1] == '+')
                 {
-                    symbols[i].stress = true;
+                    symbols[i].isStress = true;
                     word = word.Remove(i + 1, 1);
                 }
             }
@@ -150,13 +156,13 @@ namespace TaskDEV_2
                 phonemes.Append("'" + vowelAfterConsonant[symbols[index].symbol]);
                 return ;
             }
-            if ((symbols[index].stress || index == 0 || symbols[index-1].sound == "vowel" || symbols[index - 1].sound == "other")
+            if ((symbols[index].isStress || index == 0 || symbols[index-1].sound == "vowel" || symbols[index - 1].sound == "other")
                 && vowelAfterVowel.ContainsKey(symbols[index].symbol))
             {
                 phonemes.Append(vowelAfterVowel[symbols[index].symbol]);
                 return ;
             }
-            if (symbols[index].symbol == 'о' && !symbols[index].stress)
+            if (symbols[index].symbol == 'о' && !symbols[index].isStress)
             {
                 phonemes.Append("а");
                 return;
@@ -211,7 +217,7 @@ namespace TaskDEV_2
         /// </summary>
         internal char symbol;
         internal string sound = "other";
-        internal bool stress = false;
+        internal bool isStress = false;
         internal int deafness = 0;
         /// <summary>
         /// Constructor
