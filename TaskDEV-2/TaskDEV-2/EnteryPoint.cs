@@ -1,23 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TaskDEV_2
 {
+    /// <summary>
+    /// Class enteryPoint
+    /// </summary>
     class EnteryPoint
     {
-        static void Main()
+        static void Main(string[] args)
         {
             try
             {
-                var str = Console.ReadLine();
-                var word = new Phonetics(str);
+
+                Phonetics[] word = new Phonetics[args.Length];
+                for (int i = 0; i < word.Length; i++)
+                {
+                    word[i] = new Phonetics(args[i]);
+                    word[i].DisplayPhonemes(word[i].ConvertWordToPhonetics(word[i].ParsingWord()));
+                }                
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine($"Error: { ex.Message}");
             }
             catch (Exception)
             {
-                Console.WriteLine("Error: Something happened");
+                Console.WriteLine("Error: Something error.");
             }
         }
     }
