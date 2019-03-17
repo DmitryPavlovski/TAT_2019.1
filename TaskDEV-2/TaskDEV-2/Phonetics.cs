@@ -13,8 +13,7 @@ namespace TaskDEV_2
         private string word = string.Empty;
         private StringBuilder phonemes = new StringBuilder();
         internal readonly string vowels = "аоиеёэыуюя";
-        internal readonly string deafConsonants = "пфктшсхцчщ";
-        internal readonly string voicConsonants = "бвгджзйлмнр";
+        internal readonly string Consonants = "бвгджзйлмнрпфктшсхцчщ";
         private readonly Dictionary<char, char> vowelAfterConsonant = new Dictionary<char, char>
         {
             ['ю'] = 'у',
@@ -31,18 +30,18 @@ namespace TaskDEV_2
         };
         private readonly Dictionary<char, char> voicingConsonant = new Dictionary<char, char>
         {
-            ['б'] = 'п', ['й']='й',
-            ['в'] = 'ф', ['л']='л',
-            ['г'] = 'к', ['м']='м',
-            ['д'] = 'т', ['н']='н',
-            ['ж'] = 'ш', ['р']='р',
+            ['б'] = 'п', 
+            ['в'] = 'ф', 
+            ['г'] = 'к', 
+            ['д'] = 'т', 
+            ['ж'] = 'ш', 
             ['з'] = 'с'
         };
         private readonly Dictionary<char, char> deafConsonant = new Dictionary<char, char>
         {
-            ['п'] = 'б', ['х']='х',
-            ['ф'] = 'в', ['ц']='ц',
-            ['к'] = 'г', ['щ']='щ',
+            ['п'] = 'б', 
+            ['ф'] = 'в', 
+            ['к'] = 'г', 
             ['т'] = 'д',
             ['ш'] = 'ж',
             ['с'] = 'з'
@@ -176,7 +175,7 @@ namespace TaskDEV_2
         /// <param name="symbols"></param>
         void AddConsonant(int index, Symbol[] symbols)
         {
-            if(index == word.Length - 1 && symbols[index].deafness == 2)
+            if(index == word.Length - 1 && voicingConsonant.ContainsKey(symbols[index].symbol))
             {
                 phonemes.Append(voicingConsonant[symbols[index].symbol]);
                 return;
@@ -188,12 +187,12 @@ namespace TaskDEV_2
             }
             if (symbols[index + 1].sound == "consonant")
             {
-                if (symbols[index+1].deafness == 1 && symbols[index].deafness == 2)
+                if (deafConsonant.ContainsKey(symbols[index+1].symbol) && voicingConsonant.ContainsKey(symbols[index].symbol))
                 {
                     phonemes.Append(voicingConsonant[symbols[index].symbol]);
                     return;
                 }
-                if (symbols[index + 1].deafness == 2 && symbols[index].deafness == 1)
+                if (deafConsonant.ContainsKey(symbols[index].symbol) && voicingConsonant.ContainsKey(symbols[index + 1].symbol))
                 {
                     phonemes.Append(deafConsonant[symbols[index].symbol]);
                     return;
@@ -218,7 +217,6 @@ namespace TaskDEV_2
         internal char symbol;
         internal string sound = "other";
         internal bool isStress = false;
-        internal int deafness = 0;
         /// <summary>
         /// Constructor
         /// </summary>
@@ -231,14 +229,9 @@ namespace TaskDEV_2
             {
                 sound = "vowel";
             }
-            if(buf.deafConsonants.Contains(symbol) || buf.voicConsonants.Contains(symbol))
+            if(buf.Consonants.Contains(symbol))
             {
-                sound = "consonant";
-                if (buf.deafConsonants.Contains(symbol))
-                {
-                    deafness = 1;
-                }
-                else deafness = 2;
+                sound = "consonant";                
             }
         }
     }
