@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task_DEV_3
 {
+    /// <summary>
+    /// Entery Point class
+    /// </summary>
     class EnteryPoint
     {
         static void Main(string[] args)

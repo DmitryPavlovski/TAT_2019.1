@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Task_DEV_3
 {
+    /// <summary>
+    /// Class company for work with employees
+    /// </summary>
     class Company
     {
         public List<Employee> ListEmployees { get; set; } = new List<Employee>();
@@ -21,6 +24,9 @@ namespace Task_DEV_3
             AddMiddle();
             AddJunior();
         }
+        /// <summary>
+        /// Method for add lead developers
+        /// </summary>
         public void AddLead()
         {
             for (int i = 0; i < NumLeads; i++)
@@ -28,6 +34,9 @@ namespace Task_DEV_3
                 ListEmployees.Add(new Lead());
             }
         }
+        /// <summary>
+        /// Method for add senior developers
+        /// </summary>
         public void AddSenior()
         {
             for (int i = 0; i < NumSeniors; i++)
@@ -35,6 +44,9 @@ namespace Task_DEV_3
                 ListEmployees.Add(new Senior());
             }
         }
+        /// <summary>
+        /// Method for add middle developers
+        /// </summary>
         public void AddMiddle()
         {
             for (int i = 0; i < NumMiddles; i++)
@@ -42,6 +54,9 @@ namespace Task_DEV_3
                 ListEmployees.Add(new Middle());
             }
         }
+        /// <summary>
+        /// Method for add junior developers
+        /// </summary>
         public void AddJunior()
         {
             for (int i = 0; i < NumJuniors; i++)
@@ -49,8 +64,22 @@ namespace Task_DEV_3
                 ListEmployees.Add(new Junior());
             }
         }
+        /// <summary>
+        /// Selection team for work by criterion
+        /// </summary>
+        /// <param name="typeCriterion"></param>
+        /// <param name="characteristic">
+        /// characteristic depending on the type criterion
+        /// criterion=1 - characteristic=max money
+        /// criterion=2 and 3 - characteristic=need productivity
+        /// </param>
+        /// <returns></returns>
         public List<Employee> SelectionTeamByCriterion(int typeCriterion, int characteristic)
         {
+            if (characteristic < 0)
+            {
+                throw new Exception("No valid data!!!");
+            }
             switch (typeCriterion)
             {
                 case 1:
@@ -66,6 +95,10 @@ namespace Task_DEV_3
                     throw new Exception("Unknown criteria entered");
             }
         }
+        /// <summary>
+        /// Show list employees
+        /// </summary>
+        /// <param name="listEmployees"></param>
         public static void ShowListEmployees(List<Employee> listEmployees)
         {
             var counter = new int[4];
