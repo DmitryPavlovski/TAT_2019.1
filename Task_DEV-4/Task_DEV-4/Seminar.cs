@@ -1,13 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Task_DEV_4
 {
-    class Seminar : Description
+    /// <summary>
+    /// Class included in lecture
+    /// </summary>
+    class Seminar : Description, ICloneable
     {
         List<string> tasks { get; set; } 
         List<string> questions { get; set; } 
         List<string> answerTheQuestions { get; set; } 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Seminar() : base (random.Next(256))
         {
             tasks = new List<string>();
@@ -23,6 +30,14 @@ namespace Task_DEV_4
                 answerTheQuestions.Add(GetText());
             }
         }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="Information"></param>
+        /// <param name="Tasks"></param>
+        /// <param name="Questions"></param>
+        /// <param name="AnswerTheQuestions"></param>
         public Seminar(string Id, string Information, List<string> Tasks, List<string> Questions, List<string> AnswerTheQuestions):base()
         {
             Identi = Id;
@@ -45,7 +60,7 @@ namespace Task_DEV_4
         }
 
         /// <summary>
-        /// Implemented interface method deeply copies object.
+        /// Method for deep clode object
         /// </summary>
         /// <returns disciplineClone></returns>
         public object Clone()
@@ -53,6 +68,10 @@ namespace Task_DEV_4
             Seminar seminarClone = new Seminar(Identi, TextInformation, tasks, questions, answerTheQuestions);
             return seminarClone;
         }
+        /// <summary>
+        /// Method for add Information About Seminars in common string
+        /// </summary>
+        /// <param name="allInformation"></param>
         public void AddInformationAboutSeminars(StringBuilder allInformation)
         {
             int indexOfTask = 1, indexOfQuestion = 1, indexOfAnswer = 1;
@@ -67,13 +86,13 @@ namespace Task_DEV_4
             allInformation.Append("*Questions:\n");
             foreach (var question in questions)
             {
-                allInformation.Append($"{indexOfQuestion}th: {question}?\n");
+                allInformation.Append($"{indexOfQuestion}: {question}?\n");
                 indexOfQuestion++;
             }
             allInformation.Append("*Answer the questions:\n");
             foreach (var answer in answerTheQuestions)
             {
-                allInformation.Append($"{indexOfAnswer}th: {answer}.\n");
+                allInformation.Append($"{indexOfAnswer}: {answer}.\n");
                 indexOfAnswer++;
             }
         }

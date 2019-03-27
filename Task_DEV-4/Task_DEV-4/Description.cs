@@ -5,7 +5,7 @@ using System.IO;
 namespace Task_DEV_4
 {
     /// <summary>
-    /// 
+    /// class including description about entity
     /// </summary>
     class Description : Id
     {
@@ -29,13 +29,25 @@ namespace Task_DEV_4
                 }
             }
         }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="size"></param>
         public Description(int size) : base()
         {
             TextInformation = GetText(size);
         }
+        /// <summary>
+        /// Consructor
+        /// </summary>
         public Description(): base ()
         {
         }
+        /// <summary>
+        /// method for read information from file
+        /// </summary>
+        /// <param name="restriction"></param>
+        /// <returns></returns>
         public string GetText(int restriction = 20)
         {
             StringBuilder line = new StringBuilder();
@@ -63,6 +75,10 @@ namespace Task_DEV_4
             }
             return text.Substring(indexFirstElement, indexLastElement - indexFirstElement);
         }
+        /// <summary>
+        /// override method ToSring()
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"Description: {TextInformation}";

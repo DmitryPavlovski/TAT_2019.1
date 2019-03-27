@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Task_DEV_4
@@ -6,7 +7,7 @@ namespace Task_DEV_4
     /// <summary>
     /// class Discipline with lectures
     /// </summary>
-    class Discipline : Description
+    class Discipline : Description, ICloneable
     {
         public List<Lecture> ListOfLectures { get; set; }
         /// <summary>
@@ -38,7 +39,7 @@ namespace Task_DEV_4
         }
 
         /// <summary>
-        /// method for clone object.
+        /// method for deep clone object.
         /// </summary>
         /// <returns disciplineClone></returns>
         public object Clone()
@@ -72,7 +73,7 @@ namespace Task_DEV_4
                 $", laboratories - {listOfLectures.ListOfLaboratoryClasses.Count}.\n");
             allInformation.Append("                                       Detailed Description\n");
             allInformation.Append($"---Lection {index + 1}th:\n");
-            listOfLectures.AddAllInformationOfLectureToStringBuilder(allInformation);
+            listOfLectures.AddInformationAboutLecture(allInformation);
             allInformation.Append("                                                 End\n");
             return allInformation;
         }

@@ -1,14 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Task_DEV_4
 {
-    class Lecture : Description
+    /// <summary>
+    /// Class included in discipline
+    /// </summary>
+    class Lecture : Description, ICloneable
     {
         string Material { get; set; }
         Presentation Presentation { get; set; }
         public List<LaboratoryClasses> ListOfLaboratoryClasses { get; set; } 
-        public List<Seminar> ListOfSeminars { get; set; } 
+        public List<Seminar> ListOfSeminars { get; set; }
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Lecture() : base (random.Next(256))
         {
             Material = GetText(100000);
@@ -24,6 +31,15 @@ namespace Task_DEV_4
                 ListOfLaboratoryClasses.Add(new LaboratoryClasses());
             }
         }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="Description"></param>
+        /// <param name="Material"></param>
+        /// <param name="Presentation"></param>
+        /// <param name="Seminars"></param>
+        /// <param name="Laboratories"></param>
         public Lecture(string Id, string Description, string Material, Presentation Presentation, List<Seminar> Seminars, List<LaboratoryClasses> Laboratories)
         {
             Identi = Id;
@@ -43,7 +59,7 @@ namespace Task_DEV_4
         }
 
         /// <summary>
-        /// Implemented interface method deeply copies object.
+        /// Method for deep clone object
         /// </summary>
         /// <returns disciplineClone></returns>
         public object Clone()
@@ -51,7 +67,11 @@ namespace Task_DEV_4
             Lecture lectionClone = new Lecture(Identi, TextInformation, Material, Presentation, ListOfSeminars, ListOfLaboratoryClasses);
             return lectionClone;
         }
-        public void AddAllInformationOfLectureToStringBuilder(StringBuilder allInformation)
+        /// <summary>
+        /// Method for Add Information About Lecture in common string
+        /// </summary>
+        /// <param name="allInformation"></param>
+        public void AddInformationAboutLecture(StringBuilder allInformation)
         {
             int indexOfSeminar = 1;
             int indexOfLaboratory = 1;
