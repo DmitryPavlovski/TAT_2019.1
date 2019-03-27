@@ -7,7 +7,7 @@ namespace Task_DEV_4
     /// <summary>
     /// class Discipline with lectures
     /// </summary>
-    class Discipline : Description, ICloneable
+    class Discipline : Materials, ICloneable
     {
         public List<Lecture> ListOfLectures { get; set; }
         /// <summary>

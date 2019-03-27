@@ -7,7 +7,7 @@ namespace Task_DEV_4
     /// <summary>
     /// class including description about entity
     /// </summary>
-    class Description : Id
+    class Materials : Id
     {
         private string textInformation { get; set; }
         public string TextInformation
@@ -33,14 +33,14 @@ namespace Task_DEV_4
         /// Constructor
         /// </summary>
         /// <param name="size"></param>
-        public Description(int size) : base()
+        public Materials(int size) : base()
         {
             TextInformation = GetText(size);
         }
         /// <summary>
         /// Consructor
         /// </summary>
-        public Description(): base ()
+        public Materials(): base ()
         {
         }
         /// <summary>

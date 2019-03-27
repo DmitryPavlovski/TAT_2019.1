@@ -3,7 +3,7 @@
     /// <summary>
     /// class included in lecture
     /// </summary>
-    class Presentation : Description
+    class Presentation : Materials
     {
         public string Uri { get; set; }
         public Format format { get; set; }

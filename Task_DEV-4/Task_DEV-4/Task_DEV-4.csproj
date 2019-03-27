@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Description.cs" />
+    <Compile Include="Materials.cs" />
     <Compile Include="Discipline.cs" />
     <Compile Include="EnteryPoint.cs" />
     <Compile Include="Format.cs" />

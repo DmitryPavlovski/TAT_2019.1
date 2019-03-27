@@ -7,7 +7,7 @@ namespace Task_DEV_4
     /// <summary>
     /// Class included in lecture
     /// </summary>
-    class Seminar : Description, ICloneable
+    class Seminar : Materials, ICloneable
     {
         List<string> tasks { get; set; } 
         List<string> questions { get; set; } 

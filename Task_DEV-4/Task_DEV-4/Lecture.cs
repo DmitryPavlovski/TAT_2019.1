@@ -7,7 +7,7 @@ namespace Task_DEV_4
     /// <summary>
     /// Class included in discipline
     /// </summary>
-    class Lecture : Description, ICloneable
+    class Lecture : Materials, ICloneable
     {
         string Material { get; set; }
         Presentation Presentation { get; set; }

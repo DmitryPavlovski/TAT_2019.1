@@ -6,7 +6,7 @@ namespace Task_DEV_4
     /// <summary>
     /// class included in lecture
     /// </summary>
-    class LaboratoryClasses : Description, ICloneable
+    class LaboratoryClasses : Materials, ICloneable
     {
         /// <summary>
         /// Consructor
