@@ -6,17 +6,41 @@ using System.Threading.Tasks;
 
 namespace Task_DEV_4
 {
-    class Id
+    class Id : BasicClass
     {
         string Identi { get; set; }
         public Id()
         {
-            Identi = CreateGuid();
+            Identi = generateID();
         }
-        private static string CreateGuid()
+        public override bool Equals(object obj)
         {
-            var Id = Guid.NewGuid();
-            return Id.ToString();
+            if (obj == null)
+            {
+                return false;
+            }
+            Id id = obj as Id;
+            if (id as Id == null)
+            {
+                return false;
+            }
+            return id.Identi == this.Identi;
+        }
+        public string generateID()
+        {
+            long i = 1;
+
+            foreach (byte b in Guid.NewGuid().ToByteArray())
+            {
+                i *= ((int)b + 1);
+            }
+            string number = String.Format("{0:d9}", (DateTime.Now.Ticks / 10) % 1000000000);
+            return number;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
