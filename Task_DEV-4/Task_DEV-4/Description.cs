@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
+using System;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace Task_DEV_4
 {
+    /// <summary>
+    /// 
+    /// </summary>
     class Description : Id
     {
-        private string textInformation;
+        private string textInformation { get; set; }
         public string TextInformation
         {
             get
@@ -18,7 +18,7 @@ namespace Task_DEV_4
             }
             set
             {
-                if (TextInformation.Length > 256)
+                if (value.Length > 256)
                 {
                     Console.WriteLine("Description should be less");
                     textInformation = string.Empty;
@@ -27,12 +27,45 @@ namespace Task_DEV_4
                 {
                     textInformation = value;
                 }
-                    
             }
         }
-        public Description(int size)
+        public Description(int size) : base()
         {
             TextInformation = GetText(size);
+        }
+        public Description(): base ()
+        {
+        }
+        public string GetText(int restriction = 20)
+        {
+            StringBuilder line = new StringBuilder();
+            StreamReader reader = new StreamReader("../../Description.txt");
+
+            string partLine = reader.ReadLine();
+            if (partLine == null)
+            {
+                return null;
+            }
+            while (partLine != null)
+            {
+                line.Append(partLine);
+                partLine = reader.ReadLine();
+            }
+            reader.Close();
+
+            string text = line.ToString();
+            int indexFirstElement, indexLastElement;
+            indexFirstElement = random.Next(text.Length);
+            indexLastElement = random.Next(indexFirstElement + 1, indexFirstElement + restriction+1);
+            if (indexLastElement >= text.Length)
+            {
+                indexLastElement = text.Length - 1;
+            }
+            return text.Substring(indexFirstElement, indexLastElement - indexFirstElement);
+        }
+        public override string ToString()
+        {
+            return $"Description: {TextInformation}";
         }
     }
 }

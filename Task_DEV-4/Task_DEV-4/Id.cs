@@ -1,18 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task_DEV_4
 {
-    class Id : BasicClass
+    /// <summary>
+    /// class set universal id all entity
+    /// </summary>
+    class Id
     {
-        string Identi { get; set; }
+        public string Identi { get; protected set; }
+        public static Random random = new Random(DateTime.Now.Millisecond);
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Id()
         {
             Identi = generateID();
         }
+        /// <summary>
+        /// override method Equals for compare two Id
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -26,6 +34,10 @@ namespace Task_DEV_4
             }
             return id.Identi == this.Identi;
         }
+        /// <summary>
+        /// method for generate unuversal Id
+        /// </summary>
+        /// <returns></returns>
         public string generateID()
         {
             long i = 1;
@@ -37,7 +49,10 @@ namespace Task_DEV_4
             string number = String.Format("{0:d9}", (DateTime.Now.Ticks / 10) % 1000000000);
             return number;
         }
-
+        /// <summary>
+        /// override GetHashCode
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return base.GetHashCode();
