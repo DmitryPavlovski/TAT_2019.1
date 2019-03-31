@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Task_DEV_5
 {
+    /// <summary>
+    /// Entery point class
+    /// </summary>
     class EnteryPoint
     {
         static void Main()
@@ -23,12 +26,17 @@ namespace Task_DEV_5
                 Console.WriteLine($"Stack Trace: {ex.StackTrace}");
             }
         }
-        private static void DisplayTravels(object obj, ObjectFlyAwayEventArgs args)
+        /// <summary>
+        /// Method 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="arg"></param>
+        private static void DisplayTravels(object obj, ObjectFlyAwayEventArgs arg)
         {
             Console.Write($"{obj.GetType().Name}'s time is ");
             Console.WriteLine(obj is SpaceShip
-                ? $"{Math.Round(args.Time * 3600, 3)} seconds, reaching {args.Speed / 3600} km/s"
-                : $"{Math.Round(args.Time, 3)} hours, reaching {args.Speed} km/h");
+                ? $"{Math.Round(arg.Time * 3600, 3)} seconds, reaching {arg.Speed / 3600} km/s"
+                : $"{Math.Round(arg.Time, 3)} hours, reaching {arg.Speed} km/h");
         }
     }
 }
