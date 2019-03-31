@@ -27,7 +27,7 @@ namespace Task_DEV_5
             }
         }
         /// <summary>
-        /// Method 
+        /// Method display time and speed moving
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="arg"></param>

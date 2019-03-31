@@ -25,7 +25,7 @@ namespace Task_DEV_5
         }
 
         /// <summary>
-        /// method return distance from one point to next 
+        /// method return distance from one point to next point
         /// </summary>
         /// <param name="nextPoint"></param>
         /// <returns></returns>
