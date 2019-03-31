@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task_DEV_5
 {
@@ -10,6 +6,7 @@ namespace Task_DEV_5
     {
         public double Time { get; set; }
         public double Speed { get; set; }
+
         public ObjectFlyAwayEventArgs (double time, double speed)
         {
             Time = time;

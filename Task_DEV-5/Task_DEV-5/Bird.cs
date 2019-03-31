@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task_DEV_5
 {
@@ -13,18 +9,22 @@ namespace Task_DEV_5
         public double DistanceTraveled { get; set; }
 
         public event EventHandler<ObjectFlyAwayEventArgs> ObjectFlyAway;
+
         public Bird(int x = 0, int y = 0, int z = 0)
         {
             StartPoint = new Point(x, y, z);
         }
+
         public IFlyable WhoAmI()
         {
             return this;
         }
+
         public double GetFlyTime()
         {
             return DistanceTraveled / Speed;
         }
+
         public void FlyTo(Point nextPoint)
         {
             DistanceTraveled += StartPoint.GetDistance(nextPoint);
