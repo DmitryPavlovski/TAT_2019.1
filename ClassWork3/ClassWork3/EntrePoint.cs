@@ -2,8 +2,14 @@
 
 namespace TestTask3
 {
+    /// <summary>
+    /// ClassWork3: Create a triangle by 3 point, get it's square
+    /// </summary>
     class EntryPoint
     {
+        /// <summary>
+        /// entry point
+        /// </summary>
         static void Main()
         {
             try

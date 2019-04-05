@@ -2,6 +2,9 @@
 
 namespace TestTask3
 {
+    /// <summary>
+    /// struct for point
+    /// </summary>
     public struct Point
     {
         public int X { get; set; }
@@ -20,10 +23,10 @@ namespace TestTask3
         }
 
         /// <summary>
-        /// method return distance from one point to next point
+        /// method for calculate distance from one point to next point
         /// </summary>
         /// <param name="nextPoint"></param>
-        /// <returns></returns>
+        /// <returns>distance to point</returns>
         public double GetDistance(Point nextPoint)
         {
             return Math.Sqrt(Math.Pow(nextPoint.X - X, 2) + Math.Pow(nextPoint.Y - Y, 2));
