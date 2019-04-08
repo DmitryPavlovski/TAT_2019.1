@@ -11,6 +11,7 @@ namespace Task_DEV_5
         public int Speed { get; set; } = new Random().Next(1, 21); //Km/h
         public double DistanceTraveled { get; set; }
 
+        /// <inheritdoc />
         public event EventHandler<ObjectFlyAwayEventArgs> ObjectFlyAway;
 
         /// <summary>

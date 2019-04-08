@@ -11,6 +11,7 @@ namespace Task_DEV_5
         public int StartSpeed { get; set; } = 200;
         public double DistanceTraveled { get; set;}
 
+        /// <inheritdoc />
         public event EventHandler<ObjectFlyAwayEventArgs> ObjectFlyAway;
 
         /// <summary>

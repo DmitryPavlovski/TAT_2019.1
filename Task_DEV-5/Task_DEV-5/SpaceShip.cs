@@ -11,6 +11,7 @@ namespace Task_DEV_5
         public int Speed { get; set; } = 8000 * 3600; // km/h = km/s * 3600
         public double DistanceTraveled { get; set; }
 
+        /// <inheritdoc />
         public event EventHandler<ObjectFlyAwayEventArgs> ObjectFlyAway;
 
         /// <summary>
