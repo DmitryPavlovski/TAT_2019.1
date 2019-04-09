@@ -12,6 +12,9 @@ namespace Task_DEV_5
         public double Speed { get; set; }
 
         /// <inheritdoc />
+        /// <summary>
+        /// Constructor
+        /// </summary>
         /// <param name="time"></param>
         /// <param name="speed"></param>
         public ObjectFlyAwayEventArgs (double time, double speed)
