@@ -4,15 +4,27 @@ using System.Xml;
 
 namespace Task_DEV_6
 {
+    /// <summary>
+    /// class for parsig xml file
+    /// </summary>
     class CarGetter
     {
         private XmlDocument XDoc { get; set; }
 
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="xDocName"></param>
         public CarGetter(string xDocName)
         {
             XDoc = new XmlDocument();
             XDoc.Load($"../../{xDocName}.xml");
         }
+
+        /// <summary>
+        /// method for paring file and create list of cars
+        /// </summary>
+        /// <returns>List of cars</returns>
         public List<Car> ParseCar()
         {
             var listOfCars = new List<Car>();

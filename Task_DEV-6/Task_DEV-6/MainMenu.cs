@@ -2,16 +2,26 @@
 
 namespace Task_DEV_6
 {
+    /// <summary>
+    /// class for display and input commands
+    /// </summary>
     class MainMenu
     {
         public PriceListCars PriceList { get; set; }
         private ICommand Command { get; set; }
 
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="priceList"></param>
         public MainMenu(PriceListCars priceList)
         {
             PriceList = priceList;
         }
 
+        /// <summary>
+        /// method for display visualization and call commands
+        /// </summary>
         public void Display()
         {
             while (true)
