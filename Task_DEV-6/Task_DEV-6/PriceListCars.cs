@@ -35,7 +35,7 @@ namespace Task_DEV_6
         /// <returns>Cunt cars</returns>
         public int GetCountCars()
         {
-            return ListCars.Select(car => car.Quantity).Sum();
+            return ListCars.Sum(car => car.Quantity);
         }
 
         /// <summary>

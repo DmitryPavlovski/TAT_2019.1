@@ -5,11 +5,11 @@ namespace Task_DEV_6
 {
     /// <summary>
     /// class for display and input commands
+    /// only one object this can be created
     /// </summary>
     class MainMenu
     {
-        private static List<PriceListCars> instance;
-
+        private static List<PriceListCars> _instance;
         public List<PriceListCars> PriceList { get; set; }
         private ICommand Command { get; set; }
         private Action ExecuteCommands { get; set; }
@@ -23,13 +23,18 @@ namespace Task_DEV_6
             PriceList = getInstance(priceList);
         }
 
+        /// <summary>
+        /// method for check on the presence of objects of this class if not then creates a new
+        /// </summary>
+        /// <param name="listCars"></param>
+        /// <returns></returns>
         public static List<PriceListCars> getInstance(List<PriceListCars> listCars)
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = listCars;
+                _instance = listCars;
             }
-            return instance;
+            return _instance;
         }
 
         /// <summary>
@@ -95,6 +100,10 @@ namespace Task_DEV_6
             }
         }
 
+        /// <summary>
+        /// method for choose type of car
+        /// </summary>
+        /// <returns>type of car</returns>
         private static int ChooseTypeOfCar()
         {
             while(true)

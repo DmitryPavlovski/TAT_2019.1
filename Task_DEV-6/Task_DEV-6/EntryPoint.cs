@@ -5,8 +5,9 @@ namespace Task_DEV_6
 {
     /// <summary>
     /// class with entry point
-    /// program pars file and create price list of cars
+    /// program parsing files and create price list of cars
     /// and creates display
+    /// where we can use some commands
     /// </summary>
     class EntryPoint
     {

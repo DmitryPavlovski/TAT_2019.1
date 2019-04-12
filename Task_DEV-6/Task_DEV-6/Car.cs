@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Task_DEV_6
+﻿namespace Task_DEV_6
 {
     /// <summary>
     /// class for car

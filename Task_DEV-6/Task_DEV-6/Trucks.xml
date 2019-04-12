@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <cars>
   <car>
-    <mark>Chevrolet</mark>
-    <model>Silverado</model>
-    <quantity>6</quantity>
-    <cost>90000</cost>
+    <mark>Zil</mark>
+    <model>131</model>
+    <quantity>15</quantity>
+    <cost>7000</cost>
   </car>
   <car>
-    <mark>Toyota</mark>
-    <model>Tacoma</model>
-    <quantity>11</quantity>
-    <cost>80000</cost>
+    <mark>Ural</mark>
+    <model>4320</model>
+    <quantity>20</quantity>
+    <cost>8800</cost>
   </car>
   <car>
     <mark>Ford</mark>
     <model>F-250</model>
-    <quantity>2</quantity>
-    <cost>40000</cost>
+    <quantity>15</quantity>
+    <cost>45000</cost>
   </car>
 </cars>
