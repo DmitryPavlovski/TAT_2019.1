@@ -23,7 +23,7 @@ namespace Task_DEV_6
         /// </summary>
         public void Execute()
         {
-            Console.WriteLine(PriceList.GetCountMark());
+            Console.WriteLine(PriceList?.GetCountMark());
         }
     }
 }

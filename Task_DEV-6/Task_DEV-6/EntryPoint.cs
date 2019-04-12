@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Task_DEV_6
 {
@@ -21,8 +22,13 @@ namespace Task_DEV_6
                 {
                     throw new Exception("File name not specified");
                 }
-                CarGetter carGetter = new CarGetter(args[0]);
-                var mainMenu = new MainMenu(new PriceListCars(carGetter.ParseCar()));
+                CarGetter carGetter = new CarGetter();
+                List<PriceListCars> catalogs = new List<PriceListCars>()
+                {
+                    new PriceListCars(carGetter.ParseCar(args[(int)TypeOfCars.car])),
+                    new PriceListCars(carGetter.ParseCar(args[(int)TypeOfCars.truck]))
+                };
+                var mainMenu = new MainMenu(catalogs);
                 mainMenu.Display();
             }
             catch (Exception ex)

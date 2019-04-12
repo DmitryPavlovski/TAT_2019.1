@@ -23,7 +23,7 @@ namespace Task_DEV_6
         /// </summary>
         public void Execute()
         {
-            Console.WriteLine(PriceList.GetCountCars());
+            Console.WriteLine(PriceList?.GetCountCars());
         }
     }
 }

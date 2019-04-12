@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cars>
+  <car>
+    <mark>Bugatti</mark>
+    <model>Chiron</model>
+    <quantity>3</quantity>
+    <cost>100000</cost>
+  </car>
+  <car>
+    <mark>Bugatti</mark>
+    <model>Veyron</model>
+    <quantity>7</quantity>
+    <cost>70000</cost>
+  </car>
+  <car>
+    <mark>BMW</mark>
+    <model>X10</model>
+    <quantity>13</quantity>
+    <cost>20000</cost>
+  </car>
+</cars>

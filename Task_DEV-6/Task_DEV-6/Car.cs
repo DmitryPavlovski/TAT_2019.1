@@ -1,4 +1,6 @@
-﻿namespace Task_DEV_6
+﻿using System;
+
+namespace Task_DEV_6
 {
     /// <summary>
     /// class for car
@@ -11,7 +13,7 @@
         public int Cost { get; set; }
 
         /// <summary>
-        /// constructor
+        /// constructor with check on exceptoin
         /// </summary>
         /// <param name="mark"></param>
         /// <param name="model"></param>

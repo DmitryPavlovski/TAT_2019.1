@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Task_DEV_6
 {
@@ -26,7 +27,7 @@ namespace Task_DEV_6
         /// </summary>
         public void Execute()
         {
-            Console.WriteLine(PriceList.GetEveragePriceMark(Mark));
+            Console.WriteLine(PriceList?.GetEveragePriceMark(Mark));
         }
     }
 }
