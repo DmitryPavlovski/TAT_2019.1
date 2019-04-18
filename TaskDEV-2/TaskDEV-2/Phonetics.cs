@@ -54,14 +54,14 @@ namespace TaskDEV_2
         public Phonetics(string word)
         {
             this.word = word.ToLower();
-            this.CheckOnException(this.word);
+            this.CheckOnAllException(this.word);
         }
 
         /// <summary>
         /// Method for check on all Exection
         /// </summary>
         /// <param name="word"></param>
-        private void CheckOnException(string word)
+        private bool CheckOnAllException(string word)
         {
             if (word.Length == 0)
             {
@@ -95,6 +95,8 @@ namespace TaskDEV_2
                 }
                 else throw new FormatException("Need right show stress!!!");
             }
+
+            return true;
         }
 
         /// <summary>
@@ -113,6 +115,7 @@ namespace TaskDEV_2
                     this.word = this.word.Remove(i + 1, 1);
                 }
             }
+
             return symbols;
         }
 
@@ -128,10 +131,10 @@ namespace TaskDEV_2
                 switch(symbols[i].sound)
                 {
                     case "vowel":
-                        this.AddVowel(i, symbols);
+                        this.phonemes.Append(this.AddVowel(i, symbols));
                         continue;
                     case "consonant":
-                        this.AddConsonant(i, symbols);
+                        this.phonemes.Append(this.AddConsonant(i, symbols));
                         continue;
                     case "other":
                         if (symbols[i].symbol == 'ь')
@@ -141,6 +144,7 @@ namespace TaskDEV_2
                         continue;
                 }
             }
+
             return this.phonemes;
         }
 
@@ -149,25 +153,23 @@ namespace TaskDEV_2
         /// </summary>
         /// <param name="index"></param>
         /// <param name="symbols"></param>
-        void AddVowel (int index, Symbol[] symbols)
+        string AddVowel (int index, Symbol[] symbols)
         {
             if (index != 0 && symbols[index - 1].sound == "consonant" && vowelAfterConsonant.ContainsKey(symbols[index].symbol))
             {
-                this.phonemes.Append("'" + vowelAfterConsonant[symbols[index].symbol]);
-                return ;
+                return "'" + vowelAfterConsonant[symbols[index].symbol];
             }
             if ((symbols[index].isStress || index == 0 || symbols[index-1].sound == "vowel" || symbols[index - 1].sound == "other")
                 && vowelAfterVowel.ContainsKey(symbols[index].symbol))
             {
-                this.phonemes.Append(vowelAfterVowel[symbols[index].symbol]);
-                return ;
+                return vowelAfterVowel[symbols[index].symbol];
             }
             if (symbols[index].symbol == 'о' && !symbols[index].isStress)
             {
-                this.phonemes.Append("а");
-                return;
+                return "а";
             }
-            this.phonemes.Append(symbols[index].symbol);
+
+            return symbols[index].symbol.ToString();
         }
 
         /// <summary>
@@ -175,32 +177,29 @@ namespace TaskDEV_2
         /// </summary>
         /// <param name="index"></param>
         /// <param name="symbols"></param>
-        void AddConsonant(int index, Symbol[] symbols)
+        string AddConsonant(int index, Symbol[] symbols)
         {
             if(index == this.word.Length - 1 && voicingConsonant.ContainsKey(symbols[index].symbol))
             {
-                this.phonemes.Append(voicingConsonant[symbols[index].symbol]);
-                return;
+                return voicingConsonant[symbols[index].symbol].ToString();
             }
             else if(index == this.word.Length - 1)
             {
-                this.phonemes.Append(symbols[index].symbol);
-                return;
+                return symbols[index].symbol.ToString();
             }
             if (symbols[index + 1].sound == "consonant")
             {
                 if (deafConsonant.ContainsKey(symbols[index+1].symbol) && voicingConsonant.ContainsKey(symbols[index].symbol))
                 {
-                    this.phonemes.Append(voicingConsonant[symbols[index].symbol]);
-                    return;
+                    return voicingConsonant[symbols[index].symbol].ToString();
                 }
                 if (deafConsonant.ContainsKey(symbols[index].symbol) && voicingConsonant.ContainsKey(symbols[index + 1].symbol))
                 {
-                    this.phonemes.Append(deafConsonant[symbols[index].symbol]);
-                    return;
+                    return deafConsonant[symbols[index].symbol].ToString();
                 }
             }
-            this.phonemes.Append(symbols[index].symbol);
+
+            return symbols[index].symbol.ToString();
         }
 
         /// <summary>
