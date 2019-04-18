@@ -17,9 +17,9 @@ namespace Task_DEV_6
         /// <returns>List of cars</returns>
         public List<Car> ParseCar(string xDocFile)
         {
-            XDoc = XDocument.Load($"../../{xDocFile}.xml");
-            List<Car> priceList = new List<Car>();
-            foreach (XElement car in XDoc.Element("cars").Elements("car"))
+            this.XDoc = XDocument.Load($"../../{xDocFile}.xml");
+            var priceList = new List<Car>();
+            foreach (XElement car in this.XDoc.Element("cars").Elements("car"))
             {
                 priceList.Add(new Car(
                     car.Element("mark").Value.ToLower(),

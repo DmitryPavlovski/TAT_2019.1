@@ -20,7 +20,7 @@ namespace Task_DEV_6
         /// <param name="priceList"></param>
         public MainMenu(List<PriceListCars> priceList)
         {
-            PriceList = getInstance(priceList);
+            this.PriceList = getInstance(priceList);
         }
 
         /// <summary>
@@ -51,45 +51,31 @@ namespace Task_DEV_6
                     switch (command)
                     {
                         case "count types":
-
-                            Command = new CountTypesCommand(PriceList[ChooseTypeOfCar()]);
-                            ExecuteCommands += Command.Execute;
-
+                            this.Command = new CountTypesCommand(this.PriceList[ChooseTypeOfCar()]);
+                            this.ExecuteCommands += this.Command.Execute;
                             continue;
-
                         case "count all":
-
-                            Command = new CountAllCommand(PriceList[ChooseTypeOfCar()]);
-                            ExecuteCommands += Command.Execute;
-
+                            this.Command = new CountAllCommand(this.PriceList[ChooseTypeOfCar()]);
+                            this.ExecuteCommands += this.Command.Execute;
                             continue;
-
                         case "average price":
-
-                            Command = new AveragePriceCommand(PriceList[ChooseTypeOfCar()]);
-                            ExecuteCommands+= Command.Execute;
-
+                            this.Command = new AveragePriceCommand(this.PriceList[ChooseTypeOfCar()]);
+                            this.ExecuteCommands += this.Command.Execute;
                             continue;
-
                         case "execute":
-
-                            ExecuteCommands?.Invoke();
-                            ExecuteCommands = null;
-
+                            this.ExecuteCommands?.Invoke();
+                            this.ExecuteCommands = null;
                             continue;
-
                         default:
-
                             if (command.Contains("average price"))
                             {
-                                Command = new AveragePriceTypeCommand(PriceList[ChooseTypeOfCar()], command.Split(' ')[2]);
-                                ExecuteCommands += Command.Execute;
+                                this.Command = new AveragePriceTypeCommand(this.PriceList[ChooseTypeOfCar()], command.Split(' ')[command.Split(' ').Length-1]);
+                                this.ExecuteCommands += this.Command.Execute;
                             }
                             else
                             {
                                 Console.WriteLine("Unknown command");
                             }
-
                             continue;
                     }
                 }

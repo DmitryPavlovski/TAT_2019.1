@@ -15,15 +15,12 @@ namespace Task_DEV_6
         /// <param name="priceList"></param>
         public CountTypesCommand(PriceListCars priceList)
         {
-            PriceList = priceList;
+            this.PriceList = priceList;
         }
 
         /// <summary>
         /// method for call command count types
         /// </summary>
-        public void Execute()
-        {
-            Console.WriteLine(PriceList?.GetCountMark());
-        }
+        public void Execute() => Console.WriteLine(this.PriceList?.GetCountMark());
     }
 }

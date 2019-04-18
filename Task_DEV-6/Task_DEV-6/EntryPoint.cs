@@ -19,12 +19,12 @@ namespace Task_DEV_6
         {
             try
             {
-                if(args.Length==0)
+                if(args.Length == 0)
                 {
-                    throw new Exception("File name not specified");
+                    throw new Exception("File name not entered");
                 }
-                CarGetter carGetter = new CarGetter();
-                List<PriceListCars> catalogs = new List<PriceListCars>()
+                var carGetter = new CarGetter();
+                var catalogs = new List<PriceListCars>()
                 {
                     new PriceListCars(carGetter.ParseCar(args[(int)TypeOfCars.car])),
                     new PriceListCars(carGetter.ParseCar(args[(int)TypeOfCars.truck]))

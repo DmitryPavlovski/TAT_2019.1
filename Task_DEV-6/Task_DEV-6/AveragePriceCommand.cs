@@ -15,15 +15,12 @@ namespace Task_DEV_6
         /// <param name="priceList"></param>
         public AveragePriceCommand(PriceListCars priceList)
         {
-            PriceList = priceList;
+            this.PriceList = priceList;
         }
 
         /// <summary>
         /// method for call command average price
         /// </summary>
-        public void Execute()
-        {
-            Console.WriteLine(PriceList?.GetEveragePrice());
-        }
+        public void Execute() => Console.WriteLine(this.PriceList?.GetEveragePrice());
     }
 }
