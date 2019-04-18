@@ -7,12 +7,15 @@ namespace TaskDEV_2
     /// </summary>
     class EnteryPoint
     {
+        /// <summary>
+        /// Entry point
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             try
             {
-
-                Phonetics[] word = new Phonetics[args.Length];
+                var word = new Phonetics[args.Length];
                 for (int i = 0; i < word.Length; i++)
                 {
                     word[i] = new Phonetics(args[i]);

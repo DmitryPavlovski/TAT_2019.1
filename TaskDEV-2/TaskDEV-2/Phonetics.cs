@@ -12,23 +12,23 @@ namespace TaskDEV_2
     {
         private string word = string.Empty;
         private StringBuilder phonemes = new StringBuilder();
-        internal readonly string vowels = "аоиеёэыуюя";
-        internal readonly string Consonants = "бвгджзйлмнрпфктшсхцчщ";
-        private readonly Dictionary<char, char> vowelAfterConsonant = new Dictionary<char, char>
+        internal static readonly string vowels = "аоиеёэыуюя";
+        internal static readonly string Consonants = "бвгджзйлмнрпфктшсхцчщ";
+        private static readonly Dictionary<char, char> vowelAfterConsonant = new Dictionary<char, char>
         {
             ['ю'] = 'у',
             ['я'] = 'а',
             ['ё'] = 'о',
             ['е'] = 'э'
         };
-        private readonly Dictionary<char, string> vowelAfterVowel = new Dictionary<char, string>
+        private static readonly Dictionary<char, string> vowelAfterVowel = new Dictionary<char, string>
         {
             ['ю'] = "й'у",
             ['я'] = "й'а",
             ['ё'] = "й'о",
             ['е'] = "й'э"
         };
-        private readonly Dictionary<char, char> voicingConsonant = new Dictionary<char, char>
+        private static readonly Dictionary<char, char> voicingConsonant = new Dictionary<char, char>
         {
             ['б'] = 'п', 
             ['в'] = 'ф', 
@@ -37,7 +37,7 @@ namespace TaskDEV_2
             ['ж'] = 'ш', 
             ['з'] = 'с'
         };
-        private readonly Dictionary<char, char> deafConsonant = new Dictionary<char, char>
+        private static readonly Dictionary<char, char> deafConsonant = new Dictionary<char, char>
         {
             ['п'] = 'б', 
             ['ф'] = 'в', 
@@ -46,6 +46,7 @@ namespace TaskDEV_2
             ['ш'] = 'ж',
             ['с'] = 'з'
         };
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -53,8 +54,9 @@ namespace TaskDEV_2
         public Phonetics(string word)
         {
             this.word = word.ToLower();
-            CheckOnException(this.word);
+            this.CheckOnException(this.word);
         }
+
         /// <summary>
         /// Method for check on all Exection
         /// </summary>
@@ -95,27 +97,25 @@ namespace TaskDEV_2
             }
         }
 
-        public Phonetics()
-        {
-        }
         /// <summary>
         /// Method parses the word into letters
         /// </summary>
         /// <returns> symbols = word parses into letters </returns>
         public Symbol[] ParsingWord()
         {
-            Symbol[] symbols = new Symbol[word.Length-1];
+            var symbols = new Symbol[this.word.Length-1];
             for (int i = 0; i < symbols.Length; i++)
             {                
-                symbols[i] = new Symbol(word[i]);
-                if (i!=word.Length-1 && word[i + 1] == '+')
+                symbols[i] = new Symbol(this.word[i]);
+                if (i!= this.word.Length-1 && this.word[i + 1] == '+')
                 {
                     symbols[i].isStress = true;
-                    word = word.Remove(i + 1, 1);
+                    this.word = this.word.Remove(i + 1, 1);
                 }
             }
             return symbols;
         }
+
         /// <summary>
         /// Method convert word in phonetics form
         /// </summary>
@@ -123,26 +123,27 @@ namespace TaskDEV_2
         /// <returns>phonemes</returns>
         public StringBuilder ConvertWordToPhonetics(Symbol[] symbols)
         {
-            for (int i = 0 ; i < word.Length; i++)
+            for (int i = 0 ; i < this.word.Length; i++)
             {
                 switch(symbols[i].sound)
                 {
                     case "vowel":
-                        AddVowel(i, symbols);
+                        this.AddVowel(i, symbols);
                         continue;
                     case "consonant":
-                        AddConsonant(i, symbols);
+                        this.AddConsonant(i, symbols);
                         continue;
                     case "other":
                         if (symbols[i].symbol == 'ь')
                         {
-                            phonemes.Append("'");
+                            this.phonemes.Append("'");
                         }
                         continue;
                 }
             }
-            return phonemes;
+            return this.phonemes;
         }
+
         /// <summary>
         /// Method convert vowel letters into sounds
         /// </summary>
@@ -152,22 +153,23 @@ namespace TaskDEV_2
         {
             if (index != 0 && symbols[index - 1].sound == "consonant" && vowelAfterConsonant.ContainsKey(symbols[index].symbol))
             {
-                phonemes.Append("'" + vowelAfterConsonant[symbols[index].symbol]);
+                this.phonemes.Append("'" + vowelAfterConsonant[symbols[index].symbol]);
                 return ;
             }
             if ((symbols[index].isStress || index == 0 || symbols[index-1].sound == "vowel" || symbols[index - 1].sound == "other")
                 && vowelAfterVowel.ContainsKey(symbols[index].symbol))
             {
-                phonemes.Append(vowelAfterVowel[symbols[index].symbol]);
+                this.phonemes.Append(vowelAfterVowel[symbols[index].symbol]);
                 return ;
             }
             if (symbols[index].symbol == 'о' && !symbols[index].isStress)
             {
-                phonemes.Append("а");
+                this.phonemes.Append("а");
                 return;
             }
-            phonemes.Append(symbols[index].symbol);
+            this.phonemes.Append(symbols[index].symbol);
         }
+
         /// <summary>
         /// Method convert consonant letters into sounds
         /// </summary>
@@ -175,64 +177,36 @@ namespace TaskDEV_2
         /// <param name="symbols"></param>
         void AddConsonant(int index, Symbol[] symbols)
         {
-            if(index == word.Length - 1 && voicingConsonant.ContainsKey(symbols[index].symbol))
+            if(index == this.word.Length - 1 && voicingConsonant.ContainsKey(symbols[index].symbol))
             {
-                phonemes.Append(voicingConsonant[symbols[index].symbol]);
+                this.phonemes.Append(voicingConsonant[symbols[index].symbol]);
                 return;
             }
-            else if(index == word.Length - 1)
+            else if(index == this.word.Length - 1)
             {
-                phonemes.Append(symbols[index].symbol);
+                this.phonemes.Append(symbols[index].symbol);
                 return;
             }
             if (symbols[index + 1].sound == "consonant")
             {
                 if (deafConsonant.ContainsKey(symbols[index+1].symbol) && voicingConsonant.ContainsKey(symbols[index].symbol))
                 {
-                    phonemes.Append(voicingConsonant[symbols[index].symbol]);
+                    this.phonemes.Append(voicingConsonant[symbols[index].symbol]);
                     return;
                 }
                 if (deafConsonant.ContainsKey(symbols[index].symbol) && voicingConsonant.ContainsKey(symbols[index + 1].symbol))
                 {
-                    phonemes.Append(deafConsonant[symbols[index].symbol]);
+                    this.phonemes.Append(deafConsonant[symbols[index].symbol]);
                     return;
                 }
             }
-            phonemes.Append(symbols[index].symbol);
+            this.phonemes.Append(symbols[index].symbol);
         }
+
         /// <summary>
         /// Method display phonetics form word
         /// </summary>
         /// <param name="phonemes"></param>
-        public void DisplayPhonemes(StringBuilder phonemes)
-        {
-            Console.WriteLine(word + " -> " + phonemes);
-        }
-    }
-    class Symbol
-    {
-        /// <summary>
-        /// Сlass for letters
-        /// </summary>
-        internal char symbol;
-        internal string sound = "other";
-        internal bool isStress = false;
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="symbol"></param>
-        public Symbol(char symbol)
-        {
-            var buf = new Phonetics();
-            this.symbol = symbol;
-            if (buf.vowels.Contains(symbol))
-            {
-                sound = "vowel";
-            }
-            if(buf.Consonants.Contains(symbol))
-            {
-                sound = "consonant";                
-            }
-        }
+        public void DisplayPhonemes(StringBuilder phonemes) => Console.WriteLine(this.word + " -> " + phonemes);
     }
 }
