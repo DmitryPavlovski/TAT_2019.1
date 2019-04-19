@@ -31,7 +31,7 @@ namespace TaskDEV_2Test
             foreach (var word in words)
             {
                 phonetics[count] = new Phonetics(word);
-                isFlag = phonetics[count].CheckOnTwoPlus();
+                isFlag = phonetics[count].CheckOnNoPlus();
                 count++;
             }
         }

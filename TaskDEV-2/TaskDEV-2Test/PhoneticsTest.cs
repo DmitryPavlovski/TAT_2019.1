@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TaskDEV_2;
 
 namespace TaskDEV_2Test
@@ -10,8 +9,8 @@ namespace TaskDEV_2Test
         [TestMethod]
         public void ConvertWordToPhonetics_Word_PhoneticsFormReturned()
         {
-            string words = "бе+лка";
-            var expected = "б'элка";
+            string words = "обороноспосо+бность";
+            var expected = "абаранаспасобнаст'";
 
             var phonetics = new Phonetics(words);
             var phoneticsForm = phonetics.ConvertWordToPhonetics(phonetics.ParsingWord()).ToString();
