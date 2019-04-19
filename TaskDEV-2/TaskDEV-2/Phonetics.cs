@@ -8,10 +8,10 @@ namespace TaskDEV_2
     /// <summary>
     /// class for convert word in phonetics appearance
     /// </summary>
-    class Phonetics
+    public class Phonetics
     {
-        private string word = string.Empty;
-        private StringBuilder phonemes = new StringBuilder();
+        public string Word { get; set; } = string.Empty;
+        public StringBuilder Phonemes { get; set; } = new StringBuilder();
         internal static readonly string vowels = "аоиеёэыуюя";
         internal static readonly string Consonants = "бвгджзйлмнрпфктшсхцчщ";
         private static readonly Dictionary<char, char> vowelAfterConsonant = new Dictionary<char, char>
@@ -53,47 +53,100 @@ namespace TaskDEV_2
         /// <param name="word"></param>
         public Phonetics(string word)
         {
-            this.word = word.ToLower();
-            this.CheckOnAllException(this.word);
+            this.Word = word.ToLower();
         }
 
         /// <summary>
-        /// Method for check on all Exection
+        /// method for check on plus in start word
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckOnPlusInStartWord()
+        {
+            if(this.Word.Contains('+') && this.Word.IndexOf('+') == 0)
+            {
+                throw new FormatException("Plus first symbol!!!");
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// method for check on valid plus
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckOnValidPlus()
+        {
+            if(this.Word.Contains('ё'))
+                if(this.Word.Contains('+') && this.Word[this.Word.IndexOf('+')-1] != 'ё')
+                {
+                    throw new FormatException("Not valid stress!!!");
+                }
+
+            return true;
+        }
+
+        /// <summary>
+        /// method for check on plus after consonant
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckOnPlusAfterConsonant()
+        {
+            if(this.Word.Contains('+') && Consonants.Any(x => x == this.Word[this.Word.IndexOf('+')-1]))
+            {
+                throw new FormatException("Stress after consonant!!!");
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Method for check on no plus,
+        /// if no plus and only one vowel or have ё add plus
         /// </summary>
         /// <param name="word"></param>
-        private bool CheckOnAllException(string word)
+        public bool CheckOnNoPlus()
         {
-            if (word.Length == 0)
-            {
-                throw new FormatException("Need write word!!!");
-            }
-            if (word.IndexOf('+') != word.LastIndexOf('+'))
-            {
-                throw new FormatException("Wrote two stress!!!");
-            }
-            int indexFirstVowel = word.Length - 1, indexLastVowel = 0;
-            if (!word.Contains('+'))
-            {
-                for (int i = 0; i < vowels.Length; i++)
+            if (!this.Word.Contains('+'))
+            {                
+                if (this.Word.Count(x => vowels.Contains(x))==1)
                 {
-                    if (word.IndexOf(vowels[i]) >= 0 && indexFirstVowel > word.IndexOf(vowels[i]))
-                    {
-                        indexFirstVowel = word.IndexOf(vowels[i]);
-                    }
-                    if (word.LastIndexOf(vowels[i]) > 0 && indexLastVowel < word.LastIndexOf(vowels[i]))
-                    {
-                        indexLastVowel = word.LastIndexOf(vowels[i]);
-                    }
+                    this.Word = this.Word.Insert(this.Word.IndexOf(this.Word.First(x => vowels.Contains(x)))+1, "+");
                 }
-                if (indexFirstVowel == indexLastVowel)
+                else if (this.Word.Contains('ё'))
                 {
-                    this.word = word.Insert(indexFirstVowel + 1, "+");
-                }
-                else if (word.Contains('ё'))
-                {
-                    this.word = word.Insert(word.IndexOf('ё') + 1, "+");
+                    this.Word = this.Word.Insert(this.Word.IndexOf('ё') + 1, "+");
                 }
                 else throw new FormatException("Need right show stress!!!");
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Method for check on two plus in word
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public bool CheckOnTwoPlus()
+        {
+            if (this.Word.Count(x => x == '+')>1)
+            {
+                throw new FormatException("Wrote more then one stress!!!");
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// method for check on empty word
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public bool CheckOnLengthWord()
+        {
+            if (this.Word.Length == 0)
+            {
+                throw new FormatException("Need write word!!!");
             }
 
             return true;
@@ -105,17 +158,22 @@ namespace TaskDEV_2
         /// <returns> symbols = word parses into letters </returns>
         public Symbol[] ParsingWord()
         {
-            var symbols = new Symbol[this.word.Length-1];
+            this.CheckOnPlusInStartWord();
+            this.CheckOnValidPlus();
+            this.CheckOnTwoPlus();
+            this.CheckOnPlusAfterConsonant();
+            this.CheckOnNoPlus();
+            this.CheckOnLengthWord();
+            var symbols = new Symbol[this.Word.Length-1];
             for (int i = 0; i < symbols.Length; i++)
-            {                
-                symbols[i] = new Symbol(this.word[i]);
-                if (i!= this.word.Length-1 && this.word[i + 1] == '+')
+            {
+                symbols[i] = new Symbol(this.Word[i]);
+                if (i!= this.Word.Length-1 && this.Word[i + 1] == '+')
                 {
-                    symbols[i].isStress = true;
-                    this.word = this.word.Remove(i + 1, 1);
+                    symbols[i].IsStress = true;
+                    this.Word = this.Word.Remove(i + 1, 1);
                 }
             }
-
             return symbols;
         }
 
@@ -126,26 +184,26 @@ namespace TaskDEV_2
         /// <returns>phonemes</returns>
         public StringBuilder ConvertWordToPhonetics(Symbol[] symbols)
         {
-            for (int i = 0 ; i < this.word.Length; i++)
+            for (int i = 0 ; i < this.Word.Length; i++)
             {
-                switch(symbols[i].sound)
+                switch(symbols[i].Sound)
                 {
                     case "vowel":
-                        this.phonemes.Append(this.AddVowel(i, symbols));
+                        this.Phonemes.Append(this.AddVowel(i, symbols));
                         continue;
                     case "consonant":
-                        this.phonemes.Append(this.AddConsonant(i, symbols));
+                        this.Phonemes.Append(this.AddConsonant(i, symbols));
                         continue;
                     case "other":
-                        if (symbols[i].symbol == 'ь')
+                        if (symbols[i].Letter == 'ь')
                         {
-                            this.phonemes.Append("'");
+                            this.Phonemes.Append("'");
                         }
                         continue;
                 }
             }
 
-            return this.phonemes;
+            return this.Phonemes;
         }
 
         /// <summary>
@@ -153,23 +211,23 @@ namespace TaskDEV_2
         /// </summary>
         /// <param name="index"></param>
         /// <param name="symbols"></param>
-        string AddVowel (int index, Symbol[] symbols)
+        public string AddVowel (int index, Symbol[] symbols)
         {
-            if (index != 0 && symbols[index - 1].sound == "consonant" && vowelAfterConsonant.ContainsKey(symbols[index].symbol))
+            if (index != 0 && symbols[index - 1].Sound == "consonant" && vowelAfterConsonant.ContainsKey(symbols[index].Letter))
             {
-                return "'" + vowelAfterConsonant[symbols[index].symbol];
+                return "'" + vowelAfterConsonant[symbols[index].Letter];
             }
-            if ((symbols[index].isStress || index == 0 || symbols[index-1].sound == "vowel" || symbols[index - 1].sound == "other")
-                && vowelAfterVowel.ContainsKey(symbols[index].symbol))
+            if ((symbols[index].IsStress || index == 0 || symbols[index-1].Sound == "vowel" || symbols[index - 1].Sound == "other")
+                && vowelAfterVowel.ContainsKey(symbols[index].Letter))
             {
-                return vowelAfterVowel[symbols[index].symbol];
+                return vowelAfterVowel[symbols[index].Letter];
             }
-            if (symbols[index].symbol == 'о' && !symbols[index].isStress)
+            if (symbols[index].Letter == 'о' && !symbols[index].IsStress)
             {
                 return "а";
             }
 
-            return symbols[index].symbol.ToString();
+            return symbols[index].Letter.ToString();
         }
 
         /// <summary>
@@ -177,35 +235,35 @@ namespace TaskDEV_2
         /// </summary>
         /// <param name="index"></param>
         /// <param name="symbols"></param>
-        string AddConsonant(int index, Symbol[] symbols)
+        public string AddConsonant(int index, Symbol[] symbols)
         {
-            if(index == this.word.Length - 1 && voicingConsonant.ContainsKey(symbols[index].symbol))
+            if(index == this.Word.Length - 1 && voicingConsonant.ContainsKey(symbols[index].Letter))
             {
-                return voicingConsonant[symbols[index].symbol].ToString();
+                return voicingConsonant[symbols[index].Letter].ToString();
             }
-            else if(index == this.word.Length - 1)
+            else if(index == this.Word.Length - 1)
             {
-                return symbols[index].symbol.ToString();
+                return symbols[index].Letter.ToString();
             }
-            if (symbols[index + 1].sound == "consonant")
+            if (symbols[index + 1].Sound == "consonant")
             {
-                if (deafConsonant.ContainsKey(symbols[index+1].symbol) && voicingConsonant.ContainsKey(symbols[index].symbol))
+                if (deafConsonant.ContainsKey(symbols[index+1].Letter) && voicingConsonant.ContainsKey(symbols[index].Letter))
                 {
-                    return voicingConsonant[symbols[index].symbol].ToString();
+                    return voicingConsonant[symbols[index].Letter].ToString();
                 }
-                if (deafConsonant.ContainsKey(symbols[index].symbol) && voicingConsonant.ContainsKey(symbols[index + 1].symbol))
+                if (deafConsonant.ContainsKey(symbols[index].Letter) && voicingConsonant.ContainsKey(symbols[index + 1].Letter))
                 {
-                    return deafConsonant[symbols[index].symbol].ToString();
+                    return deafConsonant[symbols[index].Letter].ToString();
                 }
             }
 
-            return symbols[index].symbol.ToString();
+            return symbols[index].Letter.ToString();
         }
 
         /// <summary>
         /// Method display phonetics form word
         /// </summary>
         /// <param name="phonemes"></param>
-        public void DisplayPhonemes(StringBuilder phonemes) => Console.WriteLine(this.word + " -> " + phonemes);
+        public void DisplayPhonemes(StringBuilder phonemes) => Console.WriteLine(this.Word + " -> " + phonemes);
     }
 }

@@ -5,25 +5,27 @@ namespace TaskDEV_2
     /// <summary>
     /// Сlass for letters
     /// </summary>
-    class Symbol
+    public class Symbol
     {
-        internal char symbol;
-        internal string sound = "other";
-        internal bool isStress = false;
+        
+        public char Letter { get; set; }
+        public string Sound { get; set; } = "other";
+        public bool IsStress { get; set; } = false;
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="symbol"></param>
         public Symbol(char symbol)
         {
-            this.symbol = symbol;
+            this.Letter = symbol;
             if (Phonetics.vowels.Contains(symbol))
             {
-                this.sound = "vowel";
+                this.Sound = "vowel";
             }
             if (Phonetics.Consonants.Contains(symbol))
             {
-                this.sound = "consonant";
+                this.Sound = "consonant";
             }
         }
     }

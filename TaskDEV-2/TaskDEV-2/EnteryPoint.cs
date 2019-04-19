@@ -3,7 +3,7 @@
 namespace TaskDEV_2
 {
     /// <summary>
-    /// Class enteryPoint
+    /// Class entry point
     /// </summary>
     class EnteryPoint
     {
@@ -20,7 +20,7 @@ namespace TaskDEV_2
                 {
                     word[i] = new Phonetics(args[i]);
                     word[i].DisplayPhonemes(word[i].ConvertWordToPhonetics(word[i].ParsingWord()));
-                }                
+                }
             }
             catch (FormatException ex)
             {
@@ -28,7 +28,7 @@ namespace TaskDEV_2
             }
             catch (Exception)
             {
-                Console.WriteLine("Error: Something error.");
+                Console.WriteLine("Error: something happened");
             }
         }
     }
