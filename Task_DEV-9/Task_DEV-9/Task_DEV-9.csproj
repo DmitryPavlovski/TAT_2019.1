@@ -56,6 +56,9 @@
     <Compile Include="Rambler\LetterPage.cs" />
     <Compile Include="Rambler\MainPage.cs" />
     <Compile Include="Rambler\RamblerLogin.cs" />
+    <Compile Include="Yandex\ChangePersonalDataPage.cs" />
+    <Compile Include="Yandex\ReadLetterPage.cs" />
+    <Compile Include="Yandex\SettingProfilePage.cs" />
     <Compile Include="Yandex\YandexLogin.cs" />
     <Compile Include="Yandex\MainPage.cs" />
     <Compile Include="Yandex\SendLetterPage.cs" />

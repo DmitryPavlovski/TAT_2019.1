@@ -12,7 +12,8 @@ namespace Task_DEV_9.Rambler
         }
         public LetterPage ChooseUnreadLetter(string sender)
         {
-            this.UnreadLetter = this.Driver.FindElement(By.XPath($"//div[contains(@class,'AutoMaillistItem')]//span[contains(@title, '{sender}')]"), 10);
+            this.UnreadLetter = this.Driver.FindElement(
+                By.XPath($"//div[contains(@class,'AutoMaillistItem-root-1n AutoMaillistItem-unseen-ad')]//span[contains(@title, '{sender}')]"), 10);
             this.UnreadLetter.Click();
 
             return new LetterPage(this.Driver);
