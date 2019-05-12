@@ -16,8 +16,7 @@ namespace Task_DEV_9.Yandex
         }
         public void ChangeNickname()
         {
-            this.FirstNameBox.Clear();
-            this.FirstNameBox.Clear();
+            this.FirstNameBox.SendKeys(Keys.Shift + Keys.Home);
             this.FirstNameBox.SendKeys(this.NewNickname);
             this.SaveButton.Click();
         }

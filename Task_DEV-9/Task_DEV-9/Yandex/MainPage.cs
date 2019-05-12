@@ -6,8 +6,8 @@ namespace Task_DEV_9.Yandex
     {
         IWebDriver Driver { get; set; }
         IWebElement SendLetterBox => this.Driver.FindElement(By.XPath("//a[.//*[contains(text(), 'Написать')]]"), 10);
-        IWebElement MainLastLetter => this.Driver.FindElement(By.XPath("//div[contains(@class,'ns-view-container-desc mail-MessagesList ')]/div[1]"), 10);
-        IWebElement LastLetter => this.Driver.FindElement(By.XPath("//div[contains(@class,'ns-view-container-desc mail-MessagesList ')]/div[1]/div/div[2]/div[1]/div[1]/"), 10);
+        IWebElement MainLastLetter => this.Driver.FindElement(By.XPath("//*[contains(@class,'ns-view-container-desc mail-MessagesList ')]/*[1]"), 10);
+        IWebElement LastLetter => this.Driver.FindElement(By.XPath("//*[contains(@class,'ns-view-container-desc mail-MessagesList')]/*[1]/*/*[2]/*/div"), 10);
 
         public MainPage(IWebDriver driver)
         {
@@ -24,7 +24,6 @@ namespace Task_DEV_9.Yandex
         public ReadLetterPage ReadLastLetter()
         {
             this.MainLastLetter.Click();
-            this.LastLetter.Click();
             this.LastLetter.Click();
 
             return new ReadLetterPage(this.Driver);
