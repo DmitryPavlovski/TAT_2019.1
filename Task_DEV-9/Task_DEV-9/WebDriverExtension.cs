@@ -4,8 +4,18 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Task_DEV_9
 {
+    /// <summary>
+    /// class for extention method
+    /// </summary>
     static class WebDriverExtension
     {
+        /// <summary>
+        /// extention method with waiting for an element to appear
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="by"></param>
+        /// <param name="timeoutInSeconds"></param>
+        /// <returns></returns>
         public static IWebElement FindElement(this IWebDriver driver, By by, int timeoutInSeconds)
         {
             if (timeoutInSeconds > 0)

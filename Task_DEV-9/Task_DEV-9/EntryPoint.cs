@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 namespace Task_DEV_9
 {
+    /// <summary>
+    /// entry point class
+    /// </summary>
     class EntryPoint
     {
+        /// <summary>
+        /// entry point
+        /// </summary>
         static void Main()
         {
             try

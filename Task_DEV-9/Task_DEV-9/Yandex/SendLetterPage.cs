@@ -2,6 +2,9 @@
 
 namespace Task_DEV_9.Yandex
 {
+    /// <summary>
+    /// class for send letter page
+    /// </summary>
     class SendLetterPage
     {
         IWebDriver Driver { get; set; }
@@ -11,11 +14,21 @@ namespace Task_DEV_9.Yandex
         IWebElement ButtonLetters => this.Driver.FindElement(By.XPath("//*[contains(text(), 'Входящие')]"), 10);
         IWebElement ButtonAccept => this.Driver.FindElement(By.XPath("//button[.//*[contains(text(), 'Сохранить и перейти')]]"), 10);
 
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="driver"></param>
         public SendLetterPage(IWebDriver driver)
         {
             this.Driver = driver;
         }
 
+        /// <summary>
+        /// method for send message on email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public MainPage SendMessage(string email, string message)
         {
             this.FildOfRecipient.SendKeys(email);
