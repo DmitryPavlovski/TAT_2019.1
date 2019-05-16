@@ -8,7 +8,6 @@ namespace Task_DEV_9.Yandex
     class ReadLetterPage
     {
         IWebDriver Driver { get; set; }
-        IWebElement TextBoxMessage => this.Driver.FindElement(By.XPath("//*[@class='mail-Message-Body-Content']"), 10);
         IWebElement ButtunProfile =>  this.Driver.FindElement(By.XPath("//*[@data-key='view=head-user']"), 10);
         IWebElement ButtonProfileSetting => this.Driver.FindElement(By.XPath("//*[contains(text(), 'Управление аккаунтом')]"), 10);
 
@@ -26,13 +25,12 @@ namespace Task_DEV_9.Yandex
         /// </summary>
         /// <returns></returns>
         public SettingProfilePage GoToProfilePage()
-        { 
-            var newNickname = this.TextBoxMessage.Text;
+        {
             this.Driver.SwitchTo().ParentFrame();
             this.ButtunProfile.Click();
             this.ButtonProfileSetting.Click();
 
-            return new SettingProfilePage(this.Driver, newNickname);
+            return new SettingProfilePage(this.Driver);
         }
     }
 }

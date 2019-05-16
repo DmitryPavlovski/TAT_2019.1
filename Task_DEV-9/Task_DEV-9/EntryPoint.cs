@@ -21,17 +21,17 @@ namespace Task_DEV_9
                 var yandexPassword = "taskdev9";
                 var ramblerEmail = "dima.kupeshka@rambler.ru";
                 var ramblerPassword = "Taskdev9";
-                var message = "London is the capital of Great Britain aaaaaaaaaaaaaaaaa";
+                var message = "London is the capital of Great Britain";
                 var newNickname = "Picachu";
 
                 yandex.GoToLogin();
                 yandex.Login(yandexEmail, yandexPassword).GoToSendLetterPage().SendMessage(ramblerEmail, message);
                 var rambler = new Rambler.RamblerLogin(driver);
                 rambler.GoToLogin();
-                rambler.Login(ramblerEmail, ramblerPassword).ChooseUnreadLetter(yandexEmail).ReplyToLetter(message, newNickname);
+                rambler.Login(ramblerEmail, ramblerPassword).ChooseUnreadLetter(yandexEmail).ReplyToLetter(newNickname);
                 var yandexSecond = new Yandex.YandexLogin(driver);
                 yandexSecond.GoToLogin();
-                yandexSecond.EntryAgain().ReadLastLetter().GoToProfilePage().GoToSetting().ChangeNickname();
+                yandexSecond.EntryAgain().ReadLastLetter().GoToProfilePage().GoToSetting().ChangeNickname(newNickname);
                 driver.Quit();
 
             }

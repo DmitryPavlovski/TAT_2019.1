@@ -10,6 +10,7 @@ namespace Task_DEV_9.Rambler
         /// </summary>
         IWebDriver Driver { get; set; }
         ReadOnlyCollection<IWebElement> UnreadLetters { get; set; }
+
         readonly string unreadLetterLocator = "//div[contains(@class,'AutoMaillistItem-root-1n AutoMaillistItem-unseen-ad')]";
         IWebElement LettersButton => this.Driver.FindElement(By.XPath("//span[contains(text(),'Входящие')]"), 10);
 
@@ -40,5 +41,8 @@ namespace Task_DEV_9.Rambler
 
             return new LetterPage(this.Driver);
         }
+
+        public IWebElement SenderOfMail() => this.Driver.FindElement(By.XPath("//div[@style='position: relative;']/div/div[1]" +
+            "//span[contains(@class, 'AutoMaillistItem-sender')]"));
     }
 }

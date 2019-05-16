@@ -12,6 +12,7 @@ namespace Task_DEV_9.Yandex
         IWebElement LoginBox => this.Driver.FindElement(By.XPath("//input[@name='login']"), 10);
         IWebElement PasswordBox => this.Driver.FindElement(By.XPath("//input[@name='passwd']"), 10);
         IWebElement ButtonLetters => this.Driver.FindElement(By.XPath("//a[.//*[contains(text(), 'Почта')]]"), 10);
+        public IWebElement ErrorMessage => this.Driver.FindElement(By.XPath("//div[@class='passp-form-field__error']"), 10);
 
         /// <summary>
         /// constructor
@@ -51,6 +52,18 @@ namespace Task_DEV_9.Yandex
             this.ButtonLetters.Click();
 
             return new MainPage(this.Driver);
+        }
+
+        public YandexLogin Login_ExpectingError(string username, string password)
+        {
+            this.LoginBox.SendKeys(Keys.Enter);
+            this.LoginBox.SendKeys(username + Keys.Enter);
+            if (this.Driver.FindElements(By.XPath("//div[@class='passp-form-field__error']")).Count == 0)
+            {
+                this.PasswordBox.SendKeys(password + Keys.Enter);
+            }
+
+            return this;
         }
     }
 }

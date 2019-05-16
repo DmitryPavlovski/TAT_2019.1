@@ -8,8 +8,7 @@ namespace Task_DEV_9.Yandex
     class ChangePersonalDataPage
     {
         IWebDriver Driver { get; set; }
-        string BufferData { get; set; }
-        IWebElement FirstNameBox => this.Driver.FindElement(By.XPath("//input[@id='firstname']"), 10);
+        public IWebElement FirstNameBox => this.Driver.FindElement(By.XPath("//input[@id='firstname']"), 10);
         IWebElement SaveButton => this.Driver.FindElement(By.XPath("//*[contains(text(),'Сохранить')]"), 10);
 
         /// <summary>
@@ -17,19 +16,18 @@ namespace Task_DEV_9.Yandex
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="bufferData"></param>
-        public ChangePersonalDataPage(IWebDriver driver, string bufferData)
+        public ChangePersonalDataPage(IWebDriver driver)
         {
             this.Driver = driver;
-            this.BufferData = bufferData;
         }
 
         /// <summary>
         /// method for change nickname
         /// </summary>
-        public void ChangeNickname()
+        public void ChangeNickname(string newNickname)
         {
             this.FirstNameBox.SendKeys(Keys.Shift + Keys.Home);
-            this.FirstNameBox.SendKeys(this.BufferData);
+            this.FirstNameBox.SendKeys(newNickname);
             this.SaveButton.Click();
         }
     }

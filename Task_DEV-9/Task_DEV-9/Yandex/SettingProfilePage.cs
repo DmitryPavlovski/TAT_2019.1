@@ -8,7 +8,6 @@ namespace Task_DEV_9.Yandex
     class SettingProfilePage
     {
         IWebDriver Driver { get; set; }
-        string NewNickname { get; set; }
         IWebElement PersonalDataButton => this.Driver.FindElement(By.XPath("//*[contains(text(), 'Изменить персональную информацию')]"), 10);
 
         /// <summary>
@@ -16,10 +15,9 @@ namespace Task_DEV_9.Yandex
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="newNickname"></param>
-        public SettingProfilePage(IWebDriver driver, string newNickname)
+        public SettingProfilePage(IWebDriver driver)
         {
             this.Driver = driver;
-            this.NewNickname = newNickname;
         }
 
         /// <summary>
@@ -30,7 +28,7 @@ namespace Task_DEV_9.Yandex
         {
             this.PersonalDataButton.Click();
 
-            return new ChangePersonalDataPage(this.Driver, this.NewNickname);
+            return new ChangePersonalDataPage(this.Driver);
         }
     }
 }
