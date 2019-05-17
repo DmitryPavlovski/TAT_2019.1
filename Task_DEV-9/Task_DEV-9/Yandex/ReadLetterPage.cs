@@ -10,6 +10,7 @@ namespace Task_DEV_9.Yandex
         IWebDriver Driver { get; set; }
         IWebElement ButtunProfile =>  this.Driver.FindElement(By.XPath("//*[@data-key='view=head-user']"), 10);
         IWebElement ButtonProfileSetting => this.Driver.FindElement(By.XPath("//*[contains(text(), 'Управление аккаунтом')]"), 10);
+        IWebElement MessageTextBox => this.Driver.FindElement(By.XPath("//*[@class='mail-Message-Body-Content']"), 10);
 
         /// <summary>
         /// constructor
@@ -26,6 +27,7 @@ namespace Task_DEV_9.Yandex
         /// <returns></returns>
         public SettingProfilePage GoToProfilePage()
         {
+            var text = this.MessageTextBox.Text;
             this.Driver.SwitchTo().ParentFrame();
             this.ButtunProfile.Click();
             this.ButtonProfileSetting.Click();

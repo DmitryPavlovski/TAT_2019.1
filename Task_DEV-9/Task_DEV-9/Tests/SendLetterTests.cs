@@ -27,15 +27,15 @@ namespace Task_DEV_9.Tests
             var letterText = "Letter text";
 
             this.driver.Url = "https://yandex.by";
-            var yandexLoginPage = new Task_DEV_9.Yandex.YandexLogin(this.driver);
+            var yandexLoginPage = new Yandex.YandexLogin(this.driver);
             var yandexMainPage = yandexLoginPage.Login(this.yandexAddress, this.passwordYandex);
             var yandexWriterPage = yandexMainPage.GoToSendLetterPage();
             yandexWriterPage.SendMessage(this.ramblerAddress, letterText);
 
             this.driver.Url = "https://www.mail.rambler.ru/";
-            var ramblerLoginPage = new Task_DEV_9.Rambler.RamblerLogin(this.driver);
+            var ramblerLoginPage = new Rambler.RamblerLogin(this.driver);
             var ramblerMainPage = ramblerLoginPage.Login(this.ramblerAddress, this.passwordRambler);
-            Assert.True(ramblerMainPage.SenderOfMail().GetAttribute("title").Contains(this.ramblerAddress));
+            Assert.True(ramblerMainPage.SenderOfMail().GetAttribute("title").Contains(this.yandexAddress));
             var ramblerReadPage = ramblerMainPage.ChooseUnreadLetter(this.yandexAddress);
             var letterRecievedText = ramblerReadPage.TextBoxReceiveLetter.Text;
             Assert.AreEqual(letterText, letterRecievedText);
@@ -45,14 +45,14 @@ namespace Task_DEV_9.Tests
         public void SendReplyAndChangeNickname()
         {
             var newNicknameToSend = "Rambler";
-            var ramblerReadPage = new Task_DEV_9.Rambler.LetterPage(this.driver);
-
-            ramblerReadPage.ReplyToLetter(newNicknameToSend);
             this.driver.Navigate().GoToUrl("https://yandex.by");
-            var yandex = new Task_DEV_9.Yandex.YandexLogin(this.driver);
-            yandex.EntryAgain().ReadLastLetter().GoToProfilePage().GoToSetting().ChangeNickname(newNicknameToSend);
-            var changePersonalDataPage = new Task_DEV_9.Yandex.ChangePersonalDataPage(this.driver);
-            Assert.AreEqual(newNicknameToSend, changePersonalDataPage.FirstNameBox.GetAttribute("value"));
+
+            var yandex = new Yandex.YandexLogin(this.driver);
+            yandex.Login(this.yandexAddress, this.passwordYandex).ReadLastLetter().GoToProfilePage().GoToSetting().ChangeNickname(newNicknameToSend);
+            var changePersonalDataPage = new Yandex.ChangePersonalDataPage(this.driver);
+            var nickname = changePersonalDataPage.FirstNameBox.GetAttribute("value");
+
+            Assert.AreEqual(newNicknameToSend, nickname);
         }
 
         [TearDown]

@@ -56,6 +56,7 @@ namespace Task_DEV_9.Yandex
 
         public YandexLogin Login_ExpectingError(string username, string password)
         {
+            this.ButtonEntry.Click();
             this.LoginBox.SendKeys(Keys.Enter);
             this.LoginBox.SendKeys(username + Keys.Enter);
             if (this.Driver.FindElements(By.XPath("//div[@class='passp-form-field__error']")).Count == 0)
