@@ -24,11 +24,11 @@ namespace Task_DEV_9
                 var message = "London is the capital of Great Britain";
                 var newNickname = "Picachu";
 
-                /*yandex.GoToLogin();
+                yandex.GoToLogin();
                 yandex.Login(yandexEmail, yandexPassword).GoToSendLetterPage().SendMessage(ramblerEmail, message);
                 var rambler = new Rambler.RamblerLogin(driver);
                 rambler.GoToLogin();
-                rambler.Login(ramblerEmail, ramblerPassword).ChooseUnreadLetter(yandexEmail).ReplyToLetter(newNickname);*/
+                rambler.Login(ramblerEmail, ramblerPassword).ChooseUnreadLetter(yandexEmail).ReplyToLetter(newNickname);
                 var yandexSecond = new Yandex.YandexLogin(driver);
                 yandexSecond.GoToLogin();
                 yandexSecond.Login(yandexEmail, yandexPassword).ReadLastLetter().GoToProfilePage().GoToSetting().ChangeNickname(newNickname);
