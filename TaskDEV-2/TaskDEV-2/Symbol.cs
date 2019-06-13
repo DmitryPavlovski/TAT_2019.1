@@ -10,6 +10,7 @@ namespace TaskDEV_2
         internal char symbol;
         internal string sound = "other";
         internal bool isStress = false;
+
         /// <summary>
         /// Constructor
         /// </summary>

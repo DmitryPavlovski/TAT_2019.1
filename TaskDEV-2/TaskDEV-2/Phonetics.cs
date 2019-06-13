@@ -113,6 +113,7 @@ namespace TaskDEV_2
                     this.word = this.word.Remove(i + 1, 1);
                 }
             }
+
             return symbols;
         }
 
@@ -141,6 +142,7 @@ namespace TaskDEV_2
                         continue;
                 }
             }
+
             return this.phonemes;
         }
 
@@ -160,11 +162,13 @@ namespace TaskDEV_2
                 && vowelAfterVowel.ContainsKey(symbols[index].symbol))
             {
                 this.phonemes.Append(vowelAfterVowel[symbols[index].symbol]);
+
                 return ;
             }
             if (symbols[index].symbol == 'о' && !symbols[index].isStress)
             {
                 this.phonemes.Append("а");
+
                 return;
             }
             this.phonemes.Append(symbols[index].symbol);
@@ -180,11 +184,13 @@ namespace TaskDEV_2
             if(index == this.word.Length - 1 && voicingConsonant.ContainsKey(symbols[index].symbol))
             {
                 this.phonemes.Append(voicingConsonant[symbols[index].symbol]);
+
                 return;
             }
             else if(index == this.word.Length - 1)
             {
                 this.phonemes.Append(symbols[index].symbol);
+
                 return;
             }
             if (symbols[index + 1].sound == "consonant")
@@ -192,11 +198,13 @@ namespace TaskDEV_2
                 if (deafConsonant.ContainsKey(symbols[index+1].symbol) && voicingConsonant.ContainsKey(symbols[index].symbol))
                 {
                     this.phonemes.Append(voicingConsonant[symbols[index].symbol]);
+
                     return;
                 }
                 if (deafConsonant.ContainsKey(symbols[index].symbol) && voicingConsonant.ContainsKey(symbols[index + 1].symbol))
                 {
                     this.phonemes.Append(deafConsonant[symbols[index].symbol]);
+
                     return;
                 }
             }
