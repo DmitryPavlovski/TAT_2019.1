@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bird.cs" />
+    <Compile Include="Display.cs" />
     <Compile Include="IFlyable.cs" />
     <Compile Include="ObjectFlyAwayEventArgs.cs" />
     <Compile Include="Plane.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="EnteryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpaceShip.cs" />
+    <Compile Include="Speed.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

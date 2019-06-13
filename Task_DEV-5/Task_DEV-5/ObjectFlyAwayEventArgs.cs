@@ -19,8 +19,8 @@ namespace Task_DEV_5
         /// <param name="speed"></param>
         public ObjectFlyAwayEventArgs (double time, double speed)
         {
-            Time = time;
-            Speed = speed;
+            this.Time = time;
+            this.Speed = speed;
         }   
     }
 }

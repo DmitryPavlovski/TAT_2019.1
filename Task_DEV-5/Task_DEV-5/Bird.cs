@@ -8,7 +8,7 @@ namespace Task_DEV_5
     class Bird : IFlyable
     {
         public Point StartPoint { get; set; }
-        public int Speed { get; set; } = new Random().Next(1, 21); //Km/h
+        public int Speed { get; set; }
         public double DistanceTraveled { get; set; }
 
         /// <inheritdoc />
@@ -22,26 +22,21 @@ namespace Task_DEV_5
         /// <param name="z"></param>
         public Bird(int x = 0, int y = 0, int z = 0)
         {
-            StartPoint = new Point(x, y, z);
+            this.StartPoint = new Point(x, y, z);
+            this.Speed = new Random().Next(1, (int)ObjectSpeed.Bird);
         }
 
         /// <summary>
         /// method return type object
         /// </summary>
         /// <returns></returns>
-        public IFlyable WhoAmI()
-        {
-            return this;
-        }
+        public IFlyable WhoAmI() => this;
 
         /// <summary>
         /// method return fly time
         /// </summary>
         /// <returns></returns>
-        public double GetFlyTime()
-        {
-            return DistanceTraveled / Speed;
-        }
+        public double GetFlyTime() => this.DistanceTraveled / this.Speed;
 
         /// <summary>
         /// method for fly from one point to next point
@@ -49,8 +44,8 @@ namespace Task_DEV_5
         /// <param name="nextPoint"></param>
         public void FlyTo(Point nextPoint)
         {
-            DistanceTraveled += StartPoint.GetDistance(nextPoint);
-            ObjectFlyAway?.Invoke(WhoAmI(), new ObjectFlyAwayEventArgs(GetFlyTime(), Speed));
+            this.DistanceTraveled += this.StartPoint.GetDistance(nextPoint);
+            ObjectFlyAway?.Invoke(this.WhoAmI(), new ObjectFlyAwayEventArgs(this.GetFlyTime(), this.Speed));
         }
     }
 }

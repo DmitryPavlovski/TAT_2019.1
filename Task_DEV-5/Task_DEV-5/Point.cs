@@ -19,9 +19,9 @@ namespace Task_DEV_5
         /// <param name="z"></param>
         public Point(int x, int y, int z)
         {
-            X = x;
-            Y = y;
-            Z = z;
+            this.X = x;
+            this.Y = y;
+            this.Z = z;
         }
 
         /// <summary>
@@ -29,9 +29,6 @@ namespace Task_DEV_5
         /// </summary>
         /// <param name="nextPoint"></param>
         /// <returns></returns>
-        public double GetDistance(Point nextPoint)
-        {
-            return Math.Sqrt(Math.Pow(nextPoint.X - X, 2) + Math.Pow(nextPoint.Y - Y, 2) + Math.Pow(nextPoint.Z - Z, 2));
-        }
+        public double GetDistance(Point nextPoint) => Math.Sqrt(Math.Pow(nextPoint.X - this.X, 2) + Math.Pow(nextPoint.Y - this.Y, 2) + Math.Pow(nextPoint.Z - this.Z, 2));
     }
 }

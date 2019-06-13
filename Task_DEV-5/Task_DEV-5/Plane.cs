@@ -8,7 +8,7 @@ namespace Task_DEV_5
     class Plane : IFlyable
     {
         public Point StartPoint { get; set; }
-        public int StartSpeed { get; set; } = 200;
+        public int StartSpeed { get; set; }
         public double DistanceTraveled { get; set;}
 
         /// <inheritdoc />
@@ -22,7 +22,8 @@ namespace Task_DEV_5
         /// <param name="z"></param>
         public Plane(int x = 0, int y = 0, int z = 0)
         {
-            StartPoint = new Point(x, y, z);
+            this.StartPoint = new Point(x, y, z);
+            this.StartSpeed = (int)ObjectSpeed.Plane;
         }
 
         /// <summary>
@@ -31,18 +32,15 @@ namespace Task_DEV_5
         /// <returns></returns>
         public double GetFlyTime()
         {
-            var finishSpeed = StartSpeed + (int)DistanceTraveled / 10 * 10;
-            return (DistanceTraveled * 2) / (finishSpeed + StartSpeed);
+            var finishSpeed = this.StartSpeed + (int)this.DistanceTraveled / 10 * 10;
+            return (this.DistanceTraveled * 2) / (finishSpeed + this.StartSpeed);
         }
 
         /// <summary>
         /// method return type object
         /// </summary>
         /// <returns></returns>
-        public IFlyable WhoAmI()
-        {
-            return this;
-        }
+        public IFlyable WhoAmI() => this;
 
         /// <summary>
         /// method for fly from one point to next point
@@ -50,9 +48,9 @@ namespace Task_DEV_5
         /// <param name="nextPoint"></param>
         public void FlyTo(Point nextPoint)
         {
-            DistanceTraveled += StartPoint.GetDistance(nextPoint);
-            ObjectFlyAway?.Invoke(WhoAmI(), new ObjectFlyAwayEventArgs(GetFlyTime(), StartSpeed + (int)DistanceTraveled / 10 * 10));
-            StartPoint = nextPoint;
+            this.DistanceTraveled += this.StartPoint.GetDistance(nextPoint);
+            ObjectFlyAway?.Invoke(this.WhoAmI(), new ObjectFlyAwayEventArgs(this.GetFlyTime(), this.StartSpeed + (int)this.DistanceTraveled / 10 * 10));
+            this.StartPoint = nextPoint;
         }
     }
 }

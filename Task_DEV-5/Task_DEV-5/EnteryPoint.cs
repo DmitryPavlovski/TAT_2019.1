@@ -16,7 +16,7 @@ namespace Task_DEV_5
 
                 foreach (var flyable in flyables)
                 {
-                    flyable.ObjectFlyAway += DisplayTravels;                    
+                    flyable.ObjectFlyAway += Display.Travel;                    
                     flyable.FlyTo(new Point(100, 200, 800));
                 }
             }
@@ -25,18 +25,6 @@ namespace Task_DEV_5
                 Console.WriteLine($"Error: {ex.Message}");
                 Console.WriteLine($"Stack Trace: {ex.StackTrace}");
             }
-        }
-        /// <summary>
-        /// Method display time and speed moving
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <param name="arg"></param>
-        private static void DisplayTravels(object obj, ObjectFlyAwayEventArgs arg)
-        {
-            Console.Write($"{obj.GetType().Name}'s time is ");
-            Console.WriteLine(obj is SpaceShip
-                ? $"{Math.Round(arg.Time * 3600, 3)} seconds, reaching {arg.Speed / 3600} km/s"
-                : $"{Math.Round(arg.Time, 3)} hours, reaching {arg.Speed} km/h");
         }
     }
 }
