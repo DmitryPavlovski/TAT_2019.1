@@ -9,40 +9,38 @@ namespace Task_DEV_4
     /// </summary>
     class Materials : Id
     {
-        private string textInformation { get; set; }
+        private string _textInformation;
         public string TextInformation
         {
-            get
-            {
-                return textInformation;
-            }
+            get { return this._textInformation; }
             set
             {
                 if (value.Length > 256)
                 {
                     Console.WriteLine("Description should be less");
-                    textInformation = string.Empty;
+                    this._textInformation = string.Empty;
                 }
                 else
                 {
-                    textInformation = value;
+                    this._textInformation = value;
                 }
             }
         }
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="size"></param>
         public Materials(int size) : base()
         {
-            TextInformation = GetText(size);
+            this.TextInformation = this.GetText(size);
         }
+
         /// <summary>
-        /// Consructor
+        /// Empty Consructor
         /// </summary>
-        public Materials(): base ()
-        {
-        }
+        public Materials() : base() { }
+        
         /// <summary>
         /// method for read information from file
         /// </summary>
@@ -50,14 +48,15 @@ namespace Task_DEV_4
         /// <returns></returns>
         public string GetText(int restriction = 20)
         {
-            StringBuilder line = new StringBuilder();
-            StreamReader reader = new StreamReader("../../Description.txt");
-
+            var line = new StringBuilder();
+            var reader = new StreamReader("../../Description.txt");
             string partLine = reader.ReadLine();
+
             if (partLine == null)
             {
                 return null;
             }
+
             while (partLine != null)
             {
                 line.Append(partLine);
@@ -69,19 +68,19 @@ namespace Task_DEV_4
             int indexFirstElement, indexLastElement;
             indexFirstElement = random.Next(text.Length);
             indexLastElement = random.Next(indexFirstElement + 1, indexFirstElement + restriction+1);
+
             if (indexLastElement >= text.Length)
             {
                 indexLastElement = text.Length - 1;
             }
+
             return text.Substring(indexFirstElement, indexLastElement - indexFirstElement);
         }
+
         /// <summary>
         /// override method ToSring()
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
-        {
-            return $"Description: {TextInformation}";
-        }
+        public override string ToString() => $"Description: {this.TextInformation}";
     }
 }

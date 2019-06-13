@@ -9,13 +9,15 @@ namespace Task_DEV_4
     {
         public string Identi { get; protected set; }
         public static Random random = new Random(DateTime.Now.Millisecond);
+
         /// <summary>
         /// Constructor
         /// </summary>
         public Id()
         {
-            Identi = generateID();
+            this.Identi = this.GenerateID();
         }
+
         /// <summary>
         /// override method Equals for compare two Id
         /// </summary>
@@ -27,18 +29,21 @@ namespace Task_DEV_4
             {
                 return false;
             }
-            Id id = obj as Id;
+
+            var id = obj as Id;
             if (id as Id == null)
             {
                 return false;
             }
+
             return id.Identi == this.Identi;
         }
+
         /// <summary>
         /// method for generate unuversal Id
         /// </summary>
         /// <returns></returns>
-        public string generateID()
+        public string GenerateID()
         {
             long i = 1;
 
@@ -46,16 +51,15 @@ namespace Task_DEV_4
             {
                 i *= ((int)b + 1);
             }
-            string number = String.Format("{0:d9}", (DateTime.Now.Ticks / 10) % 1000000000);
+            string number = string.Format("{0:d9}", (DateTime.Now.Ticks / 10) % 1000000000);
+
             return number;
         }
+
         /// <summary>
         /// override GetHashCode
         /// </summary>
         /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

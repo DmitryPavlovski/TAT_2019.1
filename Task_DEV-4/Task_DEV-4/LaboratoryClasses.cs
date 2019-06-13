@@ -9,11 +9,10 @@ namespace Task_DEV_4
     class LaboratoryClasses : Materials, ICloneable
     {
         /// <summary>
-        /// Consructor
+        /// Empty Consructor
         /// </summary>
-        public LaboratoryClasses(): base(random.Next(256))
-        {
-        }
+        public LaboratoryClasses() : base(random.Next(256)) { }
+
         /// <summary>
         /// Consructor
         /// </summary>
@@ -21,8 +20,8 @@ namespace Task_DEV_4
         /// <param name="Information"></param>
         public LaboratoryClasses(string Id, string Information) : base ()
         {
-            Identi = Id;
-            TextInformation = Information;
+            this.Identi = Id;
+            this.TextInformation = Information;
         }
 
         /// <summary>
@@ -31,9 +30,11 @@ namespace Task_DEV_4
         /// <returns disciplineClone></returns>
         public object Clone()
         {
-            LaboratoryClasses laboratoryClone = new LaboratoryClasses(Identi, TextInformation);
+            var laboratoryClone = new LaboratoryClasses(this.Identi, this.TextInformation);
+
             return laboratoryClone;
         }
+
         /// <summary>
         /// method add Information About Laboratorys Classes in common string
         /// </summary>

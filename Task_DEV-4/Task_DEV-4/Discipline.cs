@@ -10,17 +10,20 @@ namespace Task_DEV_4
     class Discipline : Materials, ICloneable
     {
         public List<Lecture> ListOfLectures { get; set; }
+
         /// <summary>
         /// Constructor of discipline.
         /// </summary>
-        public Discipline() : base(random.Next(256))
+        public Discipline(int quantity = 15) : base(random.Next(256))
         {
-            ListOfLectures = new List<Lecture>();
-            for (int i = 0; i < 15; i++)
+            this.ListOfLectures = new List<Lecture>();
+
+            for (int i = 0; i < quantity; i++)
             {
-                ListOfLectures.Add(new Lecture());
+                this.ListOfLectures.Add(new Lecture());
             }
         }
+
         /// <summary>
         /// Constructor of discipline.
         /// </summary>
@@ -29,12 +32,13 @@ namespace Task_DEV_4
         /// <param name="Lections"></param>
         public Discipline(string Id, string Information, List<Lecture> Lections)
         {
-            Identi = Id;
-            TextInformation = Information;
-            ListOfLectures = new List<Lecture>();
+            this.Identi = Id;
+            this.TextInformation = Information;
+            this.ListOfLectures = new List<Lecture>();
+
             foreach (var i in Lections)
             {
-                ListOfLectures.Add((Lecture)i.Clone());
+                this.ListOfLectures.Add((Lecture)i.Clone());
             }
         }
 
@@ -44,21 +48,18 @@ namespace Task_DEV_4
         /// <returns disciplineClone></returns>
         public object Clone()
         {
-            Discipline disciplineClone = new Discipline(Identi, TextInformation, ListOfLectures);
+            var disciplineClone = new Discipline(this.Identi, this.TextInformation, this.ListOfLectures);
+
             return disciplineClone;
         }
+
         /// <summary>
         /// Indexer return to display certain lecture and her seminars and laboratory lessons.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public StringBuilder this[int index]
-        {
-            get
-            {
-                return AddInformationAboutDiscipline(ListOfLectures[index], index); ;
-            }
-        }
+        public StringBuilder this[int index]    {  get{ return this.AddInformationAboutDiscipline(this.ListOfLectures[index], index); } }
+
         /// <summary>
         /// method gather Information About Discipline
         /// </summary>
@@ -67,14 +68,15 @@ namespace Task_DEV_4
         /// <returns></returns>
         public StringBuilder AddInformationAboutDiscipline(Lecture listOfLectures, int index)
         {
-            StringBuilder allInformation = new StringBuilder();
-            allInformation.Append("                                          Lecture Content\n");
+            var allInformation = new StringBuilder();
+            allInformation.Append("Lecture Content:\n");
             allInformation.Append($"{index + 1} lection: seminars - {listOfLectures.ListOfSeminars.Count}" +
                 $", laboratories - {listOfLectures.ListOfLaboratoryClasses.Count}.\n");
-            allInformation.Append("                                       Detailed Description\n");
+            allInformation.Append("Detailed Description:\n");
             allInformation.Append($"---Lection {index + 1}th:\n");
             listOfLectures.AddInformationAboutLecture(allInformation);
-            allInformation.Append("                                                 End\n");
+            allInformation.Append("End.\n");
+
             return allInformation;
         }
     }

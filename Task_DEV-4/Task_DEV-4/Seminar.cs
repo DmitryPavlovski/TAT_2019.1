@@ -9,27 +9,31 @@ namespace Task_DEV_4
     /// </summary>
     class Seminar : Materials, ICloneable
     {
-        List<string> tasks { get; set; } 
-        List<string> questions { get; set; } 
-        List<string> answerTheQuestions { get; set; } 
+        List<string> Tasks { get; set; } 
+        List<string> Questions { get; set; } 
+        List<string> AnswerTheQuestions { get; set; } 
+
         /// <summary>
         /// Constructor
         /// </summary>
         public Seminar() : base (random.Next(256))
         {
-            tasks = new List<string>();
-            questions = new List<string>();
-            answerTheQuestions = new List<string>();
+            this.Tasks = new List<string>();
+            this.Questions = new List<string>();
+            this.AnswerTheQuestions = new List<string>();
+
             for (int i = 0; i < random.Next(1, 10); i++)
             {
-                tasks.Add(GetText());
+                this.Tasks.Add(this.GetText());
             }
+
             for (int i = 0; i < random.Next(1, 10); i++)
             {
-                questions.Add(GetText());
-                answerTheQuestions.Add(GetText());
+                this.Questions.Add(this.GetText());
+                this.AnswerTheQuestions.Add(this.GetText());
             }
         }
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -40,22 +44,25 @@ namespace Task_DEV_4
         /// <param name="AnswerTheQuestions"></param>
         public Seminar(string Id, string Information, List<string> Tasks, List<string> Questions, List<string> AnswerTheQuestions):base()
         {
-            Identi = Id;
-            TextInformation = Information;
-            tasks = new List<string>();
-            questions = new List<string>();
-            answerTheQuestions = new List<string>();
+            this.Identi = Id;
+            this.TextInformation = Information;
+            this.Tasks = new List<string>();
+            this.Questions = new List<string>();
+            this.AnswerTheQuestions = new List<string>();
+
             foreach (var i in Tasks)
             {
-                tasks.Add(i);
+                this.Tasks.Add(i);
             }
+
             foreach (var i in Questions)
             {
-                questions.Add(i);
+                this.Questions.Add(i);
             }
+
             foreach (var i in AnswerTheQuestions)
             {
-                answerTheQuestions.Add(i);
+                this.AnswerTheQuestions.Add(i);
             }
         }
 
@@ -65,9 +72,11 @@ namespace Task_DEV_4
         /// <returns disciplineClone></returns>
         public object Clone()
         {
-            Seminar seminarClone = new Seminar(Identi, TextInformation, tasks, questions, answerTheQuestions);
+            var seminarClone = new Seminar(this.Identi, this.TextInformation, this.Tasks, this.Questions, this.AnswerTheQuestions);
+
             return seminarClone;
         }
+
         /// <summary>
         /// Method for add Information About Seminars in common string
         /// </summary>
@@ -78,19 +87,24 @@ namespace Task_DEV_4
             allInformation.Append($"*GUID: {this.Identi}.\n");
             allInformation.Append($"*{this.ToString()}.\n");
             allInformation.Append("*Tasks:\n");
-            foreach (var task in tasks)
+
+            foreach (var task in this.Tasks)
             {
                 allInformation.Append($"{indexOfTask}: {task}\n");
                 indexOfTask++;
             }
+
             allInformation.Append("*Questions:\n");
-            foreach (var question in questions)
+
+            foreach (var question in this.Questions)
             {
                 allInformation.Append($"{indexOfQuestion}: {question}?\n");
                 indexOfQuestion++;
             }
+
             allInformation.Append("*Answer the questions:\n");
-            foreach (var answer in answerTheQuestions)
+
+            foreach (var answer in this.AnswerTheQuestions)
             {
                 allInformation.Append($"{indexOfAnswer}: {answer}.\n");
                 indexOfAnswer++;
