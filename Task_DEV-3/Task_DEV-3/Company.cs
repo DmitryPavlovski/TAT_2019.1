@@ -19,51 +19,56 @@ namespace Task_DEV_3
         /// </summary>
         public Company()
         {
-            AddLead();
-            AddSenior();
-            AddMiddle();
-            AddJunior();
+            this.AddLead();
+            this.AddSenior();
+            this.AddMiddle();
+            this.AddJunior();
         }
+
         /// <summary>
         /// Method for add lead developers
         /// </summary>
         public void AddLead()
         {
-            for (int i = 0; i < NumLeads; i++)
+            for (int i = 0; i < this.NumLeads; i++)
             {
-                ListEmployees.Add(new Lead());
+                this.ListEmployees.Add(new Lead());
             }
         }
+
         /// <summary>
         /// Method for add senior developers
         /// </summary>
         public void AddSenior()
         {
-            for (int i = 0; i < NumSeniors; i++)
+            for (int i = 0; i < this.NumSeniors; i++)
             {
-                ListEmployees.Add(new Senior());
+                this.ListEmployees.Add(new Senior());
             }
         }
+
         /// <summary>
         /// Method for add middle developers
         /// </summary>
         public void AddMiddle()
         {
-            for (int i = 0; i < NumMiddles; i++)
+            for (int i = 0; i < this.NumMiddles; i++)
             {
-                ListEmployees.Add(new Middle());
+                this.ListEmployees.Add(new Middle());
             }
         }
+
         /// <summary>
         /// Method for add junior developers
         /// </summary>
         public void AddJunior()
         {
-            for (int i = 0; i < NumJuniors; i++)
+            for (int i = 0; i < this.NumJuniors; i++)
             {
-                ListEmployees.Add(new Junior());
+                this.ListEmployees.Add(new Junior());
             }
         }
+
         /// <summary>
         /// Selection team for work by criterion
         /// </summary>
@@ -80,51 +85,60 @@ namespace Task_DEV_3
             {
                 throw new Exception("No valid data!!!");
             }
+
             switch (typeCriterion)
             {
                 case 1:
-                    OptimazationOrder dreamTeam1 = new FirstCriterion(characteristic);
-                    return dreamTeam1.SelectionTeam();                    
+                    OptimazationOrder dreamTeam1 = new MaxProductivityCriterion(characteristic);
+
+                    return dreamTeam1.SelectionTeam();  
+                    
                 case 2:
-                    OptimazationOrder dreamTeam2 = new SecondCriterion(characteristic);
-                    return dreamTeam2.SelectionTeam();                   
+                    OptimazationOrder dreamTeam2 = new MinCostCriterion(characteristic);
+
+                    return dreamTeam2.SelectionTeam();  
+                    
                 case 3:
-                    OptimazationOrder dreamTeam3 = new ThirdCriterion(characteristic);
+                    OptimazationOrder dreamTeam3 = new MinQuantityJuniorCriterion(characteristic);
+
                     return dreamTeam3.SelectionTeam();
+
                 default:
                     throw new Exception("Unknown criteria entered");
             }
         }
+
         /// <summary>
         /// Show list employees
         /// </summary>
         /// <param name="listEmployees"></param>
         public static void ShowListEmployees(List<Employee> listEmployees)
         {
-            var counter = new int[4];
+            var counter = new int[(int)TypeDevelopers.Length];
             int cost=0;
             int productivity=0;
+
             foreach (var employee in listEmployees)
             {
                 switch (employee)
                 {
                     case Lead _:
-                        counter[3]++;
+                        counter[(int)TypeDevelopers.Lead]++;
                         cost += employee.Salary;
                         productivity += employee.Productivity;
                         break;
                     case Senior _:
-                        counter[2]++;
+                        counter[(int)TypeDevelopers.Senior]++;
                         cost += employee.Salary;
                         productivity += employee.Productivity;
                         break;
                     case Middle _:
-                        counter[1]++;
+                        counter[(int)TypeDevelopers.Middle]++;
                         cost += employee.Salary;
                         productivity += employee.Productivity;
                         break;
                     case Junior _:
-                        counter[0]++;
+                        counter[(int)TypeDevelopers.Junior]++;
                         cost += employee.Salary;
                         productivity += employee.Productivity;
                         break;
@@ -133,7 +147,8 @@ namespace Task_DEV_3
 
             Console.WriteLine("The number of employees you'll need:");
             Console.WriteLine(
-                $"Junior: {counter[0]}\nMiddle: {counter[1]}\nSenior: {counter[2]}\nLead:   {counter[3]}\nCost: {cost}\nProductivity: {productivity}");
+                $"Junior: {counter[0]}\nMiddle: {counter[1]}\nSenior: {counter[2]}\nLead:" +
+                $"   {counter[3]}\nCost: {cost}\nProductivity: {productivity}");
         }
     }
 }

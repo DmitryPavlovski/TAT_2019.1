@@ -46,15 +46,16 @@
     <Compile Include="Company.cs" />
     <Compile Include="Employees.cs" />
     <Compile Include="EnteryPoint.cs" />
-    <Compile Include="FirstCriterion.cs" />
-    <Compile Include="Junior.cs" />
-    <Compile Include="Lead.cs" />
-    <Compile Include="Middle.cs" />
+    <Compile Include="Criterions\MaxProductivityCriterion.cs" />
+    <Compile Include="TypeDevelopers.cs" />
+    <Compile Include="TypeOfDevelopers\Junior.cs" />
+    <Compile Include="TypeOfDevelopers\Lead.cs" />
+    <Compile Include="TypeOfDevelopers\Middle.cs" />
     <Compile Include="OptimazationOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SecondCriterion.cs" />
-    <Compile Include="Senior.cs" />
-    <Compile Include="ThirdCriterion.cs" />
+    <Compile Include="Criterions\MinCostCriterion.cs" />
+    <Compile Include="TypeOfDevelopers\Senior.cs" />
+    <Compile Include="Criterions\MinQuantityJuniorCriterion.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

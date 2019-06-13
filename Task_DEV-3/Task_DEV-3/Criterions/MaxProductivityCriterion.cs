@@ -5,54 +5,60 @@ using System.Linq;
 namespace Task_DEV_3
 {
     /// <summary>
-    /// first criterion class
+    /// class for crterion with max productivty on limited money
     /// </summary>
-    class FirstCriterion : OptimazationOrder
+    class MaxProductivityCriterion : OptimazationOrder
     {
         private int Money { get; set; }
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="money"></param>
-        public FirstCriterion(int money)
+        public MaxProductivityCriterion(int money)
         {
-            Money = money;
-            ListTopEmployees = company.ListEmployees.OrderBy(empl => empl.Optimality).ToList();
+            this.Money = money;
+            this.ListTopEmployees = this.Company.ListEmployees.OrderBy(empl => empl.Optimality).ToList();
         }
+
         /// <summary>
         /// override method for selection optimal team
         /// </summary>
         /// <returns></returns>
         public override List<Employee> SelectionTeam()
         {
-            foreach (var developer in ListTopEmployees)
+            foreach (var developer in this.ListTopEmployees)
             {
-                if ((Money) >= developer.Salary)
+                if ((this.Money) >= developer.Salary)
                 {
-                    ListDreamTeamForOrder.Add(developer);
-                    Money -= developer.Salary;
+                    this.ListDreamTeamForOrder.Add(developer);
+                    this.Money -= developer.Salary;
                 }
             }
-            CheckOnSufficiencyOfEmployees();
-            CheckOnSufficiencyOfMoney();
-            return ListDreamTeamForOrder;
+            this.CheckOnSufficiencyOfEmployees();
+            this.CheckOnSufficiencyOfMoney();
+
+            return this.ListDreamTeamForOrder;
         }
+
         /// <summary>
         ///override method for check on sufficiency of emloyees
         /// </summary>
         protected override void CheckOnSufficiencyOfEmployees()
         {
-            if (Money > ListTopEmployees.Min(empl => empl.Salary) && ListDreamTeamForOrder.Count == ListTopEmployees.Count)
+            if (this.Money > this.ListTopEmployees.Min(empl => empl.Salary) 
+                && this.ListDreamTeamForOrder.Count == this.ListTopEmployees.Count)
             {
                 throw new Exception("Sorry my company cannot complete your order :(");
             }
         }
+
         /// <summary>
         /// method for check on sufficiency of money
         /// </summary>
         void CheckOnSufficiencyOfMoney()
         {
-            if (ListDreamTeamForOrder.Count == 0)
+            if (this.ListDreamTeamForOrder.Count == 0)
             {
                 throw new Exception("Need more gold!!");
             }

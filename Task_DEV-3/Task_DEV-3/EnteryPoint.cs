@@ -3,10 +3,14 @@
 namespace Task_DEV_3
 {
     /// <summary>
-    /// Entery Point class
+    /// Program finde optimal team for defferent criterion
     /// </summary>
     class EnteryPoint
     {
+        /// <summary>
+        /// entry point
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             try

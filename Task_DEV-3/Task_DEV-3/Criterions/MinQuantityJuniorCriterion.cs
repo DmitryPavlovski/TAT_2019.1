@@ -5,26 +5,28 @@ using System.Linq;
 namespace Task_DEV_3
 {
     /// <summary>
-    /// third criterion class
+    /// class for criterion with min quantity junior
     /// </summary>
-    class ThirdCriterion : SecondCriterion
+    class MinQuantityJuniorCriterion : MinCostCriterion
     {
         protected List<Employee> ListWithoutJunior { get; set; } = new List<Employee>();
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="productivity"></param>
-        public ThirdCriterion(int productivity) : base(productivity)
+        public MinQuantityJuniorCriterion(int productivity) : base(productivity)
         {
-            foreach (var employee in ListTopEmployees)
+            foreach (var employee in this.ListTopEmployees)
             {
                 if (employee is Middle)
                 {
-                    ListWithoutJunior.Add(employee);
+                    this.ListWithoutJunior.Add(employee);
                 }
             }
-            ListWithoutJunior = ListWithoutJunior.OrderBy(i => i.Optimality).ToList();
+            this.ListWithoutJunior = this.ListWithoutJunior.OrderBy(i => i.Optimality).ToList();
         }
+
         /// <summary>
         /// override method for selection optimal team
         /// </summary>
@@ -32,23 +34,26 @@ namespace Task_DEV_3
         public override List<Employee> SelectionTeam()
         {
 
-            foreach (var developer in ListWithoutJunior)
+            foreach (var developer in this.ListWithoutJunior)
             {
-                if ((NeedProductivity + ListWithoutJunior.Min(empl => empl.Productivity) - 1) >= developer.Productivity)
+                if ((this.NeedProductivity + this.ListWithoutJunior.Min(empl => empl.Productivity) - 1) >= developer.Productivity)
                 {
-                    ListDreamTeamForOrder.Add(developer);
-                    NeedProductivity -= developer.Productivity;
+                    this.ListDreamTeamForOrder.Add(developer);
+                    this.NeedProductivity -= developer.Productivity;
                 }
             }
-            CheckOnSufficiencyOfEmployees();
-            return ListDreamTeamForOrder;
+            this.CheckOnSufficiencyOfEmployees();
+
+            return this.ListDreamTeamForOrder;
         }
+
         /// <summary>
         /// override method for check on sufficiency of emloyees
         /// </summary>
         protected override void CheckOnSufficiencyOfEmployees()
         {
-            if (NeedProductivity > ListWithoutJunior.Min(empl => empl.Productivity) && ListDreamTeamForOrder.Count == ListWithoutJunior.Count)
+            if (this.NeedProductivity > this.ListWithoutJunior.Min(empl => empl.Productivity)
+                && this.ListDreamTeamForOrder.Count == this.ListWithoutJunior.Count)
             {
                 throw new Exception("it is impossible to provide such productivity, too few people: (");
             }
