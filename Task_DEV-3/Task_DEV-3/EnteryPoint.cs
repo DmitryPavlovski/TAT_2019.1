@@ -3,7 +3,7 @@
 namespace Task_DEV_3
 {
     /// <summary>
-    /// Program finde optimal team for defferent criterion
+    /// Program find optimal team for defferent criterion
     /// </summary>
     class EnteryPoint
     {
