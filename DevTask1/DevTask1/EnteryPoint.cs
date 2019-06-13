@@ -13,8 +13,8 @@ namespace DevTask1
         {
             try
             {
-                SubStringsSequence line = new SubStringsSequence(args);
-                line.DisplayAndSearchAllSubstrings();
+                var line = new SubStringsSequence(args);
+                line.DisplayAllSubstring(line.SearchAllSubstrings());
             }
             catch (Exception ex)
             {

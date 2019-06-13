@@ -1,37 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace DevTask1
 {
     class SubStringsSequence
     {
-        private StringBuilder subsequence;
+        StringBuilder Subsequence { get; set; }
+
         /// <summary>
         /// Constructor forms a string from array of strings and checks on Error
         /// </summary>
         /// <param name="sequence">Array of strings</param>
         public SubStringsSequence(string[] sequence)
         {           
-                if (ChekForEmptiness(sequence))
-                {
-                    throw new Exception("String too short!");
-                }
-                subsequence = new StringBuilder();
-                foreach (string word in sequence)
-                {
-                    subsequence.Append(word).Append(" ");
-                }
-                subsequence.Remove(subsequence.Length - 1, 1);            
+            if (this.ChekForValidity(sequence))
+            {
+               throw new Exception("String too short!");
+            }
+            this.Subsequence = new StringBuilder();
+            foreach (string word in sequence)
+            {
+                 this.Subsequence.Append(word).Append(" ");
+            }
+            this.Subsequence.Remove(this.Subsequence.Length - 1, 1);            
         }
+
         /// <summary>
         /// Method checks for minimum array length
         /// </summary>
-        /// <param name="str"></param>
+        /// <param name="sequence"></param>
         /// <returns></returns>
-        private bool ChekForEmptiness(string[] str)
-        {
-            return str.Length == 0 || str[0].Length <= 2;
-        }
+        private bool ChekForValidity(string[] sequence) => sequence.Length == 0 || sequence[0].Length <= 2;
+
         /// <summary>
         /// Method search a substring starting with indexFirstElement, but after an element indexPreviousElement 
         /// </summary>
@@ -41,30 +42,53 @@ namespace DevTask1
         /// <returns></returns>
         public string SearchNextSubstring(string sequence, int indexFirstElement, int indexPreviousElement)
         {
-            if (sequence[indexPreviousElement] == sequence[indexPreviousElement + 1])
+            if (sequence[indexPreviousElement] != sequence[indexPreviousElement + 1])
             {
-                return "0";
+                return sequence.Substring(indexFirstElement, indexPreviousElement - indexFirstElement + 2);
             }
-            return sequence.Substring(indexFirstElement, indexPreviousElement - indexFirstElement + 2);           
-        }
-        ///<summary>
-        /// the method takes a string and displays all the substrings.
-        /// </summary>
-        public void DisplayAndSearchAllSubstrings()
-        {
-            for (int firstElement = 0; firstElement < subsequence.Length; firstElement++)
+            else
             {
-                for (int lastElevent = firstElement; lastElevent < subsequence.Length - 1; lastElevent++)
+                return string.Empty;
+            }
+        }
+
+        ///<summary>
+        /// the method search all substrings in string
+        /// </summary>
+        public List<string> SearchAllSubstrings()
+        {
+            var listOfSubstring = new List<string>();
+
+            for (int firstElement = 0; firstElement < this.Subsequence.Length; firstElement++)
+            {
+                for (int lastElement = firstElement; lastElement < this.Subsequence.Length - 1; lastElement++)
                 {
-                    if(SearchNextSubstring(subsequence.ToString(), firstElement, lastElevent).Length>1)
+                    var substring = this.SearchNextSubstring(this.Subsequence.ToString(), firstElement, lastElement);
+
+                    if (substring.Length>1)
                     {
-                        Console.WriteLine(SearchNextSubstring(subsequence.ToString(),firstElement, lastElevent));
+                        listOfSubstring.Add(substring);
                     }
-                    if (subsequence.Length - lastElevent > 1 && subsequence[lastElevent] == subsequence[lastElevent + 1])
+
+                    if (this.Subsequence.Length - lastElement > 1 && this.Subsequence[lastElement] == this.Subsequence[lastElement + 1])
                     {
                         break;
                     }
                 }
+            }
+
+            return listOfSubstring;
+        }
+
+        /// <summary>
+        /// method display all substring
+        /// </summary>
+        /// <param name="list"></param>
+        public void DisplayAllSubstring(List<string> list)
+        {
+            foreach(var substring in list)
+            {
+                Console.WriteLine(substring);
             }
         }
      }
