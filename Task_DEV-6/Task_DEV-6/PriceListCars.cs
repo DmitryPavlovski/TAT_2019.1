@@ -17,35 +17,26 @@ namespace Task_DEV_6
         /// <param name="listCars"></param>
         public PriceListCars(List<Car> listCars)
         {
-            ListCars = listCars;
+            this.ListCars = listCars;
         }
 
         /// <summary>
         /// method for get count mark
         /// </summary>
         /// <returns>Count marks</returns>
-        public int GetCountMark()
-        {
-            return ListCars.GroupBy(car => car.Mark).Count();
-        }
+        public int GetCountMark() => this.ListCars.GroupBy(car => car.Mark).Count();
 
         /// <summary>
         /// method for get count cars
         /// </summary>
         /// <returns>Cunt cars</returns>
-        public int GetCountCars()
-        {
-            return ListCars.Sum(car => car.Quantity);
-        }
+        public int GetCountCars() => this.ListCars.Sum(car => car.Quantity);
 
         /// <summary>
         /// method for get everage cost all cars
         /// </summary>
         /// <returns>average cost</returns>
-        public double GetEveragePrice()
-        {
-            return ListCars.Select(car => car.Cost).Average();
-        }
+        public double GetEveragePrice() => this.ListCars.Select(car => car.Cost).Average();
 
         /// <summary>
         /// method for get average cost cars of a particular mark
@@ -54,9 +45,9 @@ namespace Task_DEV_6
         /// <returns>average cost: value - OK, 0 - not found</returns>
         public double GetEveragePriceMark(string mark)
         {
-            if(ListCars.Select(car => car.Mark).Contains(mark.ToLower()))
+            if(this.ListCars.Select(car => car.Mark).Contains(mark.ToLower()))
             {
-                return ListCars.Where(car => car.Mark == mark.ToLower()).Select(car => car.Cost).Average();
+                return this.ListCars.Where(car => car.Mark == mark.ToLower()).Select(car => car.Cost).Average();
             }
             else
             {

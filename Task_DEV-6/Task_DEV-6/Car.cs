@@ -19,10 +19,10 @@
         /// <param name="cost"></param>
         public Car(string mark, string model, int quantity, int cost)
         {
-            Mark = mark;
-            Model = model;
-            Quantity = quantity;
-            Cost = cost;
+            this.Mark = mark;
+            this.Model = model;
+            this.Quantity = quantity;
+            this.Cost = cost;
         }
     }
 }

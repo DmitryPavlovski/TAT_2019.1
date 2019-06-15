@@ -17,16 +17,13 @@ namespace Task_DEV_6
         /// <param name="mark"></param>
         public AveragePriceTypeCommand(PriceListCars priceList, string mark)
         {
-            PriceList = priceList;
-            Mark = mark;
+            this.PriceList = priceList;
+            this.Mark = mark;
         }
 
         /// <summary>
         /// method for call command average price type
         /// </summary>
-        public void Execute()
-        {
-            Console.WriteLine(PriceList.GetEveragePriceMark(Mark));
-        }
+        public void Execute() => Console.WriteLine(this.PriceList.GetEveragePriceMark(this.Mark));
     }
 }

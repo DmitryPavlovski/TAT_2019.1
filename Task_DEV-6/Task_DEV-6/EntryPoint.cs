@@ -17,11 +17,7 @@ namespace Task_DEV_6
         {
             try
             {
-                if(args.Length==0)
-                {
-                    throw new Exception("File name not specified");
-                }
-                CarGetter carGetter = new CarGetter(args[0]);
+                var carGetter = new CarGetter(args[0]);
                 var mainMenu = new MainMenu(new PriceListCars(carGetter.ParseCar()));
                 mainMenu.Display();
             }

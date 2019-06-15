@@ -16,7 +16,7 @@ namespace Task_DEV_6
         /// <param name="priceList"></param>
         public MainMenu(PriceListCars priceList)
         {
-            PriceList = priceList;
+            this.PriceList = priceList;
         }
 
         /// <summary>
@@ -33,41 +33,32 @@ namespace Task_DEV_6
                     switch (command)
                     {
                         case "count types":
-
-                            Command = new CountTypesCommand(PriceList);
+                            this.Command = new CountTypesCommand(this.PriceList);
                             Console.Write("The amount of marks is ");
-                            Command.Execute();
+                            this.Command.Execute();
                             break;
-
                         case "count all":
-
-                            Command = new CountAllCommand(PriceList);
+                            this.Command = new CountAllCommand(this.PriceList);
                             Console.Write("The amount of cars is ");
-                            Command.Execute();
-
+                            this.Command.Execute();
                             break;
-
                         case "average price":
-
-                            Command = new AveragePriceCommand(PriceList);
+                            this.Command = new AveragePriceCommand(this.PriceList);
                             Console.Write("The average price is ");
-                            Command.Execute();
-
+                            this.Command.Execute();
                             break;
-
                         default:
-
                             if (command.Contains("average price"))
                             {
-                                Command = new AveragePriceTypeCommand(PriceList, command.Split(' ')[2]);
-                                Console.Write($"The average price of {command.Split(' ')[2]} is ");
-                                Command.Execute();
+                                var com = command.Split(' ');
+                                this.Command = new AveragePriceTypeCommand(this.PriceList, com[com.Length-1]);
+                                Console.Write($"The average price of {com[com.Length - 1]} is ");
+                                this.Command.Execute();
                             }
                             else
                             {
                                 Console.WriteLine("Unknown command");
                             }
-
                             break;
                     }
                 }

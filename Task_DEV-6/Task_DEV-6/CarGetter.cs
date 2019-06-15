@@ -17,8 +17,12 @@ namespace Task_DEV_6
         /// <param name="xDocName"></param>
         public CarGetter(string xDocName)
         {
-            XDoc = new XmlDocument();
-            XDoc.Load($"../../{xDocName}.xml");
+            if (xDocName.Length == 0)
+            {
+                throw new Exception("File name not specified");
+            }
+            this.XDoc = new XmlDocument();
+            this.XDoc.Load($"../../{xDocName}.xml");
         }
 
         /// <summary>
@@ -28,7 +32,7 @@ namespace Task_DEV_6
         public List<Car> ParseCar()
         {
             var listOfCars = new List<Car>();
-            XmlElement xRoot = XDoc.DocumentElement;
+            XmlElement xRoot = this.XDoc.DocumentElement;
             foreach (XmlNode xNode in xRoot)
             {
                 string mark = string.Empty;
@@ -69,6 +73,7 @@ namespace Task_DEV_6
 
                 listOfCars.Add(new Car(mark, model, quantity, cost));
             }
+
             return listOfCars;
         }
     }
