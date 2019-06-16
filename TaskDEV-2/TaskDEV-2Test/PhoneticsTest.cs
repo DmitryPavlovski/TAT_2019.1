@@ -1,47 +1,38 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using TaskDEV_2;
 
 namespace TaskDEV_2Test
 {
-    [TestClass]
+    [TestFixture]
     public class PhoneticsTest
     {
-        [TestMethod]
-        public void ConvertWordToPhonetics_Word_PhoneticsFormReturned()
+        [TestCase("обороноспосо+бность", "абаранаспасобнаст'")]
+        public void ConvertWordToPhonetics_Word_PhoneticsFormReturned(string inputWord, string expected)
         {
-            string words = "обороноспосо+бность";
-            var expected = "абаранаспасобнаст'";
-
-            var phonetics = new Phonetics(words);
+            var phonetics = new Phonetics(inputWord);
             var phoneticsForm = phonetics.ConvertWordToPhonetics(phonetics.ParsingWord()).ToString();
 
             Assert.AreEqual(expected, phoneticsForm);
         }
 
-        [TestMethod]
-        public void AddConsonant_Consonant_PhoneticsFormReturned()
+        [TestCase("по+езд", "п")]
+        public void AddConsonant_Consonant_PhoneticsFormReturned(string inputWord, string expected)
         {
-            var letter = 'з';
-            var expected = "с";
-            var letters = new Symbol[1];
-            letters[0] = new Symbol(letter);
+            var phonetics = new Phonetics(inputWord);
+            var letters = phonetics.ParsingWord();
 
-            var phonetics = new Phonetics(letter.ToString());
             var phoneticsForm = phonetics.AddConsonant(0, letters).ToString();
 
             Assert.AreEqual(expected, phoneticsForm);
         }
 
-        [TestMethod]
-        public void AddVowel_Vowel_PhoneticsFormReturned()
+        [TestCase("о+блако", "а")]
+        public void AddVowel_Vowel_PhoneticsFormReturned(string inputWord, string expected)
         {
-            var letter = 'о';
-            var expected = "а";
-            var letters = new Symbol[1];
-            letters[0] = new Symbol(letter);
+            var phonetics = new Phonetics(inputWord);
+            var letters = phonetics.ParsingWord();
 
-            var phonetics = new Phonetics(letter.ToString());
-            var phoneticsForm = phonetics.AddVowel(0, letters).ToString();
+            var phoneticsForm = phonetics.AddVowel(5, letters).ToString();
 
             Assert.AreEqual(expected, phoneticsForm);
         }

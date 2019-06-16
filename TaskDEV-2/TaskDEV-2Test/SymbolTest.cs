@@ -1,40 +1,17 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using TaskDEV_2;
 
 namespace TaskDEV_2Test
 {
-    [TestClass]
+    [TestFixture]
     public class SymbolTest
     {
-        [TestMethod]
-        public void Symbol_Vowel_VowelReturned()
+        [TestCase('а', "vowel")]
+        [TestCase('б', "consonant")]
+        [TestCase('ь', "other")]
+        public void Symbol_Vowel_VowelReturned(char inputLetter, string expected)
         {
-            char letter = 'а';
-            string expected = "vowel";
-
-            var symbol = new Symbol(letter);
-
-            Assert.AreEqual(expected, symbol.Sound);
-        }
-
-        [TestMethod]
-        public void Symbol_Consonant_ConsonantReturned()
-        {
-            char letter = 'б';
-            string expected = "consonant";
-
-            var symbol = new Symbol(letter);
-
-            Assert.AreEqual(expected, symbol.Sound);
-        }
-
-        [TestMethod]
-        public void Symbol_Other_OtherReturned()
-        {
-            char letter = 'ь';
-            string expected = "other";
-
-            var symbol = new Symbol(letter);
+            var symbol = new Symbol(inputLetter);
 
             Assert.AreEqual(expected, symbol.Sound);
         }

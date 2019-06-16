@@ -52,8 +52,14 @@ namespace TaskDEV_2
         /// </summary>
         /// <param name="word"></param>
         public Phonetics(string word)
-        {
+        { 
             this.Word = word.ToLower();
+            this.CheckOnPlusInStartWord();
+            this.CheckOnValidPlus();
+            this.CheckOnTwoPlus();
+            this.CheckOnPlusAfterConsonant();
+            this.CheckOnNoPlus();
+            this.CheckOnLengthWord();
         }
 
         /// <summary>
@@ -76,11 +82,13 @@ namespace TaskDEV_2
         /// <returns></returns>
         public bool CheckOnValidPlus()
         {
-            if(this.Word.Contains('ё'))
-                if(this.Word.Contains('+') && this.Word[this.Word.IndexOf('+')-1] != 'ё')
+            if (this.Word.Contains('ё'))
+            {
+                if (this.Word.Contains('+') && this.Word[this.Word.IndexOf('+') - 1] != 'ё')
                 {
                     throw new FormatException("Not valid stress!!!");
                 }
+            }
 
             return true;
         }
@@ -158,12 +166,6 @@ namespace TaskDEV_2
         /// <returns> symbols = word parses into letters </returns>
         public Symbol[] ParsingWord()
         {
-            this.CheckOnPlusInStartWord();
-            this.CheckOnValidPlus();
-            this.CheckOnTwoPlus();
-            this.CheckOnPlusAfterConsonant();
-            this.CheckOnNoPlus();
-            this.CheckOnLengthWord();
             var symbols = new Symbol[this.Word.Length-1];
             for (int i = 0; i < symbols.Length; i++)
             {
