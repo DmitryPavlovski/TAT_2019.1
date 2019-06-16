@@ -20,7 +20,7 @@ namespace Task_DEV_6
         /// <param name="priceList"></param>
         public MainMenu(List<PriceListCars> priceList)
         {
-            this.PriceList = GetInstance(priceList);
+            this.PriceList = getInstance(priceList);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Task_DEV_6
         /// </summary>
         /// <param name="listCars"></param>
         /// <returns></returns>
-        public static List<PriceListCars> GetInstance(List<PriceListCars> listCars)
+        public static List<PriceListCars> getInstance(List<PriceListCars> listCars)
         {
             if (_instance == null)
             {
@@ -67,6 +67,8 @@ namespace Task_DEV_6
                             this.ExecuteCommands?.Invoke();
                             this.ExecuteCommands = null;
                             continue;
+                        case "exit":
+                            break;
                         default:
                             if (command.Contains("average price"))
                             {
