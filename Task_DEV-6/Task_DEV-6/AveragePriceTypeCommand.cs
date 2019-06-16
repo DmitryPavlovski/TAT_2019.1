@@ -24,6 +24,6 @@ namespace Task_DEV_6
         /// <summary>
         /// method for call command average price type
         /// </summary>
-        public void Execute() => Console.WriteLine(this.PriceList.GetEveragePriceMark(this.Mark));
+        public void Execute() => Console.WriteLine(this.PriceList?.GetEveragePriceMark(this.Mark));
     }
 }

@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Task_DEV_6
 {
     /// <summary>
     /// class with entry point
-    /// program pars file and create price list of cars
+    /// program parsing files and create price list of cars
     /// and creates display
+    /// where we can use some commands
     /// </summary>
     class EntryPoint
     {
@@ -17,8 +19,13 @@ namespace Task_DEV_6
         {
             try
             {
-                var carGetter = new CarGetter(args[0]);
-                var mainMenu = new MainMenu(new PriceListCars(carGetter.ParseCar()));
+                var carGetter = new CarGetter();
+                var catalogs = new List<PriceListCars>()
+                {
+                    new PriceListCars(carGetter.ParseCar(args[(int)TypeOfCars.car])),
+                    new PriceListCars(carGetter.ParseCar(args[(int)TypeOfCars.truck]))
+                };
+                var mainMenu = new MainMenu(catalogs);
                 mainMenu.Display();
             }
             catch (Exception ex)

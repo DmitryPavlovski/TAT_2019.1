@@ -21,6 +21,6 @@ namespace Task_DEV_6
         /// <summary>
         /// method for call command count all
         /// </summary>
-        public void Execute() => Console.WriteLine(this.PriceList.GetCountCars());
+        public void Execute() => Console.WriteLine(this.PriceList?.GetCountCars());
     }
 }

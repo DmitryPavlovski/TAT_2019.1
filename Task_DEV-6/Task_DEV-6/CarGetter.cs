@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml;
+using System.Xml.Linq;
 
 namespace Task_DEV_6
 {
@@ -9,72 +9,32 @@ namespace Task_DEV_6
     /// </summary>
     class CarGetter
     {
-        private XmlDocument XDoc { get; set; }
-
-        /// <summary>
-        /// constructor
-        /// </summary>
-        /// <param name="xDocName"></param>
-        public CarGetter(string xDocName)
-        {
-            if (xDocName.Length == 0)
-            {
-                throw new Exception("File name not specified");
-            }
-            this.XDoc = new XmlDocument();
-            this.XDoc.Load($"../../{xDocName}.xml");
-        }
+        private XDocument XDoc { get; set; } = new XDocument();
 
         /// <summary>
         /// method for paring file and create list of cars
         /// </summary>
         /// <returns>List of cars</returns>
-        public List<Car> ParseCar()
+        public List<Car> ParseCar(string xDocFile)
         {
-            var listOfCars = new List<Car>();
-            XmlElement xRoot = this.XDoc.DocumentElement;
-            foreach (XmlNode xNode in xRoot)
+            if (xDocFile.Length == 0)
             {
-                string mark = string.Empty;
-                string model = string.Empty;
-                int quantity = 0;
-                int cost = 0;
-
-                foreach (XmlNode childNode in xNode.ChildNodes)
-                {
-                    switch (childNode.Name)
-                    {
-                        case "mark":
-                            mark = childNode.InnerText.ToLower();
-                            break;
-
-                        case "model":
-                            model = childNode.InnerText.ToLower();
-                            break;
-
-                        case "quantity":
-                            if (!int.TryParse(childNode.InnerText, out quantity))
-                            {
-                                throw new Exception("Incorrect quantity value");
-                            }
-                            break;
-
-                        case "cost":
-                            if (!int.TryParse(childNode.InnerText, out cost))
-                            {
-                                throw new Exception("Incorrect cost value");
-                            }
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-
-                listOfCars.Add(new Car(mark, model, quantity, cost));
+                throw new Exception("File name not specified");
+            }
+            
+            this.XDoc = XDocument.Load($"../../{xDocFile}.xml");
+            var priceList = new List<Car>();
+            foreach (XElement car in this.XDoc.Element("cars").Elements("car"))
+            {
+                priceList.Add(new Car(
+                    car.Element("mark").Value.ToLower(),
+                car.Element("model").Value.ToLower(),
+                int.TryParse(car.Element("quantity").Value, out int quantity) ? quantity : throw new Exception("Incorrect quantity value"),
+                int.TryParse(car.Element("cost").Value, out int cost) ? cost : throw new Exception("Incorrect cost value")
+                ));
             }
 
-            return listOfCars;
+            return priceList;
         }
     }
 }

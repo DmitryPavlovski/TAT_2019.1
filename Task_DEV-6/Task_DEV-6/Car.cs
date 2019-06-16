@@ -11,7 +11,7 @@
         public int Cost { get; set; }
 
         /// <summary>
-        /// constructor
+        /// constructor with check on exceptoin
         /// </summary>
         /// <param name="mark"></param>
         /// <param name="model"></param>

@@ -21,6 +21,6 @@ namespace Task_DEV_6
         /// <summary>
         /// method for call command count types
         /// </summary>
-        public void Execute() => Console.WriteLine(this.PriceList.GetCountMark());
+        public void Execute() => Console.WriteLine(this.PriceList?.GetCountMark());
     }
 }
