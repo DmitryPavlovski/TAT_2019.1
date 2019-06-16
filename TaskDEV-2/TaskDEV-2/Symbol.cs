@@ -6,8 +6,7 @@ namespace TaskDEV_2
     /// Сlass for letters
     /// </summary>
     public class Symbol
-    {
-        
+    {        
         public char Letter { get; set; }
         public string Sound { get; set; } = "other";
         public bool IsStress { get; set; } = false;

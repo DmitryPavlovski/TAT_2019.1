@@ -174,6 +174,7 @@ namespace TaskDEV_2
                     this.Word = this.Word.Remove(i + 1, 1);
                 }
             }
+
             return symbols;
         }
 
