@@ -17,13 +17,19 @@ namespace Task_DEV_6
         /// <returns>List of cars</returns>
         public List<Car> ParseCar(string xDocFile)
         {
+
+            if (xDocFile.Length == 0)
+            {
+                throw new Exception("File name not entered");
+            }
+
             this.XDoc = XDocument.Load($"../../{xDocFile}.xml");
             var priceList = new List<Car>();
             foreach (XElement car in this.XDoc.Element("cars").Elements("car"))
             {
                 priceList.Add(new Car(
-                    car.Element("mark").Value.ToLower(),
-                car.Element("model").Value.ToLower(),
+                car.Element("mark").Value,
+                car.Element("model").Value,
                 int.TryParse(car.Element("quantity").Value, out int quantity) ? quantity : throw new Exception("Incorrect quantity value"),
                 int.TryParse(car.Element("cost").Value, out int cost) ? cost : throw new Exception("Incorrect cost value")
                 ));

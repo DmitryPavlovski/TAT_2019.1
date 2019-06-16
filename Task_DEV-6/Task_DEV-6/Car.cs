@@ -1,14 +1,39 @@
-﻿namespace Task_DEV_6
+﻿using System;
+
+namespace Task_DEV_6
 {
     /// <summary>
     /// class for car
     /// </summary>
     class Car
     {
-        public string Mark { get; set; }
-        public string Model { get; set; }
-        public int Quantity { get; set; }
-        public int Cost { get; set; }
+        private string _mark;
+        private string _model;
+        private int _quantity;
+        private int _cost;
+
+        public string Mark
+        {
+            get => this._mark;
+            set => this._mark = value != string.Empty ? value.ToLower() : throw new Exception("Mark should not be empty");
+        }
+
+        public string Model
+        {
+            get => this._model;
+            set => this._model = value != string.Empty ? value.ToLower() : throw new Exception("Model should not be empty");
+        }
+
+        public int Quantity
+        {
+            get => this._quantity;
+            set => this._quantity = value >= 0 ? value : throw new Exception("Quantity should be non-negative");
+        }
+        public int Cost
+        {
+            get => this._cost;
+            set => this._cost = value >= 0 ? value : throw new Exception("Cost should be non-negative");
+        }
 
         /// <summary>
         /// constructor with check on exceptoin

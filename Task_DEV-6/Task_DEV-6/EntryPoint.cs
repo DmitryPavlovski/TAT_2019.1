@@ -19,10 +19,6 @@ namespace Task_DEV_6
         {
             try
             {
-                if(args.Length == 0)
-                {
-                    throw new Exception("File name not entered");
-                }
                 var carGetter = new CarGetter();
                 var catalogs = new List<PriceListCars>()
                 {

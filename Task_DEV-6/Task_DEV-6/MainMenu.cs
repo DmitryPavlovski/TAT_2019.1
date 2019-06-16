@@ -20,7 +20,7 @@ namespace Task_DEV_6
         /// <param name="priceList"></param>
         public MainMenu(List<PriceListCars> priceList)
         {
-            this.PriceList = getInstance(priceList);
+            this.PriceList = GetInstance(priceList);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Task_DEV_6
         /// </summary>
         /// <param name="listCars"></param>
         /// <returns></returns>
-        public static List<PriceListCars> getInstance(List<PriceListCars> listCars)
+        public static List<PriceListCars> GetInstance(List<PriceListCars> listCars)
         {
             if (_instance == null)
             {
@@ -51,15 +51,15 @@ namespace Task_DEV_6
                     switch (command)
                     {
                         case "count types":
-                            this.Command = new CountTypesCommand(this.PriceList[ChooseTypeOfCar()]);
+                            this.Command = new CountTypesCommand(this.PriceList[this.ChooseTypeOfCar()]);
                             this.ExecuteCommands += this.Command.Execute;
                             continue;
                         case "count all":
-                            this.Command = new CountAllCommand(this.PriceList[ChooseTypeOfCar()]);
+                            this.Command = new CountAllCommand(this.PriceList[this.ChooseTypeOfCar()]);
                             this.ExecuteCommands += this.Command.Execute;
                             continue;
                         case "average price":
-                            this.Command = new AveragePriceCommand(this.PriceList[ChooseTypeOfCar()]);
+                            this.Command = new AveragePriceCommand(this.PriceList[this.ChooseTypeOfCar()]);
                             this.ExecuteCommands += this.Command.Execute;
                             continue;
                         case "execute":
@@ -69,7 +69,8 @@ namespace Task_DEV_6
                         default:
                             if (command.Contains("average price"))
                             {
-                                this.Command = new AveragePriceTypeCommand(this.PriceList[ChooseTypeOfCar()], command.Split(' ')[command.Split(' ').Length-1]);
+                                var com = command.Split(' ');
+                                this.Command = new AveragePriceTypeCommand(this.PriceList[this.ChooseTypeOfCar()], com[com.Length-1]);
                                 this.ExecuteCommands += this.Command.Execute;
                             }
                             else
@@ -90,7 +91,7 @@ namespace Task_DEV_6
         /// method for choose type of car
         /// </summary>
         /// <returns>type of car</returns>
-        private static int ChooseTypeOfCar()
+        private int ChooseTypeOfCar()
         {
             while(true)
             {
@@ -99,17 +100,11 @@ namespace Task_DEV_6
                 switch(typeOfCar)
                 {
                     case "car":
-
                         return (int) TypeOfCars.car;
-
                     case "truck":
-
                         return (int) TypeOfCars.truck;
-
                     default:
-
                         Console.WriteLine("Unknown type");
-
                         continue;
                 }
             }
