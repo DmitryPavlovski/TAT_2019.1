@@ -8,7 +8,7 @@ namespace Task_DEV_9.Yandex
     class SettingProfilePage
     {
         IWebDriver Driver { get; set; }
-        IWebElement PersonalDataButton => this.Driver.FindElement(By.XPath("//*[contains(text(), 'Изменить персональную информацию')]"), 10);
+        IWebElement PersonalDataButton => this.Driver.FindElement(By.XPath("//div[@class='personal-info-change']/span"), 10);
 
         /// <summary>
         /// constructor

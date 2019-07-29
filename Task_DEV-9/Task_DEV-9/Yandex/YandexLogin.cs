@@ -11,7 +11,7 @@ namespace Task_DEV_9.Yandex
         IWebElement ButtonEntry => this.Driver.FindElement(By.XPath("//a[contains(@class,'button desk-notif-card__login-enter-expanded')]"), 10);
         IWebElement LoginBox => this.Driver.FindElement(By.XPath("//input[@name='login']"), 10);
         IWebElement PasswordBox => this.Driver.FindElement(By.XPath("//input[@name='passwd']"), 10);
-        IWebElement ButtonLetters => this.Driver.FindElement(By.XPath("//a[.//*[contains(text(), 'Почта')]]"), 10);
+        IWebElement ButtonLetters => this.Driver.FindElement(By.XPath("//div[@class='desk-notif-card__mail-title']"), 10);
         public IWebElement ErrorMessage => this.Driver.FindElement(By.XPath("//div[@class='passp-form-field__error']"), 10);
 
         /// <summary>

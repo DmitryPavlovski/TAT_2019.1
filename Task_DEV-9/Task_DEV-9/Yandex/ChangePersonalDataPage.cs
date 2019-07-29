@@ -9,7 +9,7 @@ namespace Task_DEV_9.Yandex
     {
         IWebDriver Driver { get; set; }
         public IWebElement FirstNameBox => this.Driver.FindElement(By.XPath("//input[@id='firstname']"), 10);
-        IWebElement SaveButton => this.Driver.FindElement(By.XPath("//*[contains(text(),'Сохранить')]/.."), 10);
+        IWebElement SaveButton => this.Driver.FindElement(By.XPath("//div[contains(@class, 'right personal-saveblock')].."), 10);
 
         /// <summary>
         /// constructor

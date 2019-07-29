@@ -10,9 +10,9 @@ namespace Task_DEV_9.Yandex
         IWebDriver Driver { get; set; }
         IWebElement FildOfRecipient => this.Driver.FindElement(By.XPath("//div[@class='js-compose-field mail-Bubbles']"), 10);
         IWebElement FildOfMessage => this.Driver.FindElement(By.XPath("//textarea[@dir]"), 10);
-        IWebElement ButtonSend => this.Driver.FindElement(By.XPath("//*[contains(text(),'Отправить')]"), 10);
-        IWebElement ButtonLetters => this.Driver.FindElement(By.XPath("//*[contains(text(), 'Входящие')]"), 10);
-        IWebElement ButtonAccept => this.Driver.FindElement(By.XPath("//button[.//*[contains(text(), 'Сохранить и перейти')]]"), 10);
+        IWebElement ButtonSend => this.Driver.FindElement(By.XPath("//button[contains(@title,'(Ctrl + Enter)')]"), 10);
+        IWebElement ButtonLetters => this.Driver.FindElement(By.XPath("//div[@data-key='view=folders']/a[1]"), 10);
+        IWebElement ButtonAccept => this.Driver.FindElement(By.XPath("//div[@class='_nb-popup-buttons']/button[1]"), 10);
 
         /// <summary>
         /// constructor

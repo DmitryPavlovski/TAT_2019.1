@@ -4,23 +4,31 @@ using OpenQA.Selenium.Chrome;
 namespace Task_DEV_9
 {
     /// <summary>
-    /// entry point class
+    /// Prograam login in Yandex email and send on Rambler email letter
+    /// Read letter on Rambler and reply with new profile name
+    /// After read on Yandex this letter and change profile name
     /// </summary>
     class EntryPoint
     {
         /// <summary>
-        /// entry point
+        /// 
         /// </summary>
-        static void Main()
+        /// <param name="arg">
+        /// arg[0] - yandex email
+        /// arg[1] - yandex password
+        /// arg[2] - rambler email
+        /// arg[3] - rambler password
+        /// </param>
+        static void Main(string[] arg)
         {
             try
             {
                 var driver = new ChromeDriver();
                 var yandex = new Yandex.YandexLogin(driver);
-                var yandexEmail = "dima.kupeshka@yandex.by";
-                var yandexPassword = "taskdev9";
-                var ramblerEmail = "dima.kupeshka@rambler.ru";
-                var ramblerPassword = "Taskdev9";
+                var yandexEmail = arg[0];
+                var yandexPassword = arg[1];
+                var ramblerEmail = arg[2];
+                var ramblerPassword = arg[3];
                 var message = "London is the capital of Great Britain";
                 var newNickname = "Picachu";
 
