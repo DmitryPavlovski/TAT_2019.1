@@ -11,12 +11,12 @@ namespace Task_DEV_10
         /// The entry point of program.
         /// </summary>
         /// <param name="args"></param>
-        static void Main(string[] args)
+        static void Main()
         {
             try
             {
-                Shop shop = new Shop();
-                RequestHandler requester = new RequestHandler(shop);
+                var shop = new Shop();
+                var requester = new RequestHandler(shop);
                 requester.HandleRequests();
             }
             catch (Exception e)

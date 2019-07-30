@@ -1,20 +1,15 @@
 ﻿using System;
+using System.Linq;
+using Task_DEV_10.InformationClassCreaters;
 
 namespace Task_DEV_10
 {
     /// <summary>
     /// The class creates new product.
     /// </summary>
-    public class ProductCreater
+    public class ProductCreater : BaseDataCreater
     {
-        Shop Shop { get; }
         Product Product { get; }
-        bool existenceID;
-        bool existenceNumber;
-        bool existenceAddressID;
-        bool existenceDeliveryID;
-        bool existenceManufacturerID;
-        bool existenceWareHouseID;
 
         /// <summary>
         /// Constructor of HandlerProduct.
@@ -33,137 +28,30 @@ namespace Task_DEV_10
         public Product CreateProduct(Shop shop)
         {
             Console.WriteLine("Enter ID:");
-
-            while (existenceID == false)
-            {
-                if (Int32.TryParse(Console.ReadLine(), out int id))
-                {
-                    Product.ID = id;
-                    existenceID = true;
-                }
-                else
-                {
-                    Console.WriteLine("Try again! Incorrect value");
-                }
-            }
+            this.Product.ID = this.GetIntData();            
 
             Console.WriteLine("Enter name:");
-            Product.Name = Console.ReadLine();
+            this.Product.Name = this.GetStringData();
 
             Console.WriteLine("Enter number:");
-
-            while (existenceNumber == false)
-            {
-                if (Int32.TryParse(Console.ReadLine(), out int number))
-                {
-                    Product.Number = number;
-                    existenceNumber = true;
-                }
-                else
-                {
-                    Console.WriteLine("Try again! Incorrect value");
-                }
-            }
+            this.Product.Number = this.GetIntData();            
 
             Console.WriteLine("Enter manufacturer date:");
-            Product.ManufactureDate = Console.ReadLine();
+            this.Product.ManufactureDate = this.GetStringData();
 
             Console.WriteLine("Enter existing address ID:");
-
-            while (existenceAddressID == false)
-            {
-                if (Int32.TryParse(Console.ReadLine(), out int addressID))
-                {
-                    foreach (var address in shop.addresses)
-                    {
-                        if (address.ID == addressID)
-                        {
-                            Product.AddressID = addressID;
-                            existenceAddressID = true;
-
-                            break;
-                        }
-                    }
-                    Console.WriteLine(existenceAddressID == true ? "ok" : "This address don't exists. Try again!");
-                }
-                else
-                {
-                    Console.WriteLine("Try again! Incorrect value");
-                }
-            }
-
-
+            this.Product.AddressID = this.GetIntExistingID(shop.addresses.Select(t => t.ID).ToList());
+            
             Console.WriteLine("Enter existing delivery ID:");
-
-            while (existenceDeliveryID == false)
-            {
-                if (Int32.TryParse(Console.ReadLine(), out int deliveryID))
-                {
-                    foreach (var delivery in shop.deliveries)
-                    {
-                        if (delivery.ID == deliveryID)
-                        {
-                            Product.DeliveryID = deliveryID;
-                            existenceDeliveryID = true;
-
-                            break;
-                        }
-                    }
-                    Console.WriteLine(existenceDeliveryID == true ? "ok" : "This delivery don't exist. Try again!");
-                }
-                else
-                {
-                    Console.WriteLine("Try again! Incorrect value");
-                }
-            }
+            this.Product.DeliveryID = this.GetIntExistingID(shop.deliveries.Select(t => t.ID).ToList());          
 
             Console.WriteLine("Enter existing manufacturer ID:");
-
-            while (existenceManufacturerID == false)
-            {
-                if (Int32.TryParse(Console.ReadLine(), out int manufacturerID))
-                {
-                    foreach (var manufacturer in shop.manufacturers)
-                    {
-                        if (manufacturer.ID == manufacturerID)
-                        {
-                            Product.ManufacturerID = manufacturerID;
-                            existenceManufacturerID = true;
-
-                            break;
-                        }
-                    }
-                    Console.WriteLine(existenceManufacturerID == true ? "ok" : "This manufacturer don't exists. Try again!");
-                }
-                else
-                {
-                    Console.WriteLine("Try again! Incorrect value");
-                }
-            }
+            this.Product.ManufacturerID = this.GetIntExistingID(shop.manufacturers.Select(t => t.ID).ToList());            
 
             Console.WriteLine("Enter existing ware house ID:");
+            this.Product.WareHouseID = this.GetIntExistingID(shop.wareHouses.Select(t => t.ID).ToList());           
 
-            while (existenceWareHouseID == false)
-            {
-                if (Int32.TryParse(Console.ReadLine(), out int wareHouseID))
-                {
-                    foreach (var wareHouse in shop.wareHouses)
-                    {
-                        if (wareHouse.ID == wareHouseID)
-                        {
-                            Product.WareHouseID = wareHouseID;
-                            existenceWareHouseID = true;
-                        }
-                    }
-                    Console.WriteLine(existenceWareHouseID == true ? "ok" : "This warehouse don't exists. Try again!");
-                }
-                else
-                {
-                    Console.WriteLine("Try again! Incorrect value");
-                }
-            }
-
-            return Product;
+            return this.Product;
         }
     }
 }

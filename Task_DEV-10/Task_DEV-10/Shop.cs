@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Xml.Serialization;
 
 namespace Task_DEV_10
 {
@@ -34,10 +32,7 @@ namespace Task_DEV_10
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <param name="t"></param>
-        public void AddNewElement<T>(List<T> list, T t)
-        {
-            list.Add(t);
-        }
+        public void AddNewElement<T>(List<T> list, T t) => list.Add(t);
 
         /// <summary>
         /// Method deletes element of T type.
@@ -48,9 +43,9 @@ namespace Task_DEV_10
         /// <param name="id"></param>
         public void DeleteElement<T>(List<int> listID, List<T> list, int id)
         {
-            for (int i = 0; i < list.Count; i++)
+            for (var i = 0; i < list.Count; i++)
             {
-                if(listID[i] == id)
+                if (listID[i] == id)
                 {
                     list.Remove(list[i]);
 
@@ -64,7 +59,7 @@ namespace Task_DEV_10
         /// </summary>
         public void DisplayProducts()
         {
-            foreach (var product in products)
+            foreach (var product in this.products)
             {
                 Console.WriteLine("________________________");
                 Console.WriteLine($"ID: {product.ID}");
@@ -84,7 +79,7 @@ namespace Task_DEV_10
         /// </summary>
         public void DisplaAddresses()
         {
-            foreach (var address in addresses)
+            foreach (var address in this.addresses)
             {
                 Console.WriteLine("________________________");
                 Console.WriteLine($"ID: {address.ID}");
@@ -101,7 +96,7 @@ namespace Task_DEV_10
         /// </summary>
         public void DisplayDeliveries()
         {
-            foreach (var delivery in deliveries)
+            foreach (var delivery in this.deliveries)
             {
                 Console.WriteLine("________________________");
                 Console.WriteLine($"ID: {delivery.ID}");
@@ -116,7 +111,7 @@ namespace Task_DEV_10
         /// </summary>
         public void DisplayManufacturers()
         {
-            foreach (var manufacturer in manufacturers)
+            foreach (var manufacturer in this.manufacturers)
             {
                 Console.WriteLine("________________________");
                 Console.WriteLine($"ID: {manufacturer.ID}");
@@ -132,7 +127,7 @@ namespace Task_DEV_10
         /// </summary>
         public void DisplayWareHouses()
         {
-            foreach (var wareHouse in wareHouses)
+            foreach (var wareHouse in this.wareHouses)
             {
                 Console.WriteLine("________________________");
                 Console.WriteLine($"ID: {wareHouse.ID}");
@@ -149,7 +144,7 @@ namespace Task_DEV_10
         /// <returns></returns>
         public bool CheckOnUsingtoProduct(int id)
         {
-            foreach (var product in products)
+            foreach (var product in this.products)
             {
                 if (product.AddressID == id)
                 {

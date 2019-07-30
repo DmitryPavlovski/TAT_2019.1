@@ -24,15 +24,15 @@ namespace Task_DEV_10
         /// <returns></returns>
         public int FindProductID()
         {
-            bool existenceID = false;
-            int request = 0;
+            var existenceID = false;
+            var request = 0;
 
             while (existenceID == false)
             {
                 Console.WriteLine("Enter existing ID:");
-                Int32.TryParse(Console.ReadLine(), out request);
+                int.TryParse(Console.ReadLine(), out request);
 
-                foreach (var product in Shop.products)
+                foreach (var product in this.Shop.products)
                 {
                     if (request == product.ID)
                     {
@@ -52,15 +52,15 @@ namespace Task_DEV_10
         /// <returns></returns>
         public int FindAddressID()
         {
-            bool existenceID = false;
-            int request = 0;
+            var existenceID = false;
+            var request = 0;
 
             while (existenceID == false)
             {
                 Console.WriteLine("Enter existing ID:");
-                Int32.TryParse(Console.ReadLine(), out request);
+                int.TryParse(Console.ReadLine(), out request);
 
-                foreach (var address in Shop.addresses)
+                foreach (var address in this.Shop.addresses)
                 {
                     if (request == address.ID)
                     {
@@ -80,15 +80,15 @@ namespace Task_DEV_10
         /// <returns></returns>
         public int FindDeliveryID()
         {
-            bool existenceID = false;
-            int request = 0;
+            var existenceID = false;
+            var request = 0;
 
             while (existenceID == false)
             {
                 Console.WriteLine("Enter existing ID:");
-                Int32.TryParse(Console.ReadLine(), out request);
+                int.TryParse(Console.ReadLine(), out request);
 
-                foreach (var delivery in Shop.deliveries)
+                foreach (var delivery in this.Shop.deliveries)
                 {
                     if (request == delivery.ID)
                     {
@@ -108,15 +108,15 @@ namespace Task_DEV_10
         /// <returns></returns>
         public int FindManufacturerID()
         {
-            bool existenceID = false;
-            int request = 0;
+            var existenceID = false;
+            var request = 0;
 
             while (existenceID == false)
             {
                 Console.WriteLine("Enter existing ID:");
-                Int32.TryParse(Console.ReadLine(), out request);
+                int.TryParse(Console.ReadLine(), out request);
 
-                foreach (var manufacturer in Shop.manufacturers)
+                foreach (var manufacturer in this.Shop.manufacturers)
                 {
                     if (request == manufacturer.ID)
                     {
@@ -136,15 +136,15 @@ namespace Task_DEV_10
         /// <returns></returns>
         public int FindWareHouseID()
         {
-            bool existenceID = false;
-            int request = 0;
+            var existenceID = false;
+            var request = 0;
 
             while (existenceID == false)
             {
                 Console.WriteLine("Enter existing ID:");
-                Int32.TryParse(Console.ReadLine(), out request);
+                int.TryParse(Console.ReadLine(), out request);
 
-                foreach (var wareHouse in Shop.wareHouses)
+                foreach (var wareHouse in this.Shop.wareHouses)
                 {
                     if (request == wareHouse.ID)
                     {

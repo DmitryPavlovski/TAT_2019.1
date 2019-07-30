@@ -23,25 +23,22 @@ namespace Task_DEV_10
         {
             this.Shop = shop;
             this.HandlerWareHouse = new WareHouseCreater();
-            this.FinderID = new FinderID(Shop);
+            this.FinderID = new FinderID(this.Shop);
             this.XMLFileHandler = new XMLFileHandler();
         }
 
         /// <summary>
         /// Implemented method.
         /// </summary>
-        public void WriteToXML()
-        {
-            XMLFileHandler.WriteToXML(PathXML, Shop.wareHouses);
-        }
+        public void WriteToXML() => this.XMLFileHandler.WriteToXML(this.PathXML, this.Shop.wareHouses);
 
         /// <summary>
         /// Implemented method.
         /// </summary>
         public void AddNewElement()
         {
-            Shop.AddNewElement(Shop.wareHouses, HandlerWareHouse.CreateWareHouse());
-            UpdateData?.Invoke(this, new ObjectEventArgs(Shop));
+            this.Shop.AddNewElement(this.Shop.wareHouses, t: this.HandlerWareHouse.CreateWareHouse());
+            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
         }
 
         /// <summary>
@@ -49,22 +46,19 @@ namespace Task_DEV_10
         /// </summary>
         public void DeleteElement()
         {
-            List<int> listID = new List<int>();
+            var listID = new List<int>();
 
-            foreach (var wareHouse in Shop.wareHouses)
+            foreach (var wareHouse in this.Shop.wareHouses)
             {
                 listID.Add(wareHouse.ID);
             }
-            Shop.DeleteElement(listID, Shop.wareHouses, FinderID.FindWareHouseID());
-            UpdateData?.Invoke(this, new ObjectEventArgs(Shop));
+            this.Shop.DeleteElement(listID, this.Shop.wareHouses, this.FinderID.FindWareHouseID());
+            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
         }
 
         /// <summary>
         /// Implemented method.
         /// </summary>
-        public void DisplayElements()
-        {
-            Shop.DisplayWareHouses();
-        }
+        public void DisplayElements() => this.Shop.DisplayWareHouses();
     }
 }

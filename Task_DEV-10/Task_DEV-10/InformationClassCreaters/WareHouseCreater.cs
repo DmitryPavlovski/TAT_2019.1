@@ -1,15 +1,14 @@
 ﻿using System;
+using Task_DEV_10.InformationClassCreaters;
 
 namespace Task_DEV_10
 {
     /// <summary>
     /// the class creates new ware house.
     /// </summary>
-    public class WareHouseCreater
+    public class WareHouseCreater : BaseDataCreater
     {
         WareHouse WareHouse { get; }
-        bool existenceID;
-        bool existenceAddressID;
 
         /// <summary>
         /// Constructor of HandlerWareHoyse.
@@ -26,39 +25,15 @@ namespace Task_DEV_10
         public WareHouse CreateWareHouse()
         {
             Console.WriteLine("Enter ID:");
-
-            while (existenceID == false)
-            {
-                if (Int32.TryParse(Console.ReadLine(), out int id))
-                {
-                    WareHouse.ID = id;
-                    existenceID = true;
-                }
-                else
-                {
-                    Console.WriteLine("Try again! Incorrect value");
-                }
-            }
-
+            this.WareHouse.ID = this.GetIntData();
+           
             Console.WriteLine("Enter name:");
-            WareHouse.Name = Console.ReadLine();
+            this.WareHouse.Name = this.GetStringData();
 
             Console.WriteLine("Enter address ID:");
+            this.WareHouse.AddressID = this.GetIntData();           
 
-            while (existenceAddressID == false)
-            {
-                if (Int32.TryParse(Console.ReadLine(), out int addressID))
-                {
-                    WareHouse.AddressID = addressID;
-                    existenceAddressID = true;
-                }
-                else
-                {
-                    Console.WriteLine("Try again! Incorrect value");
-                }
-            }
-
-            return WareHouse;
+            return this.WareHouse;
         }
     }
 }

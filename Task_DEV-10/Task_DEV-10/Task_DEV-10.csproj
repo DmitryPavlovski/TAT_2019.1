@@ -49,6 +49,7 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="InformationClassCreaters\AddressCreater.cs" />
     <Compile Include="InformationClassCreaters\DeliveryCreater.cs" />
+    <Compile Include="InformationClassCreaters\BaseDataCreater.cs" />
     <Compile Include="InformationClasses\Address.cs" />
     <Compile Include="InformationClasses\Delivery.cs" />
     <Compile Include="EntryPoint.cs" />

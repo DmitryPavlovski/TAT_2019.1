@@ -22,25 +22,22 @@ namespace Task_DEV_10
         {
             this.Shop = shop;
             this.HandlerManufacturer = new ManufacturerCreater();
-            this.FinderID = new FinderID(Shop);
+            this.FinderID = new FinderID(this.Shop);
             this.XMLFileHandler = new XMLFileHandler();
         }
 
         /// <summary>
         /// Implemented method.
         /// </summary>
-        public void WriteToXML()
-        {
-            XMLFileHandler.WriteToXML(PathXML, Shop.manufacturers);
-        }
+        public void WriteToXML() => this.XMLFileHandler.WriteToXML(this.PathXML, this.Shop.manufacturers);
 
         /// <summary>
         /// Implemented method.
         /// </summary>
         public void AddNewElement()
         {
-            Shop.AddNewElement(Shop.manufacturers, HandlerManufacturer.CreateManufacturer());
-            UpdateData?.Invoke(this, new ObjectEventArgs(Shop));
+            this.Shop.AddNewElement(this.Shop.manufacturers, this.HandlerManufacturer.CreateManufacturer());
+            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
         }
 
         /// <summary>
@@ -48,22 +45,19 @@ namespace Task_DEV_10
         /// </summary>
         public void DeleteElement()
         {
-            List<int> listID = new List<int>();
+            var listID = new List<int>();
 
-            foreach (var manufacturer in Shop.manufacturers)
+            foreach (var manufacturer in this.Shop.manufacturers)
             {
                 listID.Add(manufacturer.ID);
             }
-            Shop.DeleteElement(listID, Shop.manufacturers, FinderID.FindManufacturerID());
-            UpdateData?.Invoke(this, new ObjectEventArgs(Shop));
+            this.Shop.DeleteElement(listID, this.Shop.manufacturers, this.FinderID.FindManufacturerID());
+            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
         }
 
         /// <summary>
         /// Implemented method.
         /// </summary>
-        public void DisplayElements()
-        {
-            Shop.DisplayManufacturers();
-        }
+        public void DisplayElements() => this.Shop.DisplayManufacturers();
     }
 }

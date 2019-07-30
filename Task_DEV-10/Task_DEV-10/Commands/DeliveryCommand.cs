@@ -22,25 +22,22 @@ namespace Task_DEV_10
         {
             this.Shop = shop;
             this.HandlerDelivery = new DeliveryCreater();
-            this.FinderID = new FinderID(Shop);
+            this.FinderID = new FinderID(this.Shop);
             this.XMLFileHandler = new XMLFileHandler();
         }
 
         /// <summary>
         /// Implemented method.
         /// </summary>
-        public void WriteToXML()
-        {
-            XMLFileHandler.WriteToXML(PathXML, Shop.deliveries);
-        }
+        public void WriteToXML() => this.XMLFileHandler.WriteToXML(this.PathXML, this.Shop.deliveries);
 
         /// <summary>
         /// Implemented method.
         /// </summary>
         public void AddNewElement()
         {
-            Shop.AddNewElement(Shop.deliveries, HandlerDelivery.CreateDelivery());
-            UpdateData?.Invoke(this, new ObjectEventArgs(Shop));
+            this.Shop.AddNewElement(this.Shop.deliveries, this.HandlerDelivery.CreateDelivery());
+            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
         }
 
         /// <summary>
@@ -48,22 +45,19 @@ namespace Task_DEV_10
         /// </summary>
         public void DeleteElement()
         {
-            List<int> listID = new List<int>();
+            var listID = new List<int>();
 
-            foreach (var delivery in Shop.deliveries)
+            foreach (var delivery in this.Shop.deliveries)
             {
                 listID.Add(delivery.ID);
             }
-            Shop.DeleteElement(listID, Shop.deliveries, FinderID.FindDeliveryID());
-            UpdateData?.Invoke(this, new ObjectEventArgs(Shop));
+            this.Shop.DeleteElement(listID, this.Shop.deliveries, this.FinderID.FindDeliveryID());
+            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
         }
 
         /// <summary>
         /// Implemented method.
         /// </summary>
-        public void DisplayElements()
-        {
-            Shop.DisplayDeliveries();
-        }
+        public void DisplayElements() => this.Shop.DisplayDeliveries();
     }
 }

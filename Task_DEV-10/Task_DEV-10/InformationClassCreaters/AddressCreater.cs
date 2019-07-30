@@ -1,15 +1,14 @@
 ﻿using System;
+using Task_DEV_10.InformationClassCreaters;
 
 namespace Task_DEV_10
 {
     /// <summary>
     /// Class handles address.
     /// </summary>
-    public class AddressCreater
+    public class AddressCreater : BaseDataCreater
     {
         Address Address { get; }
-        bool existenceID;
-        bool existenceHouseNumber;
 
         /// <summary>
         /// Constructor of HandleAddress.
@@ -26,45 +25,21 @@ namespace Task_DEV_10
         public Address CreateAddress()
         {
             Console.WriteLine("Enter ID:");
-
-            while (existenceID == false)
-            {
-                if (Int32.TryParse(Console.ReadLine(), out int id))
-                {
-                    Address.ID = id;
-                    existenceID = true;
-                }
-                else
-                {
-                    Console.WriteLine("Try again! Incorrect value");
-                }
-            }
+            this.Address.ID = this.GetIntData();
 
             Console.WriteLine("Enter country:");
-            Address.Country = Console.ReadLine();
+            this.Address.Country = this.GetStringData();
 
             Console.WriteLine("Enter city:");
-            Address.City = Console.ReadLine();
+            this.Address.City = this.GetStringData();
 
             Console.WriteLine("Enter street:");
-            Address.Street = Console.ReadLine();
+            this.Address.Street = this.GetStringData();
 
             Console.WriteLine("Enter house number:");
-
-            while (existenceHouseNumber == false)
-            {
-                if (Int32.TryParse(Console.ReadLine(), out int houseNumber))
-                {
-                    Address.HouseNumber = houseNumber;
-                    existenceHouseNumber = true;
-                }
-                else
-                {
-                    Console.WriteLine("Try again! Incorrect value");
-                }
-            }
-
-            return Address;
+            this.Address.HouseNumber = this.GetIntData();
+            
+            return this.Address;
         }
     }
 }

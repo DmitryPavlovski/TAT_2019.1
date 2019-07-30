@@ -23,25 +23,22 @@ namespace Task_DEV_10
         {
             this.Shop = shop;
             this.HandlerAddress = new AddressCreater();
-            this.FinderID = new FinderID(Shop);
+            this.FinderID = new FinderID(this.Shop);
             this.XMLFileHandler = new XMLFileHandler();
         }
 
         /// <summary>
         /// Implemented method.
         /// </summary>
-        public void WriteToXML()
-        {
-            XMLFileHandler.WriteToXML(PathXML, Shop.addresses);
-        }
+        public void WriteToXML() => this.XMLFileHandler.WriteToXML(this.PathXML, this.Shop.addresses);
 
         /// <summary>
         /// Implemented method.
         /// </summary>
         public void AddNewElement()
         {
-            Shop.AddNewElement(Shop.addresses, HandlerAddress.CreateAddress());
-            UpdateData?.Invoke(this, new ObjectEventArgs(Shop));
+            this.Shop.AddNewElement(this.Shop.addresses, this.HandlerAddress.CreateAddress());
+            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
         }
 
         /// <summary>
@@ -49,22 +46,19 @@ namespace Task_DEV_10
         /// </summary>
         public void DeleteElement()
         {
-            List<int> listID = new List<int>();
+            var listID = new List<int>();
 
-            foreach(var address in Shop.addresses)
+            foreach (var address in this.Shop.addresses)
             {
                 listID.Add(address.ID);
             }
-            Shop.DeleteElement(listID, Shop.addresses, FinderID.FindAddressID());
-            UpdateData?.Invoke(this, new ObjectEventArgs(Shop));
+            this.Shop.DeleteElement(listID, this.Shop.addresses, this.FinderID.FindAddressID());
+            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
         }
 
         /// <summary>
         /// Implemented method.
         /// </summary>
-        public void DisplayElements()
-        {
-            Shop.DisplaAddresses();
-        }
+        public void DisplayElements() => this.Shop.DisplaAddresses();
     }
 }

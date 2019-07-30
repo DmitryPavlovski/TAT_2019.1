@@ -22,25 +22,22 @@ namespace Task_DEV_10
         {
             this.Shop = shop;
             this.ProductCreater = new ProductCreater();
-            this.FinderID = new FinderID(Shop);
+            this.FinderID = new FinderID(this.Shop);
             this.XMLFileHandler = new XMLFileHandler();
         }
 
         /// <summary>
         /// Implemented method.
         /// </summary>
-        public void WriteToXML()
-        {
-            XMLFileHandler.WriteToXML(PathXML, Shop.products);
-        }
+        public void WriteToXML() => this.XMLFileHandler.WriteToXML(this.PathXML, this.Shop.products);
 
         /// <summary>
         /// Implemented method.
         /// </summary>
         public void AddNewElement()
         {
-            Shop.AddNewElement(Shop.products, ProductCreater.CreateProduct(Shop));
-            UpdateData?.Invoke(this, new ObjectEventArgs(Shop));
+            this.Shop.AddNewElement(this.Shop.products, this.ProductCreater.CreateProduct(this.Shop));
+            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
         }
 
         /// <summary>
@@ -48,22 +45,19 @@ namespace Task_DEV_10
         /// </summary>
         public void DeleteElement()
         {
-            List<int> listID = new List<int>();
+            var listID = new List<int>();
 
-            foreach (var product in Shop.products)
+            foreach (var product in this.Shop.products)
             {
                 listID.Add(product.ID);
             }
-            Shop.DeleteElement(listID, Shop.products, FinderID.FindProductID());
-            UpdateData?.Invoke(this, new ObjectEventArgs(Shop));
+            this.Shop.DeleteElement(listID, this.Shop.products, this.FinderID.FindProductID());
+            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
         }
 
         /// <summary>
         /// Implemented method.
         /// </summary>
-        public void DisplayElements()
-        {
-            Shop.DisplayProducts();
-        }
+        public void DisplayElements() => this.Shop.DisplayProducts();
     }
 }

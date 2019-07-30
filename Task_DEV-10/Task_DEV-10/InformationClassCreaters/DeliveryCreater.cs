@@ -1,16 +1,14 @@
 ﻿using System;
+using Task_DEV_10.InformationClassCreaters;
 
 namespace Task_DEV_10
 {
     /// <summary>
     /// The class creates new delivery.
     /// </summary>
-    public class DeliveryCreater
+    public class DeliveryCreater : BaseDataCreater
     {
         Delivery Delivery { get; }
-        bool existenceID;
-        bool existenceDescription;
-        bool existenceDeliveryDate;
 
         public DeliveryCreater()
         {
@@ -23,58 +21,16 @@ namespace Task_DEV_10
         /// <returns>Object of address</returns>
         public Delivery CreateDelivery()
         {
-            string request;
-
-            while (true)
-            {
                 Console.WriteLine("Enter ID:");
-
-                if (Int32.TryParse(Console.ReadLine(), out int id) && existenceID == false)
-                {
-                    Delivery.ID = id;
-                    existenceID = true;
-                }
-                else
-                {
-                    Console.WriteLine("Try again! Incorrect value");
-
-                    continue;
-                }
+                this.Delivery.ID = this.GetIntData();
 
                 Console.WriteLine("Enter house Description:");
-                request = Console.ReadLine();
-
-                if (request != string.Empty && existenceDescription == false)
-                {
-                    Delivery.Description = request;
-                    existenceDescription = true;
-                }
-                else
-                {
-                    Console.WriteLine("Try again! Incorrect value");
-
-                    continue;
-                }
+                this.Delivery.Description = this.GetStringData();                
 
                 Console.WriteLine("Enter delivery date:");
-                request = Console.ReadLine();
+                this.Delivery.DeliveryDate = this.GetStringData();             
 
-                if (request != string.Empty && existenceDeliveryDate == false)
-                {
-                    Delivery.DeliveryDate = request;
-                    existenceDeliveryDate = true;
-                }
-                else
-                {
-                    Console.WriteLine("Try again! Incorrect value");
-
-                    continue;
-                }
-
-                break;
-            }
-
-            return Delivery;
+            return this.Delivery;
         }
     }
 }

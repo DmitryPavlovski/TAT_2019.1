@@ -33,9 +33,9 @@ namespace Task_DEV_10
                 ["manufacturer"] = new ManufacturerCommand(shop),
                 ["warehouse"] = new WareHouseCommand(shop),
             };
-            JsonFileHandler jsonFileHandler = new JsonFileHandler();
+            var jsonFileHandler = new JsonFileHandler();
 
-            foreach(var command in CommandsDictionary.Values)
+            foreach (var command in this.CommandsDictionary.Values)
             {
                 command.UpdateData += jsonFileHandler.UpdateJsonFile;
             }
@@ -47,13 +47,13 @@ namespace Task_DEV_10
         /// </summary>
         public void HandleRequests()
         {
-            bool existence = true;
-            ReadData?.Invoke(this, new ObjectEventArgs(Shop));
+            var existence = true;
+            ReadData?.Invoke(this, new ObjectEventArgs(this.Shop));
 
             while (true)
             {
-                DisplayBaseCommands(existence == true ? "Enter command!" : "Try again!");
-                string request = Console.ReadLine().ToLower();
+                this.DisplayBaseCommands(existence == true ? "Enter command!" : "Try again!");
+                var request = Console.ReadLine().ToLower();
                 existence = false;
 
                 switch (request)
@@ -66,10 +66,12 @@ namespace Task_DEV_10
                     case addCommand:
                         while (existence == false)
                         {
-                            DisplayAllCommands("Enter command!", CommandsDictionary.Keys);
+                            var requestHandler = this;
+                            this.DisplayAllCommands("Enter command!", requestHandler.CommandsDictionary.Keys);
                             request = Console.ReadLine().ToLower();
 
-                            foreach (var command in CommandsDictionary)
+                            var requestHandler1 = this;
+                            foreach (var command in requestHandler1.CommandsDictionary)
                             {
                                 if (command.Key == request)
                                 {
@@ -91,10 +93,10 @@ namespace Task_DEV_10
                     case deleteCommand:
                         while (existence == false)
                         {
-                            DisplayAllCommands("Enter command!", CommandsDictionary.Keys);
+                            this.DisplayAllCommands("Enter command!", this.CommandsDictionary.Keys);
                             request = Console.ReadLine().ToLower();
 
-                            foreach (var command in CommandsDictionary)
+                            foreach (var command in this.CommandsDictionary)
                             {
                                 if (command.Key == request)
                                 {
@@ -116,10 +118,10 @@ namespace Task_DEV_10
                     case displayCommand:
                         while (existence == false)
                         {
-                            DisplayAllCommands("Enter command!", CommandsDictionary.Keys);
+                            this.DisplayAllCommands("Enter command!", this.CommandsDictionary.Keys);
                             request = Console.ReadLine().ToLower();
 
-                            foreach (var command in CommandsDictionary)
+                            foreach (var command in this.CommandsDictionary)
                             {
                                 if (command.Key == request)
                                 {
@@ -141,10 +143,10 @@ namespace Task_DEV_10
                     case writeToXMLCommand:
                         while (existence == false)
                         {
-                            DisplayAllCommands("Enter command!", CommandsDictionary.Keys);
+                            this.DisplayAllCommands("Enter command!", this.CommandsDictionary.Keys);
                             request = Console.ReadLine().ToLower();
 
-                            foreach (var command in CommandsDictionary)
+                            foreach (var command in this.CommandsDictionary)
                             {
                                 if (command.Key == request)
                                 {
