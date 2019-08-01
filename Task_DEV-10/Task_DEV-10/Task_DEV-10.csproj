@@ -44,12 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InformationClasses\IInformationClass.cs" />
+    <Compile Include="InformationClassCreaters\BaseDataCreater.cs" />
     <Compile Include="Commands\AddressCommand.cs" />
     <Compile Include="Commands\DeliveryCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="InformationClassCreaters\AddressCreater.cs" />
     <Compile Include="InformationClassCreaters\DeliveryCreater.cs" />
-    <Compile Include="InformationClassCreaters\BaseDataCreater.cs" />
     <Compile Include="InformationClasses\Address.cs" />
     <Compile Include="InformationClasses\Delivery.cs" />
     <Compile Include="EntryPoint.cs" />
@@ -61,7 +62,6 @@
     <Compile Include="Commands\ManufacturerCommand.cs" />
     <Compile Include="Commands\ProductCommand.cs" />
     <Compile Include="FileHandlers\JsonFileHandler.cs" />
-    <Compile Include="ObjectEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestHandler.cs" />
     <Compile Include="Shop.cs" />

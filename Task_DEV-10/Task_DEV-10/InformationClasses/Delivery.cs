@@ -8,7 +8,7 @@ namespace Task_DEV_10
     /// </summary>
     [DataContract]
     [Serializable]
-    public class Delivery
+    public class Delivery : IInformationClass
     {
         [DataMember]
         public int ID { get; set; }
@@ -16,5 +16,17 @@ namespace Task_DEV_10
         public string Description { get; set; }
         [DataMember]
         public string DeliveryDate { get; set; }
+
+        /// <summary>
+        /// Implemented method.
+        /// </summary>
+        public void DisplayInformation()
+        {
+            Console.WriteLine("________________________");
+            Console.WriteLine($"ID: {this.ID}");
+            Console.WriteLine($"Description: {this.Description}");
+            Console.WriteLine($"Delivery Date: {this.DeliveryDate}");
+            Console.WriteLine("________________________");
+        }
     }
 }

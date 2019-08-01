@@ -1,5 +1,6 @@
 ﻿using System;
-using Task_DEV_10.InformationClassCreaters;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Task_DEV_10
 {
@@ -8,38 +9,30 @@ namespace Task_DEV_10
     /// </summary>
     public class AddressCreater : BaseDataCreater
     {
-        Address Address { get; }
-
-        /// <summary>
-        /// Constructor of HandleAddress.
-        /// </summary>
-        public AddressCreater()
-        {
-            this.Address = new Address();
-        }
-
         /// <summary>
         /// Method creates object of address, fill his and return.
         /// </summary>
         /// <returns>Object of address</returns>
-        public Address CreateAddress()
+        public Address CreateAddress(List<Address> addresses)
         {
+            var address = new Address();
+
             Console.WriteLine("Enter ID:");
-            this.Address.ID = this.GetIntData();
+            address.ID = this.GetIntNewID(addresses.Select(t => t.ID).ToList());
 
             Console.WriteLine("Enter country:");
-            this.Address.Country = this.GetStringData();
+            address.Country = this.GetStringValue();
 
             Console.WriteLine("Enter city:");
-            this.Address.City = this.GetStringData();
+            address.City = this.GetStringValue();
 
             Console.WriteLine("Enter street:");
-            this.Address.Street = this.GetStringData();
+            address.Street = this.GetStringValue();
 
             Console.WriteLine("Enter house number:");
-            this.Address.HouseNumber = this.GetIntData();
-            
-            return this.Address;
+            address.HouseNumber = this.GetIntValue();
+
+            return address;
         }
     }
 }

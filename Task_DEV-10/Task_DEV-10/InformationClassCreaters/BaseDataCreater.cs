@@ -2,20 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Task_DEV_10.InformationClassCreaters
+namespace Task_DEV_10
 {
+    /// <summary>
+    /// The class returns value to enter.
+    /// </summary>
     public abstract class BaseDataCreater
     {
-        public int GetIntData()
+        /// <summary>
+        /// The method returns int value.
+        /// </summary>
+        /// <returns></returns>
+        public int GetIntValue()
         {
-            int data;
+            var val = 0;
+            var existence = false;
 
-            while(true)
+            while(existence == false)
             {
                 if(int.TryParse(Console.ReadLine(), out var i))
                 {
-                    data = i;
-                    break;
+                    val = i;
+                    existence = true;
                 }
                 else
                 {
@@ -23,18 +31,32 @@ namespace Task_DEV_10.InformationClassCreaters
                 }
             }
 
-            return data;
+            return val;
         }
 
-        public string GetStringData()
+        /// <summary>
+        /// The method returns inexisting id.
+        /// </summary>
+        /// <param name="listID"></param>
+        /// <returns></returns>
+        public int GetIntNewID(List<int> listID)
         {
-            string data;
+            var val = 0;
+            var existence = false;
 
-            while(true)
+            while(existence == false)
             {
-                if((data = Console.ReadLine()) != string.Empty)
+                if(int.TryParse(Console.ReadLine(), out var i))
                 {
-                    break;
+                    if(listID.Where(t => t == i).Count() == 0)
+                    {
+                        val = i;
+                        existence = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Try again! This id exist!");
+                    }
                 }
                 else
                 {
@@ -42,21 +64,27 @@ namespace Task_DEV_10.InformationClassCreaters
                 }
             }
 
-            return data;
+            return val;
         }
 
+        /// <summary>
+        /// The method returns existing id.
+        /// </summary>
+        /// <param name="listID"></param>
+        /// <returns></returns>
         public int GetIntExistingID(List<int> listID)
         {
-            var data = 0;
+            var val = 0;
+            var existence = false;
 
-            while(true)
+            while(existence == false)
             {
                 if(int.TryParse(Console.ReadLine(), out var i))
                 {
                     if(listID.Where(t => t == i).Count() > 0)
                     {
-                        data = i;
-                        break;
+                        val = i;
+                        existence = true;
                     }
                     else
                     {
@@ -69,7 +97,31 @@ namespace Task_DEV_10.InformationClassCreaters
                 }
             }
 
-            return data;
+            return val;
+        }
+
+        /// <summary>
+        /// The method returns string value.
+        /// </summary>
+        /// <returns></returns>
+        public string GetStringValue()
+        {
+            var val = string.Empty;
+            var existence = false;
+
+            while(existence == false)
+            {
+                if((val = Console.ReadLine()) != string.Empty)
+                {
+                    existence = true;
+                }
+                else
+                {
+                    Console.WriteLine("Try again! Incorrect value");
+                }
+            }
+
+            return val;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Task_DEV_10
     /// </summary>
     [DataContract]
     [Serializable]
-    public class Address
+    public class Address : IInformationClass
     {
         [DataMember]
         public int ID { get; set; }
@@ -20,5 +20,19 @@ namespace Task_DEV_10
         public string Street { get; set; }
         [DataMember]
         public int HouseNumber { get; set; }
+
+        /// <summary>
+        /// Implemented method.
+        /// </summary>
+        public void DisplayInformation()
+        {
+            Console.WriteLine("________________________");
+            Console.WriteLine($"ID: {this.ID}");
+            Console.WriteLine($"Country: {this.Country}");
+            Console.WriteLine($"City: {this.City}");
+            Console.WriteLine($"Street: {this.Street}");
+            Console.WriteLine($"House Number: {this.HouseNumber}");
+            Console.WriteLine("________________________");
+        }
     }
 }

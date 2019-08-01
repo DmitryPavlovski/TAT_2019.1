@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace Task_DEV_10
 {
@@ -13,7 +13,7 @@ namespace Task_DEV_10
         FinderID FinderID { get; }
         XMLFileHandler XMLFileHandler { get; }
         string PathXML { get; } = "../../InformationXML/products.xml";
-        public event EventHandler<ObjectEventArgs> UpdateData;
+        public event Action<ICommand> UpdateData;
 
         /// <summary>
         /// Constructor of ProductCommand.
@@ -22,7 +22,7 @@ namespace Task_DEV_10
         {
             this.Shop = shop;
             this.ProductCreater = new ProductCreater();
-            this.FinderID = new FinderID(this.Shop);
+            this.FinderID = new FinderID();
             this.XMLFileHandler = new XMLFileHandler();
         }
 
@@ -36,8 +36,9 @@ namespace Task_DEV_10
         /// </summary>
         public void AddNewElement()
         {
-            this.Shop.AddNewElement(this.Shop.products, this.ProductCreater.CreateProduct(this.Shop));
-            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
+            var product = this.ProductCreater.CreateProduct(this.Shop);
+            this.Shop.AddNewElement(this.Shop.products, product);
+            UpdateData?.Invoke(this);
         }
 
         /// <summary>
@@ -45,19 +46,15 @@ namespace Task_DEV_10
         /// </summary>
         public void DeleteElement()
         {
-            var listID = new List<int>();
-
-            foreach (var product in this.Shop.products)
-            {
-                listID.Add(product.ID);
-            }
-            this.Shop.DeleteElement(listID, this.Shop.products, this.FinderID.FindProductID());
-            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
+            var id = this.FinderID.Find(this.Shop.products.Select(t => t.ID).ToList());
+            var product = this.Shop.products.Where(t => t.ID == id).First();
+            this.Shop.DeleteElement(this.Shop.products, product);
+            UpdateData?.Invoke(this);
         }
 
         /// <summary>
         /// Implemented method.
         /// </summary>
-        public void DisplayElements() => this.Shop.DisplayProducts();
+        public void DisplayElements() => this.Shop.DisplayAllInformation(this.Shop.products);
     }
 }

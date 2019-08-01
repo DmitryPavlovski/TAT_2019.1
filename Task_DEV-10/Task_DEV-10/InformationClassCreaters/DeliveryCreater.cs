@@ -1,5 +1,6 @@
 ﻿using System;
-using Task_DEV_10.InformationClassCreaters;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Task_DEV_10
 {
@@ -8,29 +9,24 @@ namespace Task_DEV_10
     /// </summary>
     public class DeliveryCreater : BaseDataCreater
     {
-        Delivery Delivery { get; }
-
-        public DeliveryCreater()
-        {
-            this.Delivery = new Delivery();
-        }
-
         /// <summary>
         /// Method creates object of delivery, fill his and return.
         /// </summary>
         /// <returns>Object of address</returns>
-        public Delivery CreateDelivery()
+        public Delivery CreateDelivery(List<Delivery> deliveries)
         {
-                Console.WriteLine("Enter ID:");
-                this.Delivery.ID = this.GetIntData();
+            var delivery = new Delivery();
 
-                Console.WriteLine("Enter house Description:");
-                this.Delivery.Description = this.GetStringData();                
+            Console.WriteLine("Enter delivery ID:");
+            delivery.ID = this.GetIntNewID(deliveries.Select(t => t.ID).ToList());
 
-                Console.WriteLine("Enter delivery date:");
-                this.Delivery.DeliveryDate = this.GetStringData();             
+            Console.WriteLine("Enter house Description:");
+            delivery.Description = this.GetStringValue();
 
-            return this.Delivery;
+            Console.WriteLine("Enter delivery date:");
+            delivery.DeliveryDate = this.GetStringValue();
+
+            return delivery;
         }
     }
 }

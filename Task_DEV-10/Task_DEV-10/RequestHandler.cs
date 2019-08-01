@@ -8,23 +8,21 @@ namespace Task_DEV_10
     /// </summary>
     public class RequestHandler
     {
-        Dictionary<string, ICommand> CommandsDictionary { get; }
-        Shop Shop { get; }
+        public event Action<RequestHandler> ReadData;
+        public Dictionary<string, ICommand> CommandsDictionary { get; set; } 
         const string displayCommand = "display";
         const string addCommand = "add";
         const string deleteCommand = "delete";
         const string writeToXMLCommand = "write to xml";
-        const string backCommand = "back";
         const string exitCommand = "exit";
-        public event EventHandler<ObjectEventArgs> ReadData;
 
         /// <summary>
-        /// Constructor of RequestHandler.
+        /// Constructor for RequestHandler
         /// </summary>
         /// <param name="shop"></param>
         public RequestHandler(Shop shop)
         {
-            this.Shop = shop;
+            var jsonFileHandler = new JsonFileHandler(shop);
             this.CommandsDictionary = new Dictionary<string, ICommand>
             {
                 ["product"] = new ProductCommand(shop),
@@ -33,13 +31,12 @@ namespace Task_DEV_10
                 ["manufacturer"] = new ManufacturerCommand(shop),
                 ["warehouse"] = new WareHouseCommand(shop),
             };
-            var jsonFileHandler = new JsonFileHandler();
 
-            foreach (var command in this.CommandsDictionary.Values)
+            foreach(var command in this.CommandsDictionary.Values)
             {
                 command.UpdateData += jsonFileHandler.UpdateJsonFile;
             }
-            ReadData += jsonFileHandler.ReadAndWriteFromJson;
+            this.ReadData += jsonFileHandler.ReadAndWriteFromJson;
         }
 
         /// <summary>
@@ -47,8 +44,8 @@ namespace Task_DEV_10
         /// </summary>
         public void HandleRequests()
         {
+            this.ReadData?.Invoke(this);
             var existence = true;
-            ReadData?.Invoke(this, new ObjectEventArgs(this.Shop));
 
             while (true)
             {
@@ -66,22 +63,14 @@ namespace Task_DEV_10
                     case addCommand:
                         while (existence == false)
                         {
-                            var requestHandler = this;
-                            this.DisplayAllCommands("Enter command!", requestHandler.CommandsDictionary.Keys);
+                            this.DisplayAllCommands("Enter command!", this.CommandsDictionary.Keys);
                             request = Console.ReadLine().ToLower();
 
-                            var requestHandler1 = this;
-                            foreach (var command in requestHandler1.CommandsDictionary)
+                            foreach(var command in this.CommandsDictionary)
                             {
                                 if (command.Key == request)
                                 {
                                     command.Value.AddNewElement();
-                                    existence = true;
-
-                                    break;
-                                }
-                                else if (request == backCommand)
-                                {
                                     existence = true;
 
                                     break;
@@ -105,12 +94,6 @@ namespace Task_DEV_10
 
                                     break;
                                 }
-                                else if (request == backCommand)
-                                {
-                                    existence = true;
-
-                                    break;
-                                }
                             }
                         }
 
@@ -130,12 +113,6 @@ namespace Task_DEV_10
 
                                     break;
                                 }
-                                else if (request == backCommand)
-                                {
-                                    existence = true;
-
-                                    break;
-                                }
                             }
                         }
 
@@ -151,12 +128,6 @@ namespace Task_DEV_10
                                 if (command.Key == request)
                                 {
                                     command.Value.WriteToXML();
-                                    existence = true;
-
-                                    break;
-                                }
-                                else if (request == backCommand)
-                                {
                                     existence = true;
 
                                     break;
@@ -196,7 +167,6 @@ namespace Task_DEV_10
             {
                 Console.WriteLine($"-{command}");
             }
-            Console.WriteLine($"-{backCommand}");
         }
     }
 }

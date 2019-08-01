@@ -1,5 +1,6 @@
 ﻿using System;
-using Task_DEV_10.InformationClassCreaters;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Task_DEV_10
 {
@@ -8,32 +9,24 @@ namespace Task_DEV_10
     /// </summary>
     public class WareHouseCreater : BaseDataCreater
     {
-        WareHouse WareHouse { get; }
-
-        /// <summary>
-        /// Constructor of HandlerWareHoyse.
-        /// </summary>
-        public WareHouseCreater()
-        {
-            this.WareHouse = new WareHouse();
-        }
-
         /// <summary>
         /// Method creates object of adware housedress, fill his and return.
         /// </summary>
         /// <returns>Object of address</returns>
-        public WareHouse CreateWareHouse()
+        public WareHouse CreateWareHouse(List<WareHouse> wareHouses)
         {
+            var wareHouse = new WareHouse();
+
             Console.WriteLine("Enter ID:");
-            this.WareHouse.ID = this.GetIntData();
-           
+            wareHouse.ID = this.GetIntNewID(wareHouses.Select(t => t.ID).ToList());
+
             Console.WriteLine("Enter name:");
-            this.WareHouse.Name = this.GetStringData();
+            wareHouse.Name = this.GetStringValue();
 
             Console.WriteLine("Enter address ID:");
-            this.WareHouse.AddressID = this.GetIntData();           
+            wareHouse.AddressID = this.GetIntValue();
 
-            return this.WareHouse;
+            return wareHouse;
         }
     }
 }

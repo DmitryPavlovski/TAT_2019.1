@@ -5,9 +5,9 @@ namespace Task_DEV_10
     /// <summary>
     /// Interface for pattern command.
     /// </summary>
-    interface ICommand
+    public interface ICommand
     {
-        event EventHandler<ObjectEventArgs> UpdateData;
+        event Action<ICommand> UpdateData;
 
         /// <summary>
         /// Method writes data to XML file.

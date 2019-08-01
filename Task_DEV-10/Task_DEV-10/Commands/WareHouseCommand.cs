@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace Task_DEV_10
 {
@@ -13,7 +13,7 @@ namespace Task_DEV_10
         FinderID FinderID { get; }
         XMLFileHandler XMLFileHandler { get; }
         string PathXML { get; } = "../../InformationXML/warehouses.xml";
-        public event EventHandler<ObjectEventArgs> UpdateData;
+        public event Action<ICommand> UpdateData;
 
         /// <summary>
         /// Constructor of WareHouseCommand.
@@ -23,7 +23,7 @@ namespace Task_DEV_10
         {
             this.Shop = shop;
             this.HandlerWareHouse = new WareHouseCreater();
-            this.FinderID = new FinderID(this.Shop);
+            this.FinderID = new FinderID();
             this.XMLFileHandler = new XMLFileHandler();
         }
 
@@ -37,8 +37,9 @@ namespace Task_DEV_10
         /// </summary>
         public void AddNewElement()
         {
-            this.Shop.AddNewElement(this.Shop.wareHouses, t: this.HandlerWareHouse.CreateWareHouse());
-            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
+            var wareHouse = this.HandlerWareHouse.CreateWareHouse(this.Shop.wareHouses);
+            this.Shop.AddNewElement(this.Shop.wareHouses, wareHouse);
+            UpdateData?.Invoke(this);
         }
 
         /// <summary>
@@ -46,19 +47,23 @@ namespace Task_DEV_10
         /// </summary>
         public void DeleteElement()
         {
-            var listID = new List<int>();
+            var id = this.FinderID.Find(this.Shop.wareHouses.Select(t => t.ID).ToList());
 
-            foreach (var wareHouse in this.Shop.wareHouses)
+            if(this.Shop.products.Where(t => t.WareHouseID == id).Count() == 0)
             {
-                listID.Add(wareHouse.ID);
+                var wareHouse = this.Shop.wareHouses.Where(t => t.ID == id).First();
+                this.Shop.DeleteElement(this.Shop.wareHouses, wareHouse);
+                UpdateData?.Invoke(this);
             }
-            this.Shop.DeleteElement(listID, this.Shop.wareHouses, this.FinderID.FindWareHouseID());
-            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
+            else
+            {
+                Console.WriteLine("Sorry, this id using in products, before delete product!");
+            }
         }
 
         /// <summary>
         /// Implemented method.
         /// </summary>
-        public void DisplayElements() => this.Shop.DisplayWareHouses();
+        public void DisplayElements() => this.Shop.DisplayAllInformation(this.Shop.wareHouses);
     }
 }

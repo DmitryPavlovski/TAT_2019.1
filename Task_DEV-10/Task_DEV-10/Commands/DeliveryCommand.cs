@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace Task_DEV_10
 {
@@ -13,7 +13,7 @@ namespace Task_DEV_10
         FinderID FinderID { get; }
         XMLFileHandler XMLFileHandler { get; }
         string PathXML { get; } = "../../InformationXML/deliveries.xml";
-        public event EventHandler<ObjectEventArgs> UpdateData;
+        public event Action<ICommand> UpdateData;
 
         /// <summary>
         /// Constructor of DeliveryCommand.
@@ -22,7 +22,7 @@ namespace Task_DEV_10
         {
             this.Shop = shop;
             this.HandlerDelivery = new DeliveryCreater();
-            this.FinderID = new FinderID(this.Shop);
+            this.FinderID = new FinderID();
             this.XMLFileHandler = new XMLFileHandler();
         }
 
@@ -36,8 +36,9 @@ namespace Task_DEV_10
         /// </summary>
         public void AddNewElement()
         {
-            this.Shop.AddNewElement(this.Shop.deliveries, this.HandlerDelivery.CreateDelivery());
-            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
+            var delivery = this.HandlerDelivery.CreateDelivery(this.Shop.deliveries);
+            this.Shop.AddNewElement(this.Shop.deliveries, delivery);
+            UpdateData?.Invoke(this);
         }
 
         /// <summary>
@@ -45,19 +46,23 @@ namespace Task_DEV_10
         /// </summary>
         public void DeleteElement()
         {
-            var listID = new List<int>();
+            var id = this.FinderID.Find(this.Shop.deliveries.Select(t => t.ID).ToList());
 
-            foreach (var delivery in this.Shop.deliveries)
+            if(this.Shop.products.Where(t => t.DeliveryID == id).Count() == 0)
             {
-                listID.Add(delivery.ID);
+                var delivery = this.Shop.deliveries.Where(t => t.ID == id).First();
+                this.Shop.DeleteElement(this.Shop.deliveries, delivery);
+                UpdateData?.Invoke(this);
             }
-            this.Shop.DeleteElement(listID, this.Shop.deliveries, this.FinderID.FindDeliveryID());
-            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
+            else
+            {
+                Console.WriteLine("Sorry, this id using in products, before delete product!");
+            }
         }
 
         /// <summary>
         /// Implemented method.
         /// </summary>
-        public void DisplayElements() => this.Shop.DisplayDeliveries();
+        public void DisplayElements() => this.Shop.DisplayAllInformation(this.Shop.deliveries);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
-using Task_DEV_10.InformationClassCreaters;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Task_DEV_10
 {
@@ -8,35 +9,27 @@ namespace Task_DEV_10
     /// </summary>
     public class ManufacturerCreater : BaseDataCreater
     {
-        Manufacturer Manufacturer { get; }
-
-        /// <summary>
-        /// Constructor of HandlerManufacturer.
-        /// </summary>
-        public ManufacturerCreater()
-        {
-            this.Manufacturer = new Manufacturer();
-        }
-
         /// <summary>
         /// Method creates object of manufacturer, fill his and return.
         /// </summary>
         /// <returns>Object of address</returns>
-        public Manufacturer CreateManufacturer()
+        public Manufacturer CreateManufacturer(List<Manufacturer> manufacturers)
         {
+            var manufacturer = new Manufacturer();
+
             Console.WriteLine("Enter ID:");
-            this.Manufacturer.ID = this.GetIntData();
+            manufacturer.ID = this.GetIntNewID(manufacturers.Select(t => t.ID).ToList());
 
             Console.WriteLine("Enter name:");
-            this.Manufacturer.Name = this.GetStringData();
+            manufacturer.Name = this.GetStringValue();
 
             Console.WriteLine("Enter registrasion address ID:");
-            this.Manufacturer.RegistrasionAddressID = this.GetIntData();
+            manufacturer.RegistrasionAddressID = this.GetIntValue();
 
             Console.WriteLine("Enter country:");
-            this.Manufacturer.Country = this.GetStringData();
+            manufacturer.Country = this.GetStringValue();
 
-            return this.Manufacturer;
+            return manufacturer;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Task_DEV_10
     /// </summary>
     [DataContract]
     [Serializable]
-    public class Manufacturer
+    public class Manufacturer : IInformationClass
     {
         [DataMember]
         public int ID { get; set; }
@@ -18,5 +18,18 @@ namespace Task_DEV_10
         public int RegistrasionAddressID { get; set; }
         [DataMember]
         public string Country { get; set; }
+
+        /// <summary>
+        /// Implemented method.
+        /// </summary>
+        public void DisplayInformation()
+        {
+            Console.WriteLine("________________________");
+            Console.WriteLine($"ID: {this.ID}");
+            Console.WriteLine($"Name: {this.Name}");
+            Console.WriteLine($"Registrasion Address ID: {this.RegistrasionAddressID}");
+            Console.WriteLine($"Country: {this.Country}");
+            Console.WriteLine("________________________");
+        }
     }
 }

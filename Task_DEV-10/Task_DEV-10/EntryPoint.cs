@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Task_DEV_10
 {
@@ -16,8 +17,8 @@ namespace Task_DEV_10
             try
             {
                 var shop = new Shop();
-                var requester = new RequestHandler(shop);
-                requester.HandleRequests();
+                var handler = new RequestHandler(shop);                
+                handler.HandleRequests();
             }
             catch (Exception e)
             {

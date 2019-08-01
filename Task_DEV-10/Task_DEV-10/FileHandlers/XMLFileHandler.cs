@@ -18,7 +18,7 @@ namespace Task_DEV_10
         {
             XmlSerializer xmlFormatter;
 
-            using (var fileStream = new FileStream(path, FileMode.OpenOrCreate))
+            using(var fileStream = new FileStream(path, FileMode.OpenOrCreate))
             {
                 xmlFormatter = new XmlSerializer(typeof(T));
                 xmlFormatter.Serialize(fileStream, list);

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace Task_DEV_10
 {
@@ -8,12 +8,12 @@ namespace Task_DEV_10
     /// </summary>
     public class ManufacturerCommand : ICommand
     {
+        public event Action<ICommand> UpdateData;
         Shop Shop { get; }
         ManufacturerCreater HandlerManufacturer { get; }
         FinderID FinderID { get; }
         XMLFileHandler XMLFileHandler { get; }
         string PathXML { get; } = "../../InformationXML/manufacturers.xml";
-        public event EventHandler<ObjectEventArgs> UpdateData;
 
         /// <summary>
         /// Constructor of ManufacturerCommand.
@@ -22,7 +22,7 @@ namespace Task_DEV_10
         {
             this.Shop = shop;
             this.HandlerManufacturer = new ManufacturerCreater();
-            this.FinderID = new FinderID(this.Shop);
+            this.FinderID = new FinderID();
             this.XMLFileHandler = new XMLFileHandler();
         }
 
@@ -36,8 +36,9 @@ namespace Task_DEV_10
         /// </summary>
         public void AddNewElement()
         {
-            this.Shop.AddNewElement(this.Shop.manufacturers, this.HandlerManufacturer.CreateManufacturer());
-            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
+            var manufacturer = this.HandlerManufacturer.CreateManufacturer(this.Shop.manufacturers);
+            this.Shop.AddNewElement(this.Shop.manufacturers, manufacturer);
+            UpdateData?.Invoke(this);
         }
 
         /// <summary>
@@ -45,19 +46,23 @@ namespace Task_DEV_10
         /// </summary>
         public void DeleteElement()
         {
-            var listID = new List<int>();
+            var id = this.FinderID.Find(this.Shop.manufacturers.Select(t => t.ID).ToList());
 
-            foreach (var manufacturer in this.Shop.manufacturers)
+            if(this.Shop.products.Where(t => t.ManufacturerID == id).Count() == 0)
             {
-                listID.Add(manufacturer.ID);
+                var manufacturer = this.Shop.manufacturers.Where(t => t.ID == id).First();
+                this.Shop.DeleteElement(this.Shop.manufacturers, manufacturer);
+                UpdateData?.Invoke(this);
             }
-            this.Shop.DeleteElement(listID, this.Shop.manufacturers, this.FinderID.FindManufacturerID());
-            UpdateData?.Invoke(this, new ObjectEventArgs(this.Shop));
+            else
+            {
+                Console.WriteLine("Sorry, this id using in products, before delete product!");
+            }
         }
 
         /// <summary>
         /// Implemented method.
         /// </summary>
-        public void DisplayElements() => this.Shop.DisplayManufacturers();
+        public void DisplayElements() => this.Shop.DisplayAllInformation(this.Shop.manufacturers);
     }
 }

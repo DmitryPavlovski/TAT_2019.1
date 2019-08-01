@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Task_DEV_10
 {
@@ -35,126 +34,34 @@ namespace Task_DEV_10
         public void AddNewElement<T>(List<T> list, T t) => list.Add(t);
 
         /// <summary>
-        /// Method deletes element of T type.
+        ///  Method deletes element of T type.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="listID"></param>
         /// <param name="list"></param>
-        /// <param name="id"></param>
-        public void DeleteElement<T>(List<int> listID, List<T> list, int id)
-        {
-            for (var i = 0; i < list.Count; i++)
-            {
-                if (listID[i] == id)
-                {
-                    list.Remove(list[i]);
+        /// <param name="t"></param>
+        public void DeleteElement<T>(List<T> list, T t) => list.Remove(t);
 
-                    return;
+        /// <summary>
+        /// The method displays information.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        public void DisplayAllInformation<T>(List<T> list)
+        {
+            IInformationClass informationClass;
+
+            foreach(var element in list)
+            {
+                if(element is IInformationClass)
+                {
+                    informationClass = (IInformationClass)element;
+                    informationClass.DisplayInformation();
+                }
+                else
+                {
+                    break;
                 }
             }
-        }
-
-        /// <summary>
-        /// Method displays products to console.
-        /// </summary>
-        public void DisplayProducts()
-        {
-            foreach (var product in this.products)
-            {
-                Console.WriteLine("________________________");
-                Console.WriteLine($"ID: {product.ID}");
-                Console.WriteLine($"Name: {product.Name}");
-                Console.WriteLine($"Number: {product.Number}");
-                Console.WriteLine($"Manufacturer ID: {product.ManufacturerID}");
-                Console.WriteLine($"Ware House ID: {product.WareHouseID}");
-                Console.WriteLine($"Delivery ID: {product.DeliveryID}");
-                Console.WriteLine($"Address ID: {product.AddressID}");
-                Console.WriteLine($"Manufacture Date: {product.ManufactureDate}");
-            }
-            Console.WriteLine("________________________");
-        }
-
-        /// <summary>
-        /// Method displays addresses to console.
-        /// </summary>
-        public void DisplaAddresses()
-        {
-            foreach (var address in this.addresses)
-            {
-                Console.WriteLine("________________________");
-                Console.WriteLine($"ID: {address.ID}");
-                Console.WriteLine($"Country: {address.Country}");
-                Console.WriteLine($"City: {address.City}");
-                Console.WriteLine($"Street: {address.Street}");
-                Console.WriteLine($"House Number: {address.HouseNumber}");
-            }
-            Console.WriteLine("________________________");
-        }
-
-        /// <summary>
-        /// Method displays deliveries to console.
-        /// </summary>
-        public void DisplayDeliveries()
-        {
-            foreach (var delivery in this.deliveries)
-            {
-                Console.WriteLine("________________________");
-                Console.WriteLine($"ID: {delivery.ID}");
-                Console.WriteLine($"Description: {delivery.Description}");
-                Console.WriteLine($"Delivery Date: {delivery.DeliveryDate}");
-            }
-            Console.WriteLine("________________________");
-        }
-
-        /// <summary>
-        /// Method displays manufacturers to console.
-        /// </summary>
-        public void DisplayManufacturers()
-        {
-            foreach (var manufacturer in this.manufacturers)
-            {
-                Console.WriteLine("________________________");
-                Console.WriteLine($"ID: {manufacturer.ID}");
-                Console.WriteLine($"Name: {manufacturer.Name}");
-                Console.WriteLine($"Registrasion Address ID: {manufacturer.RegistrasionAddressID}");
-                Console.WriteLine($"Country: {manufacturer.Country}");
-            }
-            Console.WriteLine("________________________");
-        }
-
-        /// <summary>
-        /// Method displays ware houses to console.
-        /// </summary>
-        public void DisplayWareHouses()
-        {
-            foreach (var wareHouse in this.wareHouses)
-            {
-                Console.WriteLine("________________________");
-                Console.WriteLine($"ID: {wareHouse.ID}");
-                Console.WriteLine($"Name: {wareHouse.Name}");
-                Console.WriteLine($"Address ID: {wareHouse.AddressID}");
-            }
-            Console.WriteLine("________________________");
-        }
-
-        /// <summary>
-        /// Method checks that this id use in some product.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public bool CheckOnUsingtoProduct(int id)
-        {
-            foreach (var product in this.products)
-            {
-                if (product.AddressID == id)
-                {
-                    Console.WriteLine("Sorry, this address using for product! Before delete this product!");
-
-                    return true;
-                }
-            }
-
-            return false;
         }
     }
 }
