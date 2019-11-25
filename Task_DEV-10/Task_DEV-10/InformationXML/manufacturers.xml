@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<ArrayOfManufacturer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Manufacturer>
+    <ID>1</ID>
+    <Name>VITRUM</Name>
+    <RegistrasionAddressID>1</RegistrasionAddressID>
+    <Country>Belarus</Country>
+  </Manufacturer>
+  <Manufacturer>
+    <ID>2</ID>
+    <Name>Tea Team</Name>
+    <RegistrasionAddressID>2</RegistrasionAddressID>
+    <Country>Russia</Country>
+  </Manufacturer>
+  <Manufacturer>
+    <ID>3</ID>
+    <Name>Milk Factory</Name>
+    <RegistrasionAddressID>3</RegistrasionAddressID>
+    <Country>USA</Country>
+  </Manufacturer>
+  <Manufacturer>
+    <ID>89</ID>
+    <Name>lik</Name>
+    <RegistrasionAddressID>2</RegistrasionAddressID>
+    <Country>Lithuania</Country>
+  </Manufacturer>
+  <Manufacturer>
+    <ID>4</ID>
+    <Name>mak</Name>
+    <RegistrasionAddressID>9</RegistrasionAddressID>
+    <Country>Moskva</Country>
+  </Manufacturer>
+  <Manufacturer>
+    <ID>10</ID>
+    <Name>sdf</Name>
+    <RegistrasionAddressID>6</RegistrasionAddressID>
+    <Country>minsk</Country>
+  </Manufacturer>
+  <Manufacturer>
+    <ID>2</ID>
+    <Name>kler</Name>
+    <RegistrasionAddressID>3</RegistrasionAddressID>
+    <Country>lithuania</Country>
+  </Manufacturer>
+</ArrayOfManufacturer>
