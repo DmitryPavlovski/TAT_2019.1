@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ArrayOfWareHouse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <WareHouse>
+    <ID>1</ID>
+    <Name>Evroopt</Name>
+    <AddressID>1</AddressID>
+  </WareHouse>
+  <WareHouse>
+    <ID>2</ID>
+    <Name>Bel</Name>
+    <AddressID>2</AddressID>
+  </WareHouse>
+  <WareHouse>
+    <ID>6</ID>
+    <Name>hasl</Name>
+    <AddressID>2</AddressID>
+  </WareHouse>
+  <WareHouse>
+    <ID>4</ID>
+    <Name>halk</Name>
+    <AddressID>2</AddressID>
+  </WareHouse>
+</ArrayOfWareHouse>
